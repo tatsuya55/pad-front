@@ -14,36 +14,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
-@Api(tags = "首页")
+@Api(tags = "页面跳转")
 @Controller
-@RequestMapping("/index")
 public class IndexController {
 
-    @Autowired
-    private CompanyInfoService companyInfoService;
-
-    @ApiOperation("测试")
+    @ApiOperation("首页跳转")
     @GetMapping("/")
-    public String index(){
+    public String toIndex(){
         return "index";
     }
 
-    @ApiOperation("企业用户登录")
-    @PostMapping("/login")
-    @ResponseBody
-    public boolean login(
-            @ApiParam(name = "cNo",value = "企业统一编号",required = true)String cNo,
-            @ApiParam(name = "password",value = "密码",required = true)String password
-    ){
-        //将密码经MD5加密后 与数据库中密码进行比对
-        return companyInfoService.login(cNo, MD5.encrypt(password));
-    }
-
-    @ApiOperation("测试")
-    @GetMapping("/sign")
-    public String indexr(){
+    @ApiOperation("登录页")
+    @GetMapping("/signIn")
+    public String toSignIn(){
         return "sign-in";
     }
 
-
+    @ApiOperation("注册页")
+    @GetMapping("/signUp")
+    public String toSignUp(){
+        return "sign-up";
+    }
 }
