@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 @Api(tags = "首页")
 @Controller
@@ -27,6 +30,7 @@ public class IndexController {
 
     @ApiOperation("企业用户登录")
     @PostMapping("/login")
+    @ResponseBody
     public boolean login(
             @ApiParam(name = "cNo",value = "企业统一编号",required = true)String cNo,
             @ApiParam(name = "password",value = "密码",required = true)String password
@@ -34,6 +38,7 @@ public class IndexController {
         //将密码经MD5加密后 与数据库中密码进行比对
         return companyInfoService.login(cNo, MD5.encrypt(password));
     }
+
     @ApiOperation("测试")
     @GetMapping("/sign")
     public String indexr(){
