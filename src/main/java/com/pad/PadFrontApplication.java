@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PadFrontApplication {
     public static void main(String[] args) {
-        try {
-            SpringApplication.run(PadFrontApplication.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SpringApplication.run(PadFrontApplication.class);
     }
 }
