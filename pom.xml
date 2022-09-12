@@ -123,8 +123,6 @@
             <scope>test</scope>
         </dependency>
 
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
@@ -156,23 +154,11 @@
             <artifactId>arcsoft-sdk-face</artifactId>
             <version>2.2.0.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/arcsoft-sdk-face-3.0.0.0.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/arcsoft-sdk-face-3.0.0.0.jar</systemPath>
         </dependency>
     </dependencies>
 
-    <!--打包xml文件-->
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <!--一个*号 一层目录-->
-                    <!--两个*号 多层目录-->
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -189,6 +175,11 @@
                     <includeSystemScope>true</includeSystemScope>
                     <fork>true</fork>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
         </plugins>
     </build>

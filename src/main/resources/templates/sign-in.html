@@ -319,7 +319,7 @@
                         <p>请登录您的账号.</p>
                     </div>
 
-                    <form action="#" method="post" onsubmit="return check()">
+                    <form onsubmit="return check()">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -330,6 +330,12 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <input id="password" name="password" type="password" class="form-control" placeholder="请输入您的密码">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <span id="checkSpan" style="color: #ff0000"></span>
                                 </div>
                             </div>
 
@@ -348,7 +354,6 @@
                                 <div class="send-btn">
                                     <button type="submit" class="default-btn">
                                         立即登录
-                                        <span id="checkSpan" style="color: #ff0000"></span>
                                     </button>
                                 </div>
                                 <br>
@@ -465,7 +470,7 @@
                             <div class="info-contact">
                                 <i class="flaticon-mail"></i>
                                 <span>
-                                    <a th:href="@{/mailto:hello@finix.com}" href="mailto:hello@finix.com">hello@finix.com</a>
+                                    <a href="mailto:hello@finix.com">hello@finix.com</a>
                                 </span>
                                 <span>
                                     <a th:href="@{/}" href="#">Skype: example</a>
@@ -541,24 +546,25 @@
         let cNo = $("#cNo").val();
         let password =$("#password").val();
         if (cNo=="" || password==""){
-            document.getElementById("#checkSpan").innerHTML='企业编号或密码不能为空'
+            $("#checkSpan").html('企业编号和密码不能为空');
             return false;
         }
         $.ajax({
-            url:"/index/login",
-            method:'post',
+            url:"/company/login",
+            type:'post',
             data:{
                 "cNo":cNo,
                 "password":password
             },
             success:function (res) {
                 if(res){
-                    document.getElementById("#checkSpan").innerHTML='登录成功'
-                    setTimeout(function() { window.location.href = "/"; }, 2000 );
+                    $("#checkSpan").html('登录成功');
+                    setTimeout(function() { window.location.href = "/"; }, 1000 );
                 }else {
-                    document.getElementById("#checkSpan").innerHTML='企业编号或密码错误'
+                    $("#checkSpan").html('企业编号或密码错误');
                 }
             }
         })
+        return false;
     }
 </script>

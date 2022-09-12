@@ -6,6 +6,7 @@ import com.pad.mapper.CompanyInfoMapper;
 import com.pad.service.CompanyInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 /**
  * <p>
@@ -24,6 +25,10 @@ public class CompanyInfoServiceImpl extends ServiceImpl<CompanyInfoMapper, Compa
         LambdaQueryWrapper<CompanyInfo> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(CompanyInfo::getCNo,cNo);
         CompanyInfo companyInfo = baseMapper.selectOne(wrapper);
+        //未查询出用户
+        if (ObjectUtils.isEmpty(companyInfo)){
+            return false;
+        }
         //比较密码是否正确
         if (encrypt.equals(companyInfo.getPassword())){
             return true;
