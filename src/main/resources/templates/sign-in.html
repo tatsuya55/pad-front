@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS --> 
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <!-- Animate CSS --> 
+        <!-- Animate CSS -->
         <link rel="stylesheet" href="assets/css/animate.css">
         <!-- Meanmenu CSS -->
         <link rel="stylesheet" href="assets/css/meanmenu.css">
@@ -28,14 +28,12 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- Responsive CSS -->
 		<link rel="stylesheet" href="assets/css/responsive.css">
-		
 		<title></title>
 
         <link rel="icon" type="image/png" href="assets/img/favicon.png">
     </head>
 
     <body>
-        
         <!-- Start Navbar Area -->
         <div class="navbar-area">
             <div class="main-responsive-nav">
@@ -61,7 +59,7 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Home 
+                                        Home
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -87,7 +85,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link active">
-                                        Pages 
+                                        Pages
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
 
@@ -136,17 +134,17 @@
 
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
-                                                Projects 
+                                                Projects
                                                 <i class='bx bx-chevron-down'></i>
                                             </a>
-        
+
                                             <ul class="dropdown-menu">
                                                 <li class="nav-item">
                                                     <a href="projects.html" class="nav-link">
                                                         Projects
                                                     </a>
                                                 </li>
-        
+
                                                 <li class="nav-item">
                                                     <a href="project-details.html" class="nav-link">
                                                         Project Details
@@ -154,7 +152,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                    
+
                                         <li class="nav-item">
                                             <a href="sign-in.html" class="nav-link active">
                                                 Sign In
@@ -178,7 +176,7 @@
                                                 Privacy Policy
                                             </a>
                                         </li>
-                                    
+
                                         <li class="nav-item">
                                             <a href="error-404.html" class="nav-link">
                                                 Error Page
@@ -195,7 +193,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Services 
+                                        Services
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
 
@@ -228,7 +226,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        News 
+                                        News
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -300,10 +298,10 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>Sign In</h2>
+                            <h2>登 录</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Sign In</li>
+                                <li><a href="index.html">首 页</a></li>
+                                <li>登 录</li>
                             </ul>
                         </div>
                     </div>
@@ -317,44 +315,44 @@
             <div class="container">
                 <div class="sign-in-form">
                     <div class="sign-in-title">
-                        <h3>Welcome Back!</h3>
-                        <p>Please Sign In to your account.</p>
+                        <h3>欢迎回来!</h3>
+                        <p>请登录您的账号.</p>
                     </div>
-                        
-                    <form>
+
+                    <form action="#" method="post" onsubmit="return check()">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input id="cNo" name="cNo" type="text" class="form-control" placeholder="请输入企业统一编号">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="请输入您的密码">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="checkme">
-                                    <label class="form-check-label" for="checkme">Keep me Log In</label>
+                                    <input name="remember-me" type="checkbox" class="form-check-input" id="checkme">
+                                    <label class="form-check-label" for="checkme">记住我</label>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 text-right">
-                                <p class="forgot-password"><a href="#">Forgot Password?</a></p>
+                                <p class="forgot-password"><a href="#">忘记密码?</a></p>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="send-btn">
                                     <button type="submit" class="default-btn">
-                                        Sign In Now
-                                        <span></span>
+                                        立即登录
+                                        <span id="checkSpan" style="color: #ff0000"></span>
                                     </button>
                                 </div>
                                 <br>
-                                <span>Don't have account? <a href="sign-up.html">Signup!</a></span>
+                                <span>还没有账号? <a href="sign-up.html">立即注册!</a></span>
                             </div>
                         </div>
                     </form>
@@ -379,25 +377,25 @@
                                 <li>
                                     <b>Follow us:</b>
                                 </li>
-                                
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-twitter"></i>
                                     </a>
                                 </li>
-            
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-instagram"></i>
                                     </a>
                                 </li>
-            
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-facebook"></i>
                                     </a>
                                 </li>
-                                
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-linkedin"></i>
@@ -428,7 +426,7 @@
                                     <a href="contact.html">Contact</a>
                                 </li>
                             </ul>
-                        </div>    
+                        </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
@@ -452,7 +450,7 @@
                                     <a href="#">Loan Services</a>
                                 </li>
                             </ul>
-                        </div>    
+                        </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
@@ -538,3 +536,29 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<script>
+    function check(){
+        let cNo = $("#cNo").val();
+        let password =$("#password").val();
+        if (cNo=="" || password==""){
+            document.getElementById("#checkSpan").innerHTML='企业编号或密码不能为空'
+            return false;
+        }
+        $.ajax({
+            url:"/index/login",
+            method:'post',
+            data:{
+                "cNo":cNo,
+                "password":password
+            },
+            success:function (res) {
+                if(res){
+                    document.getElementById("#checkSpan").innerHTML='登录成功'
+                    setTimeout(function() { window.location.href = "/"; }, 2000 );
+                }else {
+                    document.getElementById("#checkSpan").innerHTML='企业编号或密码错误'
+                }
+            }
+        })
+    }
+</script>
