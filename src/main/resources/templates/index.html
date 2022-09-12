@@ -1,41 +1,41 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS --> 
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <!-- Animate CSS --> 
-        <link rel="stylesheet" href="assets/css/animate.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}">
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="assets/css/animate.css" th:href="@{/assets/css/animate.css}">
         <!-- Meanmenu CSS -->
-        <link rel="stylesheet" href="assets/css/meanmenu.css">
+        <link rel="stylesheet" href="assets/css/meanmenu.css" th:href="@{/assets/css/meanmenu.css}">
         <!-- Boxicons CSS -->
-        <link rel="stylesheet" href="assets/css/boxicons.min.css">
+        <link rel="stylesheet" href="assets/css/boxicons.min.css" th:href="@{/assets/css/boxicons.min.css}">
         <!-- Flaticon CSS -->
-        <link rel="stylesheet" href="assets/css/flaticon.css">
+        <link rel="stylesheet" href="assets/css/flaticon.css" th:href="@{/assets/css/flaticon.css}">
         <!-- Carousel CSS -->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css" th:href="@{/assets/css/owl.carousel.min.css}">
         <!-- Carousel Default CSS -->
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" th:href="@{/assets/css/owl.theme.default.min.css}">
         <!-- Carousel Default CSS -->
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" th:href="@{/assets/css/owl.theme.default.min.css}">
         <!-- Nice Select CSS -->
-        <link rel="stylesheet" href="assets/css/nice-select.css">
+        <link rel="stylesheet" href="assets/css/nice-select.css" th:href="@{/assets/css/nice-select.css}">
         <!-- Odometer CSS -->
-        <link rel="stylesheet" href="assets/css/odometer.css">
+        <link rel="stylesheet" href="assets/css/odometer.css" th:href="@{/assets/css/odometer.css}">
         <!-- Style CSS -->
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/style.css" th:href="@{/assets/css/style.css}">
         <!-- Responsive CSS -->
-		<link rel="stylesheet" href="assets/css/responsive.css">
-		
+		<link rel="stylesheet" href="assets/css/responsive.css" th:href="@{/assets/css/responsive.css}">
+
 		<title></title>
 
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        <link rel="icon" type="image/png" href="assets/img/favicon.png" th:href="@{/assets/img/favicon.png}">
     </head>
 
     <body>
-        
+
         <!-- Start Navbar Area -->
         <div class="navbar-area">
             <div class="main-responsive-nav">
@@ -43,7 +43,7 @@
                     <div class="main-responsive-menu">
                         <div class="logo">
                             <a href="index.html">
-                                <img src="assets/img/logo.png" alt="image">
+                                <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
                             </a>
                         </div>
                     </div>
@@ -54,14 +54,14 @@
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-md navbar-light">
                         <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" alt="image">
+                            <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
                         </a>
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link active">
-                                        Home 
+                                        Home
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -87,7 +87,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Pages 
+                                        Pages
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
 
@@ -136,17 +136,17 @@
 
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
-                                                Projects 
+                                                Projects
                                                 <i class='bx bx-chevron-down'></i>
                                             </a>
-        
+
                                             <ul class="dropdown-menu">
                                                 <li class="nav-item">
                                                     <a href="projects.html" class="nav-link">
                                                         Projects
                                                     </a>
                                                 </li>
-        
+
                                                 <li class="nav-item">
                                                     <a href="project-details.html" class="nav-link">
                                                         Project Details
@@ -154,7 +154,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                    
+
                                         <li class="nav-item">
                                             <a href="sign-in.html" class="nav-link">
                                                 Sign In
@@ -178,7 +178,7 @@
                                                 Privacy Policy
                                             </a>
                                         </li>
-                                    
+
                                         <li class="nav-item">
                                             <a href="error-404.html" class="nav-link">
                                                 Error Page
@@ -195,7 +195,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        Services 
+                                        Services
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
 
@@ -228,7 +228,7 @@
 
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        News 
+                                        News
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -303,7 +303,7 @@
                             <span>We are here for</span>
                             <h1>Start or grow your own business</h1>
                             <p>Loans are advantageous as a relatively inexpensive way of borrowing money. We believe in those made to do more.</p>
-                            
+
                             <div class="banner-btn">
                                 <a href="apply-now.html" class="default-btn">
                                     View more
@@ -317,25 +317,25 @@
                                 <li>
                                     <span>Follow us</span>
                                 </li>
-                                
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-twitter"></i>
                                     </a>
                                 </li>
-            
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-instagram"></i>
                                     </a>
                                 </li>
-            
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-facebook"></i>
                                     </a>
                                 </li>
-                                
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-linkedin"></i>
@@ -346,7 +346,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Start Approvals Area -->
             <div class="approvals-area">
                 <div class="container-fluid">
@@ -393,8 +393,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7">
                         <div class="about-image">
-                            <img src="assets/img/about/image1.jpg" alt="image">
-                            <img src="assets/img/about/image2.jpg" alt="image">
+                            <img src="assets/img/about/image1.jpg" th:src="@{/assets/img/about/image1.jpg}" alt="image">
+                            <img src="assets/img/about/image2.jpg" th:src="@{/assets/img/about/image2.jpg}"  alt="image">
                         </div>
 
                         <div class="experience">
@@ -496,7 +496,7 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="company-image">
-                            <img src="assets/img/company.jpg" alt="image">
+                            <img src="assets/img/company.jpg" th:src="@{/assets/img/company.jpg}" alt="image">
                         </div>
                     </div>
 
@@ -739,7 +739,7 @@
                 <div class="projects-slider owl-carousel owl-theme">
                     <div class="projects-item">
                         <a href="project-details.html">
-                            <img src="assets/img/projects/image1.jpg" alt="image">
+                            <img src="assets/img/projects/image1.jpg" th:src="@{/assets/img/projects/image1.jpg}" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -750,7 +750,7 @@
 
                     <div class="projects-item">
                         <a href="project-details.html">
-                            <img src="assets/img/projects/image2.jpg" alt="image">
+                            <img src="assets/img/projects/image2.jpg" th:src="@{/assets/img/projects/image2.jpg}" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -761,7 +761,7 @@
 
                     <div class="projects-item">
                         <a href="project-details.html">
-                            <img src="assets/img/projects/image3.jpg" alt="image">
+                            <img th:src="@{/assets/img/projects/image3.jpg}" src="assets/img/projects/image3.jpg" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -772,7 +772,7 @@
 
                     <div class="projects-item">
                         <a href="project-details.html">
-                            <img src="assets/img/projects/image4.jpg" alt="image">
+                            <img th:src="@{/assets/img/projects/image4.jpg}" src="assets/img/projects/image4.jpg" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -783,7 +783,7 @@
 
                     <div class="projects-item">
                         <a href="project-details.html">
-                            <img src="assets/img/projects/image1.jpg" alt="image">
+                            <img th:src="@{/assets/img/projects/image1.jpg}" src="assets/img/projects/image1.jpg" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -794,7 +794,7 @@
 
                     <div class="projects-item">
                         <a href="project-details.html">
-                            <img src="assets/img/projects/image2.jpg" alt="image">
+                            <img th:src="@{/assets/img/projects/image2.jpg}" src="assets/img/projects/image2.jpg" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -805,7 +805,7 @@
 
                     <div class="projects-item">
                         <a href="#">
-                            <img src="assets/img/projects/image3.jpg" alt="image">
+                            <img th:src="@{/assets/img/projects/image3.jpg}" src="assets/img/projects/image3.jpg" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -816,7 +816,7 @@
 
                     <div class="projects-item">
                         <a href="project-details.html">
-                            <img src="assets/img/projects/image4.jpg" alt="image">
+                            <img th:src="@{/assets/img/projects/image4.jpg}" src="assets/img/projects/image4.jpg" alt="image">
                         </a>
                         <div class="content">
                             <h3>
@@ -842,7 +842,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="clients-item">
                             <div class="info">
-                                <img src="assets/img/clients/image1.png" alt="image">
+                                <img th:src="@{/assets/img/clients/image1.png}" src="assets/img/clients/image1.png" alt="image">
                                 <h4>Markus Twain</h4>
                                 <span>Client</span>
                             </div>
@@ -856,7 +856,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="clients-item">
                             <div class="info">
-                                <img src="assets/img/clients/image2.png" alt="image">
+                                <img th:src="@{/assets/img/clients/image2.png}" src="assets/img/clients/image2.png" alt="image">
                                 <h4>Jessica Molony</h4>
                                 <span>CEO</span>
                             </div>
@@ -876,29 +876,29 @@
             <div class="container">
                 <div class="partner-slider owl-carousel owl-theme">
                     <div class="partner-item">
-                        <img src="assets/img/partner/1.png" alt="image">
+                        <img th:src="@{/assets/img/partner/1.png}" src="assets/img/partner/1.png" alt="image">
                     </div>
 
                     <div class="partner-item">
-                        <img src="assets/img/partner/2.png" alt="image">
+                        <img th:src="@{/assets/img/partner/2.png}" src="assets/img/partner/2.png" alt="image">
                     </div>
 
                     <div class="partner-item">
-                        <img src="assets/img/partner/3.png" alt="image">
+                        <img th:src="@{/assets/img/partner/3.png}" src="assets/img/partner/3.png" alt="image">
                     </div>
 
                     <div class="partner-item">
-                        <img src="assets/img/partner/4.png" alt="image">
+                        <img th:src="@{/assets/img/partner/4.png}" src="assets/img/partner/4.png" alt="image">
                     </div>
 
                     <div class="partner-item">
-                        <img src="assets/img/partner/5.png" alt="image">
+                        <img th:src="@{/assets/img/partner/5.png}" src="assets/img/partner/5.png" alt="image">
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Partner Area -->
-        
+
         <!-- Start Blog Area -->
         <section class="blog-area pt-100 pb-70">
             <div class="container">
@@ -913,7 +913,7 @@
                         <div class="blog-item">
                             <div class="image">
                                 <a href="news-details.html">
-                                    <img src="assets/img/blog/image1.jpg" alt="image">
+                                    <img th:src="@{/assets/img/blog/image1.jpg}" src="assets/img/blog/image1.jpg" alt="image">
                                 </a>
                             </div>
                             <div class="content">
@@ -930,7 +930,7 @@
                         <div class="blog-item">
                             <div class="image">
                                 <a href="news-details.html">
-                                    <img src="assets/img/blog/image2.jpg" alt="image">
+                                    <img th:src="@{/assets/img/blog/image2.jpg}" src="assets/img/blog/image2.jpg" alt="image">
                                 </a>
                             </div>
                             <div class="content">
@@ -947,7 +947,7 @@
                         <div class="blog-item">
                             <div class="image">
                                 <a href="news-details.html">
-                                    <img src="assets/img/blog/image3.jpg" alt="image">
+                                    <img th:src="@{/assets/img/blog/image3.jpg}" src="assets/img/blog/image3.jpg" alt="image">
                                 </a>
                             </div>
                             <div class="content">
@@ -972,7 +972,7 @@
                         <div class="single-footer-widget">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="assets/img/logo2.png" alt="image">
+                                    <img th:src="@{/assets/img/logo2.png}" src="assets/img/logo2.png" alt="image">
                                 </a>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -980,25 +980,25 @@
                                 <li>
                                     <b>Follow us:</b>
                                 </li>
-                                
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-twitter"></i>
                                     </a>
                                 </li>
-            
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-instagram"></i>
                                     </a>
                                 </li>
-            
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-facebook"></i>
                                     </a>
                                 </li>
-                                
+
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="flaticon-linkedin"></i>
@@ -1029,7 +1029,7 @@
                                     <a href="contact.html">Contact</a>
                                 </li>
                             </ul>
-                        </div>    
+                        </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
@@ -1053,7 +1053,7 @@
                                     <a href="#">Loan Services</a>
                                 </li>
                             </ul>
-                        </div>    
+                        </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
@@ -1110,32 +1110,32 @@
         <!-- End Go Top Area -->
 
         <!-- Jquery Slim JS -->
-        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
         <!-- Popper JS -->
-        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/popper.min.js" th:src="@{/assets/js/popper.min.js}"></script>
         <!-- Bootstrap JS -->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
         <!-- Meanmenu JS -->
-        <script src="assets/js/jquery.meanmenu.js"></script>
+        <script src="assets/js/jquery.meanmenu.js" th:src="@{/assets/js/jquery.meanmenu.js}"></script>
         <!-- Carousel JS -->
-        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
         <!-- Nice Select JS -->
-        <script src="assets/js/jquery.nice-select.min.js"></script>
+        <script src="assets/js/jquery.nice-select.min.js" th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
         <!-- Magnific Popup JS -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js" th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
         <!-- Odometer JS -->
-        <script src="assets/js/odometer.min.js"></script>
+        <script src="assets/js/odometer.min.js" th:src="@{/assets/js/odometer.min.js}"></script>
         <!-- Appear JS -->
-        <script src="assets/js/jquery.appear.js"></script>
+        <script src="assets/js/jquery.appear.js" th:src="@{/assets/js/jquery.appear.js}"></script>
         <!-- Form Ajaxchimp JS -->
-		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+		<script src="assets/js/jquery.ajaxchimp.min.js" th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
 		<!-- Form Validator JS -->
-		<script src="assets/js/form-validator.min.js"></script>
+		<script src="assets/js/form-validator.min.js" th:src="@{/assets/js/form-validator.min.js}"></script>
 		<!-- Contact JS -->
-        <script src="assets/js/contact-form-script.js"></script>
+        <script src="assets/js/contact-form-script.js" th:src="@{/assets/js/contact-form-script.js}"></script>
         <!-- Wow JS -->
-		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/wow.min.js" th:src="@{/assets/js/wow.min.js}"></script>
         <!-- Custom JS -->
-        <script src="assets/js/main.js"></script>
+        <script src="assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
     </body>
 </html>
