@@ -34,4 +34,11 @@ public class IndexController {
         //将密码经MD5加密后 与数据库中密码进行比对
         return companyInfoService.login(cNo, MD5.encrypt(password));
     }
+    @ApiOperation("测试")
+    @GetMapping("/sign")
+    public String indexr(){
+        return "sign-in";
+    }
+
+
 }
