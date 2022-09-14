@@ -20,17 +20,65 @@ import org.springframework.util.ObjectUtils;
 public class CompanyInfoServiceImpl extends ServiceImpl<CompanyInfoMapper, CompanyInfo> implements CompanyInfoService {
     //企业用户登录
     @Override
-    public boolean login(String cNo, String encrypt) {
+    public CompanyInfo login(String cNo, String encrypt) {
         //通过企业统一编号查询用户
         LambdaQueryWrapper<CompanyInfo> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(CompanyInfo::getCNo,cNo);
         CompanyInfo companyInfo = baseMapper.selectOne(wrapper);
         //未查询出用户
         if (ObjectUtils.isEmpty(companyInfo)){
-            return false;
+            return null;
         }
         //比较密码是否正确
-        if (encrypt.equals(companyInfo.getPassword())){
+        if (!encrypt.equals(companyInfo.getPassword())){
+            return null;
+        }
+        return companyInfo;
+    }
+
+    //检查cno是否重复
+    @Override
+    public boolean checkCno(String cNo) {
+        LambdaQueryWrapper<CompanyInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CompanyInfo::getCNo,cNo);
+        CompanyInfo companyInfo = baseMapper.selectOne(wrapper);
+        if (ObjectUtils.isEmpty(companyInfo)){
+            return true;
+        }
+        return false;
+    }
+
+    //检查企业名称是否重复
+    @Override
+    public boolean checkName(String name) {
+        LambdaQueryWrapper<CompanyInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CompanyInfo::getName,name);
+        CompanyInfo companyInfo = baseMapper.selectOne(wrapper);
+        if (ObjectUtils.isEmpty(companyInfo)){
+            return true;
+        }
+        return false;
+    }
+
+    //检查phone是否重复
+    @Override
+    public boolean checkPhone(String phone) {
+        LambdaQueryWrapper<CompanyInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CompanyInfo::getPhone,phone);
+        CompanyInfo companyInfo = baseMapper.selectOne(wrapper);
+        if (ObjectUtils.isEmpty(companyInfo)){
+            return true;
+        }
+        return false;
+    }
+
+    //检查email是否重复
+    @Override
+    public boolean checkEmail(String email) {
+        LambdaQueryWrapper<CompanyInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CompanyInfo::getEmail,email);
+        CompanyInfo companyInfo = baseMapper.selectOne(wrapper);
+        if (ObjectUtils.isEmpty(companyInfo)){
             return true;
         }
         return false;
