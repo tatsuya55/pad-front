@@ -300,10 +300,10 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>Contact</h2>
+                            <h2>留言</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Contact</li>
+                                <li><a th:href="@{/}">首页</a></li>
+                                <li>留言</li>
                             </ul>
                         </div>
                     </div>
@@ -316,54 +316,46 @@
         <section class="contact-area ptb-100">
             <div class="container">
                 <div class="section-title">
-                    <span>Let's discuss</span>
-                    <h2>Whatever question you have, please feel free to ask.</h2>
+                    <span>你永远值得</span>
+                    <h3>良言一句三冬暖,恶语伤人六月寒.</h3>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="contact-form">
                             <div class="title">
-                                <h3>Write Us</h3>
+                                <h3>写信给我们</h3>
                             </div>
 
                             <form id="contactForm">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your name">
+                                            <label>姓名</label>
+                                            <input type="text" name="name" id="name" class="form-control" required data-error="请输入你的名字">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <label>Email Address</label>
-                                            <input type="email" name="email" id="email" class="form-control" required data-error="Please enter your email">
+                                            <label>企业编号</label>
+                                            <input type="text" name="cNo" id="cNo" class="form-control" required data-error="请输入你的企业编号">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Subject</label>
-                                            <input type="text" name="msg_subject" id="msg_subject" class="form-control" required data-error="Please enter your subject">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-group">
-                                            <label>Message</label>
-                                            <textarea name="message" class="form-control" id="message" cols="30" rows="5" required data-error="Write your message"></textarea>
+                                            <label>留言内容</label>
+                                            <textarea name="context" class="form-control" id="context" cols="30" rows="5" required data-error="请输入留言内容"></textarea>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
                                         <button type="submit" class="default-btn">
-                                            Send message
+                                            发送消息
                                             <span></span>
                                         </button>
                                         <div id="msgSubmit" class="h3 text-center hidden"></div>
@@ -377,26 +369,26 @@
                     <div class="col-lg-4">
                         <div class="contact-side-box">
                             <div class="title">
-                                <h3>Contact Finix</h3>
+                                <h3>联系方式</h3>
                             </div>
 
                             <div class="info-box">
                                 <div class="icon">
                                     <i class="flaticon-clock"></i>
                                 </div>
-                                <h4>Working hours</h4>
+                                <h4>工作时间</h4>
                                 <ul class="list">
                                     <li>
-                                        Mon – Thurs
+                                        周一 – 周四
                                         <span>8:00 AM - 5:00 PM</span>
                                     </li>
                                     <li>
-                                        Fri – Satur
+                                        周五 – 周六
                                         <span>8:00 AM - 3:00 PM</span>
                                     </li>
                                     <li>
-                                        Sun
-                                        <span>CLOSED</span>
+                                        周日
+                                        <span>休息</span>
                                     </li>
                                 </ul>
                             </div>
@@ -405,20 +397,20 @@
                                 <div class="icon">
                                     <i class="flaticon-pin"></i>
                                 </div>
-                                <h4>Address</h4>
-                                <span>6890 Blvd, The Bronx, NY 1058 New York, USA</span>
+                                <h4>地址</h4>
+                                <span>苍盐海大街250号</span>
                             </div>
 
                             <div class="info-box">
                                 <div class="icon">
                                     <i class="flaticon-phone-call"></i>
                                 </div>
-                                <h4>Phone</h4>
+                                <h4>电话</h4>
                                 <span>
-                                    <a href="tel:1514312-6688">+1 (514) 312-5678</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-5678</a>
                                 </span>
                                 <span>
-                                    <a href="tel:1514312-6688">+1 (514) 312-6688</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-6688</a>
                                 </span>
                             </div>
 
@@ -426,12 +418,9 @@
                                 <div class="icon">
                                     <i class="flaticon-email"></i>
                                 </div>
-                                <h4>Email</h4>
+                                <h4>邮箱</h4>
                                 <span>
-                                    <a href="mailto:hello@finix.com">hello@finix.com</a>
-                                </span>
-                                <span>
-                                    <a href="#">Skype: example</a>
+                                    <a href="mailto:Cyh@finix.com">Cyh@finix.com</a>
                                 </span>
                             </div>
                         </div>
@@ -444,7 +433,7 @@
         <!-- Start Map Area -->
         <div class="map">
             <div class="container-fluid">
-                <iframe src="https://ditu.google.cn/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.11976397304603!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1594738801148!5m2!1sen!2sbd"></iframe>
+                <iframe src="https://www.amap.com/place/B0FFF4IRLY"></iframe>
             </div>
         </div>
         <!-- End Map Area -->
@@ -460,10 +449,10 @@
                                     <img src="assets/img/logo2.png" alt="image">
                                 </a>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>我今天做核酸了,什么酸,得不到你的心酸.</p>
                             <ul class="social">
                                 <li>
-                                    <b>Follow us:</b>
+                                    <b>联系我们:</b>
                                 </li>
 
                                 <li>
@@ -543,30 +532,27 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="single-footer-widget">
-                            <h3>Contact Us</h3>
+                            <h3>联系我们</h3>
 
                             <div class="info-contact">
                                 <i class="flaticon-pin"></i>
-                                <span>6890 Blvd, The Bronx, NY 1058 New York, USA</span>
+                                <span>苍盐海大街250号</span>
                             </div>
 
                             <div class="info-contact">
                                 <i class="flaticon-mail"></i>
                                 <span>
-                                    <a href="mailto:hello@finix.com">hello@finix.com</a>
-                                </span>
-                                <span>
-                                    <a href="#">Skype: example</a>
+                                    <a href="mailto:Cyh@finix.com">Cyh@finix.com</a>
                                 </span>
                             </div>
 
                             <div class="info-contact">
                                 <i class="flaticon-telephone"></i>
                                 <span>
-                                    <a href="tel:1514312-6688">+1 (514) 312-5678</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-5678</a>
                                 </span>
                                 <span>
-                                    <a href="tel:1514312-6688">+1 (514) 312-6688</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-6688</a>
                                 </span>
                             </div>
                         </div>
@@ -581,7 +567,7 @@
             <div class="container">
                 <div class="copy-right-content">
                     <p>
-                        Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                        &copy;版权和副本:2022苍盐海 版权所有.
                     </p>
                 </div>
             </div>

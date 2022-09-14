@@ -35,4 +35,10 @@ public class IndexController {
     public String toSignUp(){
         return "sign-up";
     }
+
+    @ApiOperation("留言页")
+    @GetMapping("/contact")
+    public String toMessage(){
+        return "contact";
+    }
 }
