@@ -1,7 +1,10 @@
 package com.pad.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -37,6 +40,7 @@ public class Integral implements Serializable {
     private Integer value;
 
     @ApiModelProperty(value = "获得时间")
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
 

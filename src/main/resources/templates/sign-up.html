@@ -61,28 +61,8 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a th:href="@{/nav-link}" href="#" class="nav-link">
-                                        Home
-                                        <i class='bx bx-chevron-down'></i>
+                                        首 页
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a th:href="@{/index.html}" href="index.html" class="nav-link">
-                                                Home One
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a th:href="@{/index-2.html}" href="index-2.html" class="nav-link">
-                                                Home Two
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a th:href="@{/index-3.html}" href="index-3.html" class="nav-link">
-                                                Home Three
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
 
                                 <li class="nav-item">
@@ -156,14 +136,14 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/sign-in.html}" href="sign-in.html" class="nav-link">
-                                                Sign In
+                                            <a th:href="@{/signIn}" href="sign-in.html" class="nav-link">
+                                                登 录
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/sign-up.html}" href="sign-up.html" class="nav-link active">
-                                                Sign Up
+                                            <a th:href="@{/signUp}" href="sign-up.html" class="nav-link active">
+                                                注  册
                                             </a>
                                         </li>
 
@@ -317,42 +297,60 @@
             <div class="container">
                 <div class="signup-form">
                     <h3>Create your Account</h3>
-                    <form>
+                    <form onsubmit="return check()" id="formRegister">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Username">
+                                    <input id="cNo" name="cNo" type="text" class="form-control" placeholder="请输入企业统一编号">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="请输入企业名称">
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input id="phone" name="phone" type="text" class="form-control" placeholder="请输入企业电话">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input id="email" name="email" type="email" class="form-control" placeholder="请输入企业邮箱">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <span id="checkSpan" style="color: #ff0000"></span>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="checkme">
-                                    <label class="form-check-label" for="checkme">Keep Me Sign Up</label>
+                                    <input type="checkbox" class="form-check-input" id="agree" name="agree">
+                                    <label class="form-check-label" for="agree">同意条款</label>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="send-btn">
-                                    <button type="#" class="default-btn">
-                                        Sign Up Now
+                                    <button type="submit" class="default-btn">
+                                        立即注册
                                         <span></span>
                                     </button>
                                 </div>
                                 <br>
-                                <span>Already a registered user? <a th:href="@{/sign-in.html}" href="sign-in.html">Signin!</a></span>
+                                <span>已经有账号了? <a th:href="@{/signIn}" href="sign-in.html">前往登录!</a></span>
                             </div>
                         </div>
                     </form>
@@ -536,3 +534,157 @@
         <script th:src="@{/assets/js/main.js}" src="assets/js/main.js"></script>
     </body>
 </html>
+<script>
+    /*校验是否重复*/
+    $(function () {
+        $("#cNo").blur(function () {
+            let cno = $("#cNo").val()
+            if (cno!=""){
+                $.ajax({
+                    url:'/company/checkCno',
+                    type:'get',
+                    data: {
+                        "cNo":cno
+                    },
+                    success:function (res) {
+                        if(!res){
+                            $("#checkSpan").html('企业编号已存在，请直接登录');
+                        }else {
+                            $("#checkSpan").html('');
+                        }
+                    }
+                })
+            }
+        })
+        $("#name").blur(function () {
+            let name = $("#name").val()
+            if (name!=""){
+                $.ajax({
+                    url:'/company/checkName',
+                    type:'get',
+                    data: {
+                        "name":name
+                    },
+                    success:function (res) {
+                        if(!res){
+                            $("#checkSpan").html('企业名称已存在');
+                        }else {
+                            $("#checkSpan").html('');
+                        }
+                    }
+                })
+            }
+        })
+        $("#phone").blur(function () {
+            let phone = $("#phone").val()
+            let expression = /^1[34578][0-9]{9}$/
+            if (!expression.test(phone)){
+                $("#checkSpan").html('请输入正确的手机号');
+                return;
+            }else {
+                $("#checkSpan").html('');
+            }
+            if (phone!=""){
+                $.ajax({
+                    url:'/company/checkPhone',
+                    type:'get',
+                    data: {
+                        "phone":phone
+                    },
+                    success:function (res) {
+                        if(!res){
+                            $("#checkSpan").html('手机号已存在');
+                        }else {
+                            $("#checkSpan").html('');
+                        }
+                    }
+                })
+            }
+        })
+        $("#email").blur(function () {
+            let email = $("#email").val()
+            let expression = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+            if (!expression.test(email)){
+                $("#checkSpan").html('请输入正确的邮箱');
+                return;
+            }else {
+                $("#checkSpan").html('');
+            }
+            if (email!=""){
+                $.ajax({
+                    url:'/company/checkEmail',
+                    type:'get',
+                    data: {
+                        "email":email
+                    },
+                    success:function (res) {
+                        if(!res){
+                            $("#checkSpan").html('邮箱已存在');
+                        }else {
+                            $("#checkSpan").html('');
+                        }
+                    }
+                })
+            }
+        })
+    })
+
+    /*非空判断 提交表单*/
+    function check() {
+        let cno = $("#cNo").val()
+        let name = $("#name").val()
+        let password = $("#password").val()
+        let email = $("#email").val()
+        let phone = $("#phone").val()
+        let agree = $('#agree').prop('checked')
+        if (cno==""){
+            $("#checkSpan").html('企业统一编号不能为空');
+            return false;
+        }
+        if (name==""){
+            $("#checkSpan").html('企业名称不能为空');
+            return false;
+        }
+        if (password==""){
+            $("#checkSpan").html('密码不能为空');
+            return false;
+        }
+        if (email==""){
+            $("#checkSpan").html('企业邮箱不能为空');
+            return false;
+        }
+        if (phone==""){
+            $("#checkSpan").html('企业电话不能为空');
+            return false;
+        }
+        if (agree==false){
+            $("#checkSpan").html('请勾选同意条款');
+            return false;
+        }
+        $("#checkSpan").html('');
+        //将表单转化为json字符串传递
+        let form = $("#formRegister").serializeArray();
+        let obj = {};//分配内存空间
+        for (let i = 0; i < form.length; i++) {
+            obj[form[i].name] = form[i].value;
+        }
+     /*   console.log(JSON.stringify(obj))
+        console.log('-------------------')
+        console.log(obj)*/
+        $.ajax({
+            url:'/company/register',
+            type:'post',
+            data:obj,
+            success:function (res) {
+                if (res){
+                    $("#checkSpan").html('注册成功,请登录');
+                    setTimeout(function() { window.location.href = "/signIn"; }, 1000 );
+                }else {
+                    $("#checkSpan").html('注册失败');
+                    $("#formRegister")[0].reset()
+                }
+            }
+        })
+        return false;
+    }
+</script>

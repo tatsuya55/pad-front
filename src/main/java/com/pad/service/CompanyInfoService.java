@@ -13,5 +13,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CompanyInfoService extends IService<CompanyInfo> {
     //企业用户登录
-    boolean login(String cNo, String encrypt);
+    CompanyInfo login(String cNo, String encrypt);
+    //检查cno是否重复
+    boolean checkCno(String cNo);
+    //检查企业名称是否重复
+    boolean checkName(String name);
+    //检查phone是否重复
+    boolean checkPhone(String phone);
+    //检查email是否重复
+    boolean checkEmail(String email);
 }

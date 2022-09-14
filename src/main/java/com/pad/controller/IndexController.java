@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     @ApiOperation("首页跳转")
-    @GetMapping("/")
+    @RequestMapping({"/","/index","/index.html"})
     public String toIndex(){
         return "index";
     }

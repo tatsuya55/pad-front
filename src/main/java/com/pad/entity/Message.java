@@ -1,7 +1,10 @@
 package com.pad.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -34,16 +37,18 @@ public class Message implements Serializable {
     private String cNo;
 
     @ApiModelProperty(value = "留言时间")
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @ApiModelProperty(value = "留言内容")
     private String context;
 
     @ApiModelProperty(value = "回复内容")
-    private String updateTime;
+    private String reply;
 
     @ApiModelProperty(value = "回复时间")
-    private Date reply;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
     @ApiModelProperty(value = "逻辑删除 0已删除，1未删除")
     private Integer isDeleted;
