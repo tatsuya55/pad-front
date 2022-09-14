@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     @ApiOperation("首页跳转")
-    @GetMapping("/")
+    @RequestMapping({"/","/index","/index.html"})
     public String toIndex(){
         return "index";
     }
@@ -34,5 +34,11 @@ public class IndexController {
     @GetMapping("/signUp")
     public String toSignUp(){
         return "sign-up";
+    }
+
+    @ApiOperation("留言页")
+    @GetMapping("/contact")
+    public String toMessage(){
+        return "contact";
     }
 }

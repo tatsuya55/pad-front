@@ -1,7 +1,10 @@
 package com.pad.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -30,13 +33,14 @@ public class Profit implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "放款编号    外键")
+    @ApiModelProperty(value = "放款编号  外键")
     private String cId;
 
     @ApiModelProperty(value = "收益金额")
     private Integer value;
 
     @ApiModelProperty(value = "获得时间")
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
 
