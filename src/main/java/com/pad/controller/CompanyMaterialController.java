@@ -76,6 +76,7 @@ public class CompanyMaterialController {
      */
     @ApiOperation("企业用户材料修改接口")
     @PutMapping("/update")
+    @ResponseBody
     private boolean update(
             @ApiParam(name = "companyMaterial",value = "企业用户材料")
             @RequestBody CompanyMaterial companyMaterial){
@@ -89,6 +90,7 @@ public class CompanyMaterialController {
      */
     @ApiOperation("企业用户材料添加")
     @PostMapping("/save")
+    @ResponseBody
     public boolean save(
             @ApiParam(name = "companyDetail" ,value = "详细信息")
             @RequestBody CompanyMaterial companyMaterial){

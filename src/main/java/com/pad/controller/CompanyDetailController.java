@@ -72,6 +72,7 @@ public class CompanyDetailController {
      */
     @ApiOperation("企业用户详情修改")
     @PutMapping("/update")
+    @ResponseBody
     public boolean update(
             @ApiParam(name = "companyDetail" ,value = "详细信息")
             @RequestBody CompanyDetail companyDetail){
@@ -86,6 +87,8 @@ public class CompanyDetailController {
      */
     @ApiOperation("企业用户详情添加")
     @PostMapping("/save")
+    @ResponseBody
+
     public boolean save(
             @ApiParam(name = "companyDetail" ,value = "详细信息")
             @RequestBody CompanyDetail companyDetail){

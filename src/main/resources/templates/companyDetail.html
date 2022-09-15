@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -17,7 +17,8 @@
     <!-- Carousel CSS -->
     <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}" href="assets/css/owl.carousel.min.css">
     <!-- Carousel Default CSS -->
-    <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}" href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}"
+          href="assets/css/owl.theme.default.min.css">
     <!-- Magnific Popup CSS -->
     <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}" href="assets/css/magnific-popup.css">
     <!-- Nice Select CSS -->
@@ -128,7 +129,8 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/project-details.html}" href="project-details.html" class="nav-link">
+                                            <a th:href="@{/project-details.html}" href="project-details.html"
+                                               class="nav-link">
                                                 Project Details
                                             </a>
                                         </li>
@@ -187,7 +189,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/services-details.html}" href="services-details.html" class="nav-link">
+                                    <a th:href="@{/services-details.html}" href="services-details.html"
+                                       class="nav-link">
                                         Services Details
                                     </a>
                                 </li>
@@ -299,69 +302,74 @@
             <h3>Loan Application</h3>
         </div>
 
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="apply-form">
+        <form onsubmit="return check()" id="formRegister">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="apply-form">
 
 
-                    <div class="form-group">
-                        <label>企业名称</label>
-                        <input type="text" class="form-control">
+                        <div class="form-group">
+                            <label>企业类型</label>
+                            <div class="select-box">
+                                <select class="form-control">
+                                    <option ></option>
+                                    <option value="1">合伙企业</option>
+                                    <option value="2">有限责任公司</option>
+                                    <option value="0">独资企业</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>法人姓名</label>
+                            <input id="legalName" name="legalName" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>法人证件号</label>
+                            <input id="legalId" name="legalId" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>企业详细地址</label>
+                            <input id="address" name="address" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>经营范围</label>
+                            <input id="scope" name="scope" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>企业信誉度</label>
+                            <input id="credit" name="credit" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>营业执照</label> </br>
+                            <img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                                 width="180" height="180">
+                            <input class="hide" type="file" title="上传头像" name="fileField" id="upload" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label>营业执照有效期</label>
+                            <input id="licTime" name="licTime" type="date" class="form-control">
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <span id="checkSpan" style="color: #ff0000"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="default-btn" value="保 存">
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>企业电话</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>企业邮箱</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>法人姓名</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>法人证件号</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>企业详细地址</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>经营范围</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>企业信誉度</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>营业执照</label>
-                        <img src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" width="180" height="180">
-                        <input class="hide" type="file" title="上传头像" name="fileField" id="upload" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label>营业执照有效期</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <a th:href="@{/}" href="#" class="default-btn">
-                            保 存
-                            <span></span>
-                        </a>
-                    </div>
                 </div>
             </div>
+        </form>
     </div>
+
 </section>
 <!-- End Apply Area -->
 
@@ -376,7 +384,8 @@
                             <img th:src="@{/assets/img/logo2.png}" src="assets/img/logo2.png" alt="image">
                         </a>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.</p>
                     <ul class="social">
                         <li>
                             <b>Follow us:</b>
@@ -497,7 +506,9 @@
     <div class="container">
         <div class="copy-right-content">
             <p>
-                Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" th:href="@{/http://sc.chinaz.com/moban/}" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                Copyright &copy; 2020.Company name All rights reserved.<a target="_blank"
+                                                                          th:href="@{/http://sc.chinaz.com/moban/}"
+                                                                          href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
             </p>
         </div>
     </div>
@@ -540,3 +551,24 @@
 <script th:src="@{/assets/js/main.js}" src="assets/js/main.js"></script>
 </body>
 </html>
+<script>
+    /*非空判断 提交表单*/
+    function check() {
+        let type = $("#type").val()
+        let legalName = $("#legalName").val()
+        let legalId = $("#legalId").val()
+        if (type==""){
+            $("#checkSpan").html('企业类型不能为空');
+            return false;
+        }
+        if (legalName==""){
+            $("#checkSpan").html('法人不能为空');
+            return false;
+        }
+        if (legalId==""){
+            $("#checkSpan").html('证件号不能为空');
+            return false;
+        }
+
+    }
+</script>
