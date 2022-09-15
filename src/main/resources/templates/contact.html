@@ -327,20 +327,12 @@
                                 <h3>写信给我们</h3>
                             </div>
 
-                            <form id="contactForm">
+                            <form id="contactForm" onsubmit="return check()">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <label>姓名</label>
-                                            <input type="text" name="name" id="name" class="form-control" required data-error="请输入你的名字">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
                                             <label>企业编号</label>
-                                            <input type="text" name="cNo" id="cNo" class="form-control" required data-error="请输入你的企业编号">
+                                            <input type="text" id="cNo"  name="cNo" class="form-control" required data-error="请输入你的企业编号">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -352,14 +344,16 @@
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <span id="checkSpan" style="color: #ff0000"></span>
+                                        </div>
+                                    </div>
 
-                                    <div class="col-lg-12 col-md-12">
+                                   <div class="col-lg-12 col-md-12">
                                         <button type="submit" class="default-btn">
-                                            发送消息
-                                            <span></span>
-                                        </button>
-                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                        <div class="clearfix"></div>
+                                           发送消息
+                                      </button>
                                     </div>
                                 </div>
                             </form>
@@ -610,3 +604,31 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<script>
+    function check(){
+        let cNo = $("#cNo").val();
+        let context =$("#context").val();
+        if (cNo=="" || context==""){
+            $("#checkSpan").html('企业编号和留言不能为空');
+            return false;
+        }
+        $.ajax({
+            url:"/message/add",
+            type:'post',
+            data:{
+                "cNo":cNo,
+                "context":context
+            },
+            success:function (res) {
+                if(res){
+                    $("#checkSpan").html('留言成功');
+                    setTimeout(function() { window.location.href = "/"; }, 1000 );
+                }else {
+                    $("#checkSpan").html('留言失败');
+                }
+            }
+        })
+        return false;
+    }
+</script>
+
