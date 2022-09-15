@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CompanyMaterialMapper extends BaseMapper<CompanyMaterial> {
 
+    /**
+     * 外键查询材料信息
+     * @param cNo
+     * @return
+     */
+    CompanyMaterial selectByFk(String cNo);
 }

@@ -4,6 +4,8 @@ import com.pad.entity.CompanyDetail;
 import com.pad.mapper.CompanyDetailMapper;
 import com.pad.service.CompanyDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompanyDetailServiceImpl extends ServiceImpl<CompanyDetailMapper, CompanyDetail> implements CompanyDetailService {
 
+    @Autowired
+    CompanyDetailMapper companyDetailMapper;
+
+    @Override
+    public CompanyDetail selectByFK(String cNo) {
+        return companyDetailMapper.selectByFK(cNo);
+    }
 }

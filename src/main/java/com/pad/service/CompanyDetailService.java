@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CompanyDetailService extends IService<CompanyDetail> {
 
+    /**
+     * 外键查询详细信息
+     * @param cNo
+     * @return
+     */
+    CompanyDetail selectByFK(String cNo);
 }
