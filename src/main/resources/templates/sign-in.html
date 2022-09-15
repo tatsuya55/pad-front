@@ -536,7 +536,7 @@
             success:function (res) {
                 if(res){
                     $("#checkSpan").html('登录成功');
-                    setTimeout(function() { window.location.href = "/"; }, 1000 );
+                    setTimeout(function() { location.reload(); }, 1000 );
                 }else {
                     $("#checkSpan").html('企业编号或密码错误');
                 }
