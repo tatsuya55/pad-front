@@ -14,10 +14,10 @@ public class UploadTool {
         if (!imageFile.isEmpty()){//传入图片非空
             //图片存储路径
             //例如  D:\shixun\images\item\categoryPicture
-            ///C:/Users/1/Desktop/pad-front/target/test-classes/
+            ///C:/Users/1/Desktop/pad-front/target/
             String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
 
-            String realPath = path + type;
+            String realPath = path +"\\static\\images\\"+ type;
             //获取图片扩展名
             String extension = FilenameUtils.getExtension(imageFile.getOriginalFilename());
             //对图片重命名
