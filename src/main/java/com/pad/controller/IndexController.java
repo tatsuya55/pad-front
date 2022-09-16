@@ -1,18 +1,13 @@
 package com.pad.controller;
 
-import com.pad.service.CompanyInfoService;
-import com.pad.utils.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
+
+
 
 @Api(tags = "页面跳转")
 @Controller
@@ -40,5 +35,11 @@ public class IndexController {
     @GetMapping("/contact")
     public String toMessage(){
         return "contact";
+    }
+
+    @ApiOperation("详细信息页")
+    @GetMapping("/details")
+    public String toDetails(){
+        return "companyDetail";
     }
 }

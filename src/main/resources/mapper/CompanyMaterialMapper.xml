@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pad.mapper.CompanyMaterialMapper">
 
+    <select id="selectByFk" resultType="com.pad.entity.CompanyMaterial">
+        select *
+        from company_material m
+                 left  join company_info i on  m.c_no=i.c_no
+            and i.c_no=#{cNo,jdbcType=VARCHAR}
+    </select>
 </mapper>

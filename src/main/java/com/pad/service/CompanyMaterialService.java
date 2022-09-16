@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CompanyMaterialService extends IService<CompanyMaterial> {
 
+    /**
+     * 外键查询材料信息
+     * @param cNo
+     * @return
+     */
+    CompanyMaterial selectByFk(String cNo);
 }
