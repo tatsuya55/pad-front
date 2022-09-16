@@ -47,6 +47,17 @@ public class CompanyInfoController {
         return true;
     }
 
+    @ApiOperation("判断用户是否认证")
+    @GetMapping("/checkAuthStatus")
+    @ResponseBody
+    public int checkAuthStatus(HttpSession session){
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)){
+            return -2;//未登录
+        }
+        return user.getAuthStatus();
+    }
+
     @ApiOperation("检查cno是否重复")
     @GetMapping("/checkCno")
     @ResponseBody
