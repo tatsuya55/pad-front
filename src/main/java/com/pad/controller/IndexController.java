@@ -42,4 +42,10 @@ public class IndexController {
     public String toDetails(){
         return "companyDetail";
     }
+
+    @ApiOperation("贷款")
+    @GetMapping("/loans")
+    public String toLoans(){
+        return "loans";
+    }
 }
