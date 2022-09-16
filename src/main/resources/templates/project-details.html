@@ -300,10 +300,10 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>Project Details</h2>
+                            <h2>留言详情</h2>
                             <ul>
-                                <li><a th:href="@{/index.html}" href="index.html">Home</a></li>
-                                <li>Project Details</li>
+                                <li><a th:href="@{/index}" href="index.html">首页</a></li>
+                                <li>留言详情</li>
                             </ul>
                         </div>
                     </div>
@@ -319,73 +319,24 @@
                     <img th:src="@{/assets/img/single-projects.jpg}" src="assets/img/single-projects.jpg" alt="image">
                 </div>
 
-                <div class="projects-details-content">
-                    <h3>Our Best Useful Company</h3>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.</p>
-
-                    <h4>Our Projects</h4>
-                    <p>No fake products and projects. The customer is king, their lives and needs are the inspiration. But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
-
-                    <h4>Define Your Category</h4>
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic.</p>
-
-                    <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this.</p>
-
-                    <div class="projects-details-info">
-                        <div class="single-info-box">
-                            <h4>Client</h4>
-                            <span>James Anderson</span>
-                        </div>
-
-                        <div class="single-info-box">
-                            <h4>Category</h4>
-                            <span>House loan</span>
-                        </div>
-
-                        <div class="single-info-box">
-                            <h4>Date</h4>
-                            <span>February 28, 2020</span>
-                        </div>
-
-                        <div class="single-info-box">
-                            <h4>Share</h4>
-                            <ul class="social">
-                                <li>
-                                    <a target="_blank" th:href="@{/}" href="#">
-                                        <i class="flaticon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" th:href="@{/}" href="#">
-                                        <i class='flaticon-twitter'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" th:href="@{/}" href="#">
-                                        <i class="flaticon-instagram"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a target="_blank" th:href="@{/}" href="#">
-                                        <i class='flaticon-linkedin'></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="single-info-box">
-                            <a class="default-btn" th:href="@{/}" href="#">
-                                Live Preview
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
+                <div class="projects-details-content" th:each="message:${messageList}">
+                    <span style="display:inline-block;width:200px;font-weight:bold; ">你的留言:</span>
+                    <span >[[${{message.context}}]]</span>
+                    <span style="display:inline-block;width:200px;font-weight:bold; text-align:center;">留言时间:</span>
+                    <span>[[${{message.createTime}}]]</span>
+                    <br>
+                    <span style="display:inline-block;width:200px;font-weight:bold; color: #00FF00">回复留言:</span>
+                    <span>[[${{message.reply}}]]</span>
+                    <span style="display:inline-block;width:200px;font-weight:bold;text-align:center; color: #00FF00">回复时间:</span>
+                    <span>[[${{message.updateTime}}]]</span>
+                    <br>
+                    <br>
                 </div>
             </div>
-        </div>
-        <!-- End Project Details -->
 
+        </div>
+
+        <!-- End Project Details -->
         <!-- Start Footer Area -->
         <section class="footer-area pt-100 pb-70">
             <div class="container">
@@ -393,36 +344,36 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="single-footer-widget">
                             <div class="logo">
-                                <a th:href="@{/}" href="#">
-                                    <img th:src="@{/assets/img/logo2.png}" src="assets/img/logo2.png" alt="image">
+                                <a href="#">
+                                    <img src="assets/img/logo2.png" alt="image">
                                 </a>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>我今天做核酸了,什么酸,得不到你的心酸.</p>
                             <ul class="social">
                                 <li>
-                                    <b>Follow us:</b>
+                                    <b>联系我们:</b>
                                 </li>
 
                                 <li>
-                                    <a th:href="@{/}" href="#" target="_blank">
+                                    <a href="#" target="_blank">
                                         <i class="flaticon-twitter"></i>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a th:href="@{/}" href="#" target="_blank">
+                                    <a href="#" target="_blank">
                                         <i class="flaticon-instagram"></i>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a th:href="@{/}" href="#" target="_blank">
+                                    <a href="#" target="_blank">
                                         <i class="flaticon-facebook"></i>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a th:href="@{/}" href="#" target="_blank">
+                                    <a href="#" target="_blank">
                                         <i class="flaticon-linkedin"></i>
                                     </a>
                                 </li>
@@ -436,19 +387,19 @@
 
                             <ul class="quick-links">
                                 <li>
-                                    <a th:href="@{/about.html}" href="about.html">About</a>
+                                    <a href="about.html">About</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/}" href="#">Our Performance</a>
+                                    <a href="#">Our Performance</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/faq.html}" href="faq.html">Help (FAQ)</a>
+                                    <a href="faq.html">Help (FAQ)</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/news.html}" href="news.html">Blog</a>
+                                    <a href="news.html">Blog</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/contact.html}" href="contact.html">Contact</a>
+                                    <a href="contact.html">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -460,19 +411,19 @@
 
                             <ul class="quick-links">
                                 <li>
-                                    <a th:href="@{/}" href="#">Support</a>
+                                    <a href="#">Support</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/privacy-policy.html}" href="privacy-policy.html">Privacy Policy</a>
+                                    <a href="privacy-policy.html">Privacy Policy</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/terms-condition.html}" href="terms-condition.html">Terms of Service</a>
+                                    <a href="terms-condition.html">Terms of Service</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/}" href="#">Business Loans</a>
+                                    <a href="#">Business Loans</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/}" href="#">Loan Services</a>
+                                    <a href="#">Loan Services</a>
                                 </li>
                             </ul>
                         </div>
@@ -480,30 +431,27 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="single-footer-widget">
-                            <h3>Contact Us</h3>
+                            <h3>联系我们</h3>
 
                             <div class="info-contact">
                                 <i class="flaticon-pin"></i>
-                                <span>6890 Blvd, The Bronx, NY 1058 New York, USA</span>
+                                <span>苍盐海大街250号</span>
                             </div>
 
                             <div class="info-contact">
                                 <i class="flaticon-mail"></i>
                                 <span>
-                                    <a th:href="@{/mailto:hello@finix.com}" href="mailto:hello@finix.com">hello@finix.com</a>
-                                </span>
-                                <span>
-                                    <a th:href="@{/}" href="#">Skype: example</a>
+                                    <a href="mailto:Cyh@finix.com">Cyh@finix.com</a>
                                 </span>
                             </div>
 
                             <div class="info-contact">
                                 <i class="flaticon-telephone"></i>
                                 <span>
-                                    <a th:href="@{/tel:1514312-6688}" href="tel:1514312-6688">+1 (514) 312-5678</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-5678</a>
                                 </span>
                                 <span>
-                                    <a th:href="@{/tel:1514312-6688}" href="tel:1514312-6688">+1 (514) 312-6688</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-6688</a>
                                 </span>
                             </div>
                         </div>
@@ -518,7 +466,7 @@
             <div class="container">
                 <div class="copy-right-content">
                     <p>
-                        Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" th:href="@{/http://sc.chinaz.com/moban/}" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                        &copy;版权和副本:2022苍盐海 版权所有.
                     </p>
                 </div>
             </div>

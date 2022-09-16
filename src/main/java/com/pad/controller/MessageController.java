@@ -1,14 +1,19 @@
 package com.pad.controller;
 
-
-import com.pad.entity.Bank;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.pad.entity.CompanyInfo;
 import com.pad.entity.Message;
 import com.pad.service.MessageService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>
@@ -18,7 +23,7 @@ import javax.annotation.Resource;
  * @author F4
  * @since 2022-09-12
  */
-@RestController
+@Controller
 @RequestMapping("/message")
 public class MessageController {
     @Resource
@@ -37,6 +42,22 @@ public class MessageController {
         message.setCNo(cNo);
         message.setContext(context);
         return messageService.save(message);
+    }
+
+    @ApiOperation("查询留言")
+    @GetMapping("/query")
+    public String queryMessage(HttpSession session, Model model){
+//        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+//        if (ObjectUtils.isEmpty(user)){
+//            model.addAttribute("message","用户未登录");
+//            return "project-details";
+//        }
+//        String cNo = user.getCNo();
+        LambdaQueryWrapper<Message> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Message::getCNo,1);
+        List<Message> messageList = messageService.list(wrapper);
+        model.addAttribute("messageList",messageList);
+        return "project-details";
     }
 }
 
