@@ -89,10 +89,10 @@ public class CompanyDetailController {
 
     public boolean save(
             @ApiParam(name = "companyDetail" ,value = "详细信息")
-            CompanyDetail companyDetail, MultipartFile file
+             CompanyDetail companyDetail, MultipartFile file
     , HttpSession session ) throws IOException {
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
-        companyDetail.setCNo(user.getCNo());//user.getCNo()
+        companyDetail.setCNo("Q1231394-2244");//user.getCNo()
         String image = UploadTool.uploadImage(ImageType.LICENSE, file);
         companyDetail.setLicense(image);
         return service.save(companyDetail);
