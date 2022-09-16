@@ -34,6 +34,7 @@
     </head>
 
     <body>
+    <div id="app">
         <!-- Start Navbar Area -->
         <div class="navbar-area">
             <div class="main-responsive-nav">
@@ -516,6 +517,7 @@
 		<script th:src="@{/assets/js/wow.min.js}" src="assets/js/wow.min.js"></script>
         <!-- Custom JS -->
         <script th:src="@{/assets/js/main.js}" src="assets/js/main.js"></script>
+        </div>
     </body>
 </html>
 <script>
@@ -536,12 +538,34 @@
             success:function (res) {
                 if(res){
                     $("#checkSpan").html('登录成功');
-                    setTimeout(function() { location.reload(); }, 1000 );
+                    //判断用户是否认证
+                    checkAuthStatus()
                 }else {
                     $("#checkSpan").html('企业编号或密码错误');
                 }
             }
         })
         return false;
+    }
+
+    function checkAuthStatus() {
+        $.ajax({
+            url:'/company/checkAuthStatus',
+            type:'get',
+            success:function (res) {
+                switch (res) {
+                    case -2:
+                        $("#checkSpan").html('用户未登录');
+                        setTimeout(function() { location.reload(); }, 1000 );
+                        break;
+                    case 1:
+                        setTimeout(function() { location.reload(); }, 1000 );
+                        break;
+                    default:
+                        $("#checkSpan").html('请认证身份');
+                        setTimeout(function() { location.href="/details" }, 1000 );
+                }
+            }
+        })
     }
 </script>
