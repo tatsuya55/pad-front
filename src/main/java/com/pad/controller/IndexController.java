@@ -42,4 +42,15 @@ public class IndexController {
     public String toDetails(){
         return "companyDetail";
     }
+
+    @ApiOperation("贷款")
+    @GetMapping("/loans")
+    public String toLoans(){
+        return "loans";
+    }
+    @ApiOperation("留言详情")
+    @GetMapping("/project-details")
+    public String toProjectDetails(){
+        return "project-details";
+    }
 }
