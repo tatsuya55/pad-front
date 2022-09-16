@@ -306,10 +306,6 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="apply-form" >
-
-
-
-
                         <div class="form-group">
                             <label>企业类型</label>
                             <div class="select-box">
@@ -349,7 +345,8 @@
 
                         <div class="form-group">
                             <label>营业执照</label> </br>
-                            <input type="file" class="form-control" id="license" placeholder="添加图片">
+                            <input type="file" class="form-control" id="license" placeholder="添加图片" onchange="showPreview(this)">
+                            <img src="" style="" id="addimg"><br>
                         </div>
                         <div class="form-group">
                             <label>营业执照有效期</label>
@@ -480,7 +477,7 @@
                     <div class="info-contact">
                         <i class="flaticon-mail"></i>
                         <span>
-                                    <a th:href="@{/mailto:hello@finix.com}" href="mailto:hello@finix.com">hello@finix.com</a>
+                                    <a href="mailto:hello@finix.com">hello@finix.com</a>
                                 </span>
                         <span>
                                     <a th:href="@{/}" href="#">Skype: example</a>
@@ -554,9 +551,6 @@
 </body>
 </html>
 <script>
-
-
-
     /*非空判断 提交表单*/
     function check() {
         let  formData=new FormData;
@@ -566,7 +560,7 @@
         let address = $("#address").val()
         let scope = $("#scope").val()
         let credit = $("#credit").val()
-        let file = $("#license").val()
+        let file = $("#license")[0].files[0]
         if (type==""){
             $("#checkSpan").html('企业类型不能为空');
             return false;
@@ -586,7 +580,6 @@
         formData.append("scope",scope);
         formData.append("credit",credit);
         formData.append("file",file);
-        console.log(formData)
         $.ajax({
             url:'/company-detail/save',
             type:'post',
@@ -603,6 +596,21 @@
                 }
             }
         })
-
+        return false;
+    }
+    /*回显图片*/
+    function showPreview(source){
+        let file = source.files[0];
+        /*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*/
+        if(window.FileReader){
+            let fr = new FileReader();
+            console.log(fr);
+            let protrait = document.getElementById('addimg');
+            fr.onloadend = function (e){
+                protrait.src = e.target.result;
+            };
+            fr.readAsDataURL(file);
+            protrait.style.display = 'block';
+        }
     }
 </script>
