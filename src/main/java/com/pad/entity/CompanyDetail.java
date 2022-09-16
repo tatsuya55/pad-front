@@ -52,7 +52,7 @@ public class CompanyDetail implements Serializable {
     private Integer area;
 
     @ApiModelProperty(value = "企业信誉度")
-    private Integer credit;
+    private String credit;
 
     @ApiModelProperty(value = "公司详情地址")
     private String address;
