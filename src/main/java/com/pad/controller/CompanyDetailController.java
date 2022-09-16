@@ -8,7 +8,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.soap.Detail;
 
 /**
  * <p>
@@ -32,23 +35,7 @@ public class CompanyDetailController {
         return "companyDetail";
     }
 
-    /**
-     * 添加页面
-     * @return
-     */
-    @GetMapping("/add")
-    public String addDetails(){
-        return "";
-    }
 
-    /**
-     * 修改页面
-     * @return
-     */
-    @GetMapping("/revise")
-    public String reviseDetails(){
-        return "";
-    }
 
 
     /**按外键查询
@@ -59,9 +46,11 @@ public class CompanyDetailController {
     @GetMapping("/findDetailByPK/{id}")
     @ApiOperation("企业用户详情查询接口")
     @ResponseBody
-    public CompanyDetail findByPK(@ApiParam(value = "企业用户外键") @PathVariable("id") String cNo){
+    public String findByPK(@ApiParam(value = "企业用户外键") @PathVariable("id") String cNo, Model model){
+        CompanyDetail Detail = service.selectByFK(cNo);
         System.out.println(service.selectByFK(cNo));
-       return service.selectByFK(cNo);
+        model.addAttribute("Detail",Detail);
+       return "companyDetail";
     }
 
 
