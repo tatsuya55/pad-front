@@ -48,6 +48,7 @@ public class IndexController {
     public String toLoans(){
         return "loans";
     }
+
     @ApiOperation("留言详情")
     @GetMapping("/project-details")
     public String toProjectDetails(){

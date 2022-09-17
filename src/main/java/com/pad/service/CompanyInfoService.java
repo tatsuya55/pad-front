@@ -22,4 +22,6 @@ public interface CompanyInfoService extends IService<CompanyInfo> {
     boolean checkPhone(String phone);
     //检查email是否重复
     boolean checkEmail(String email);
+    //修改用户认证状态
+    boolean updateAuthStatus(String cNo, Integer status);
 }

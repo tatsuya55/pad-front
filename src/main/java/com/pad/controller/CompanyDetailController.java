@@ -6,6 +6,7 @@ import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
 import com.pad.entity.Message;
 import com.pad.service.CompanyDetailService;
+import com.pad.service.CompanyInfoService;
 import com.pad.utils.ImageType;
 import com.pad.utils.UploadTool;
 import io.swagger.annotations.Api;
@@ -36,6 +37,9 @@ import java.util.List;
 public class CompanyDetailController {
 
     @Autowired
+    private CompanyInfoService companyInfoService;
+
+    @Autowired
     private CompanyDetailService service;
 
     @ApiOperation("详细信息")
@@ -43,9 +47,6 @@ public class CompanyDetailController {
     public String toSignIn(){
         return "companyDetail";
     }
-
-
-
 
     /**按外键查询
      *
@@ -86,16 +87,24 @@ public class CompanyDetailController {
     @ApiOperation("企业用户详情添加")
     @PostMapping("/save")
     @ResponseBody
-
     public boolean save(
             @ApiParam(name = "companyDetail" ,value = "详细信息")
-             CompanyDetail companyDetail, MultipartFile file
-    , HttpSession session ) throws IOException {
+            CompanyDetail companyDetail,
+            MultipartFile file,
+            HttpSession session
+    ) throws IOException {
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
-        companyDetail.setCNo("Q1231394-2244");//user.getCNo()
+        String cNo = user.getCNo();
+        companyDetail.setCNo(cNo);
         String image = UploadTool.uploadImage(ImageType.LICENSE, file);
         companyDetail.setLicense(image);
-        return service.save(companyDetail);
+        boolean save = service.save(companyDetail);
+        if (save){
+            //添加成功 将认证状态改为认证中
+            return companyInfoService.updateAuthStatus(cNo,1);
+        }else {
+            return false;
+        }
     }
 
 }
