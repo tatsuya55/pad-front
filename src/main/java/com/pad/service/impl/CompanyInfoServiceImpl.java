@@ -83,4 +83,13 @@ public class CompanyInfoServiceImpl extends ServiceImpl<CompanyInfoMapper, Compa
         }
         return false;
     }
+
+    //修改用户认证状态
+    @Override
+    public boolean updateAuthStatus(String cNo, Integer status) {
+        CompanyInfo companyInfo = new CompanyInfo();
+        companyInfo.setCNo(cNo);
+        companyInfo.setAuthStatus(status);
+        return baseMapper.updateById(companyInfo)>0;
+    }
 }
