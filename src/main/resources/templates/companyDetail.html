@@ -601,7 +601,8 @@
         let scope = $("#scope").val()
         let credit = $("#credit").val()
         let licTime = $("#licTime").val()
-        let file = $("#license")[0].files[0]
+        let file = $("#license")[0].files[0]let expression = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+
         if (type==""){
             $("#checkSpan").html('企业类型不能为空');
             return false;
@@ -612,6 +613,10 @@
         }
         if (legalId==""){
             $("#checkSpan").html('证件号不能为空');
+            return false;
+        }
+        if (!expression.test(licTime)){
+            $("#checkSpan").html('请输入正确的身份证号');
             return false;
         }
         formData.append("type",type);
