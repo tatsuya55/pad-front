@@ -283,10 +283,10 @@
         <div class="d-table-cell">
             <div class="container">
                 <div class="page-title-content">
-                    <h2>详细信息</h2>
+                    <h2>企业信息认证</h2>
                     <ul>
                         <li><a th:href="@{/index.html}" href="index.html">首页</a></li>
-                        <li>详细信息</li>
+                        <li>企业信息认证</li>
                     </ul>
                 </div>
             </div>
@@ -299,58 +299,65 @@
 <section class="apply-area ptb-100">
     <div class="container">
         <div class="apply-title">
-            <h3>Loan Application</h3>
+            <h3 id="message" style="color: red">请完善相关信息</h3>
         </div>
 
         <form onsubmit="return check()" id="formRegister"  enctype="multipart/form-data">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="apply-form" >
+                    <div class="apply-form">
                         <div class="form-group">
                             <label>企业类型</label>
                             <div class="select-box">
-                                <select class="form-control" id="type" >
+                                <select class="form-control" id="type">
                                     <option ></option>
-                                    <option th:value="1">合伙企业</option>
-                                    <option th:value="2">有限责任公司</option>
-                                    <option th:value="0">独资企业</option>
+                                    <option th:value="1" th:selected="${detail?.type eq 1}">合伙企业</option>
+                                    <option th:value="2" th:selected="${detail?.type eq 2}">有限责任公司</option>
+                                    <option th:value="0" th:selected="${detail?.type eq 0}">独资企业</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group" >
                             <label >法人姓名</label>
-                            <input id="legalName" name="legalName" type="text" class="form-control">
+                            <input id="legalName" name="legalName" type="text" class="form-control"
+                                   th:value="${detail?.legalName}">
                         </div>
 
                         <div class="form-group">
                             <label>法人证件号</label>
-                            <input id="legalId" name="legalId" type="text" class="form-control">
+                            <input id="legalId" name="legalId" type="text" class="form-control"
+                                   th:value="${detail?.legalId}">
                         </div>
 
                         <div class="form-group">
                             <label>企业详细地址</label>
-                            <input id="address" name="address" type="text" class="form-control">
+                            <input id="address" name="address" type="text" class="form-control"
+                                   th:value="${detail?.address}">
                         </div>
 
                         <div class="form-group">
                             <label>经营范围</label>
-                            <input id="scope" name="scope" type="text" class="form-control">
+                            <input id="scope" name="scope" type="text" class="form-control"
+                                   th:value="${detail?.scope}">
                         </div>
 
                         <div class="form-group">
                             <label>企业信誉度</label>
-                            <input id="credit" name="credit" type="text" class="form-control">
+                            <input id="credit" name="credit" type="text" class="form-control"
+                                   th:value="${detail?.credit}">
                         </div>
 
                         <div class="form-group">
                             <label>营业执照</label> </br>
                             <input type="file" class="form-control" id="license" placeholder="添加图片" onchange="showPreview(this)">
                             <img src="" style="" id="addimg"><br>
+                            <img th:if="${detail}!=null" th:src="@{|/images/license/${detail?.license}|}"><br>
                         </div>
                         <div class="form-group">
                             <label>营业执照有效期</label>
-                            <input id="licTime" name="licTime" type="date" class="form-control">
+                            <input id="licTime" name="licTime" type="date" class="form-control" required="required"
+                                   th:value="${#dates.format(detail?.licTime,'yyyy-MM-dd')}">
                         </div>
 
                         <div class="col-lg-12">
@@ -359,7 +366,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="default-btn" value="保 存">
+                            <input id="button" type="submit" class="default-btn" value="提 交">
                         </div>
 
                     </div>
@@ -551,15 +558,49 @@
 </body>
 </html>
 <script>
+    $(function () {
+        //判断用户认证状态
+        $.ajax({
+            url:'/company/checkAuthStatus',
+            type:'get',
+            success:function (res) {
+                switch (res) {
+                    case -2:
+                        $("#message").html('请登录后再进行操作');
+                        setTimeout(function() { location.reload(); }, 1000 );
+                        break;
+                    case 1:
+                        disable();
+                        $("#message").html('认证信息审核中，请耐心等待');
+                        $("#checkSpan").html('认证信息审核中，不可修改');
+                        break;
+                    case 2:
+                        disable();
+                        $("#message").html('认证通过');
+                        $("#checkSpan").html('认证通过，不可修改');
+                        break;
+                    case -1:
+                        able();
+                        $("#message").html('认证失败，请重新认证');
+                        break;
+                    default:
+                        able();
+                        $("#message").html('请认证身份');
+                        break;
+                }
+            }
+        })
+    })
     /*非空判断 提交表单*/
     function check() {
-        let  formData=new FormData;
+        let formData=new FormData;
         let type = $("#type").val()
         let legalName = $("#legalName").val()
         let legalId = $("#legalId").val()
         let address = $("#address").val()
         let scope = $("#scope").val()
         let credit = $("#credit").val()
+        let licTime = $("#licTime").val()
         let file = $("#license")[0].files[0]
         if (type==""){
             $("#checkSpan").html('企业类型不能为空');
@@ -579,6 +620,7 @@
         formData.append("address",address);
         formData.append("scope",scope);
         formData.append("credit",credit);
+        formData.append("licTime",licTime);
         formData.append("file",file);
         $.ajax({
             url:'/company-detail/save',
@@ -591,6 +633,7 @@
             success:function (res) {
                 if(res){
                     $("#checkSpan").html('提交成功');
+                    setTimeout(function() { location.reload(); }, 1000 );
                 }else {
                     $("#checkSpan").html('提交失败');
                 }
@@ -612,5 +655,32 @@
             fr.readAsDataURL(file);
             protrait.style.display = 'block';
         }
+    }
+    /*修改样式 禁用*/
+    function disable() {
+        $("#type").attr("disabled","disabled");
+        $("#legalName").attr("disabled","disabled");
+        $("#legalId").attr("disabled","disabled");
+        $("#address").attr("disabled","disabled");
+        $("#scope").attr("disabled","disabled");
+        $("#credit").attr("disabled","disabled");
+        $("#license").attr("disabled","disabled");
+        $("#button").attr("disabled","disabled");
+        $("#licTime").attr("disabled","disabled");
+
+        $("#button").css("background-color","#cfcfcf");
+    }
+    /*修改样式 可用*/
+    function able() {
+        $("#type").removeAttr("disabled");
+        $("#legalName").removeAttr("disabled");
+        $("#legalId").removeAttr("disabled");
+        $("#address").removeAttr("disabled");
+        $("#scope").removeAttr("disabled");
+        $("#credit").removeAttr("disabled");
+        $("#license").removeAttr("disabled");
+        $("#button").removeAttr("disabled");
+        $("#licTime").removeAttr("disabled");
+        $("#button").css("background-color","#e73c3e");
     }
 </script>

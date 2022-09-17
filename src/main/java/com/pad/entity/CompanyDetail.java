@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -60,6 +62,7 @@ public class CompanyDetail implements Serializable {
     @ApiModelProperty(value = "营业执照图片")
     private String license;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "营业执照到期时间")
     private Date licTime;
 

@@ -4,7 +4,6 @@ package com.pad.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
-import com.pad.entity.Message;
 import com.pad.service.CompanyDetailService;
 import com.pad.service.CompanyInfoService;
 import com.pad.utils.ImageType;
@@ -15,13 +14,12 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.soap.Detail;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * <p>
@@ -46,21 +44,6 @@ public class CompanyDetailController {
     @GetMapping("/details")
     public String toSignIn(){
         return "companyDetail";
-    }
-
-    /**按外键查询
-     *
-     * @param
-     * @return
-     */
-    @GetMapping("/findDetailByPK")
-    @ApiOperation("企业用户详情查询接口")
-    public String findByPK(HttpSession session, Model model){
-        LambdaQueryWrapper<CompanyDetail> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(CompanyDetail::getCNo,"Q1231394-2241");
-        CompanyDetail CompanyDetail = service.getOne(wrapper);
-        model.addAttribute("Detail",CompanyDetail);
-       return "companyDetail";
     }
 
 
@@ -101,7 +84,10 @@ public class CompanyDetailController {
         boolean save = service.save(companyDetail);
         if (save){
             //添加成功 将认证状态改为认证中
-            return companyInfoService.updateAuthStatus(cNo,1);
+            companyInfoService.updateAuthStatus(cNo,1);
+            //更新session
+            session.setAttribute("user",companyInfoService.getById(cNo));
+            return true;
         }else {
             return false;
         }
