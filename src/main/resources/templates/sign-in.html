@@ -489,6 +489,26 @@
         </div>
         <!-- End Go Top Area -->
 
+        <!--弹框start-->
+        <div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">提示</h4>
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                    </div>
+                    <div class="modal-body">
+                        <p id="ModalContext">内容</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="location.href=('/details')" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!--弹框end-->
+
         <!-- Jquery Slim JS -->
         <script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
         <!-- Popper JS -->
@@ -588,8 +608,9 @@
                         setTimeout(function() { location.href="/" }, 1000 );
                         break;
                     default:
-                        $("#checkSpan").html('请认证身份');
-                        setTimeout(function() { location.href="/details" }, 1000 );
+                        $("#ModalContext").html('请完善身份信息');
+                        $("#MyModal").modal('show')
+                        /* setTimeout(function() { location.href="/details" }, 1000 );*/
                 }
             }
         })
