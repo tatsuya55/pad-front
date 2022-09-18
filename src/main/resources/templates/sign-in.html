@@ -322,8 +322,8 @@
 
                             <div class="col-lg-12">
                                 <div class="form-check">
-                                    <input name="remember-me" type="checkbox" class="form-check-input" id="checkme">
-                                    <label class="form-check-label" for="checkme">记住我</label>
+                                    <input name="remember-me" type="checkbox" class="form-check-input" id="remember">
+                                    <label class="form-check-label" for="remember">记住密码</label>
                                 </div>
                             </div>
 
@@ -521,9 +521,34 @@
     </body>
 </html>
 <script>
+    /*获取cookie*/
+    let cookies = document.cookie.split(';');
+    function getCookie(mkey) {
+        for (let i = 0; i < cookies.length; i++) {
+            let kv = cookies[i].split('=');
+            if (kv[0].trim() == mkey) {
+                console.log(kv[1].trim())
+                return kv[1].trim();
+            }
+        }
+        return '';
+    }
+    //获取cookie回显
+    window.onload = function () {
+        let userNumber = getCookie("userNumber");
+        let password = getCookie("password");
+        let remember = getCookie("remember");
+        if (remember == 'on') {
+            $("#cNo").val(userNumber);
+            $("#password").val(password);
+            $("#remember").prop("checked", true);
+        }
+    }
+    /*提交登录*/
     function check(){
         let cNo = $("#cNo").val();
         let password =$("#password").val();
+        let remember =$("#remember").val();
         if (cNo=="" || password==""){
             $("#checkSpan").html('企业编号和密码不能为空');
             return false;
@@ -533,7 +558,8 @@
             type:'post',
             data:{
                 "cNo":cNo,
-                "password":password
+                "password":password,
+                "remember":remember
             },
             success:function (res) {
                 if(res){
@@ -547,7 +573,7 @@
         })
         return false;
     }
-
+    /*检查用户认证*/
     function checkAuthStatus() {
         $.ajax({
             url:'/company/checkAuthStatus',
@@ -559,7 +585,7 @@
                         setTimeout(function() { location.reload(); }, 1000 );
                         break;
                     case 1:
-                        setTimeout(function() { location.reload(); }, 1000 );
+                        setTimeout(function() { location.href="/" }, 1000 );
                         break;
                     default:
                         $("#checkSpan").html('请认证身份');
