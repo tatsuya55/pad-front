@@ -42,14 +42,13 @@ public class CompanyInfoController {
             HttpSession session, HttpServletResponse response
             ){
         //将密码经MD5加密后 与数据库中密码进行比对
-        String encrypt = MD5.encrypt(password);
-        CompanyInfo companyInfo = companyInfoService.login(cNo,encrypt);
+        CompanyInfo companyInfo = companyInfoService.login(cNo,MD5.encrypt(password));
         if (ObjectUtils.isEmpty(companyInfo)){
             return false;
         }
         if ("on".equals(remember)){
             //将用户名和密码存入cookie
-            Cookie c_password = new Cookie("password", encrypt);
+            Cookie c_password = new Cookie("password", password);
             Cookie c_userNumber = new Cookie("userNumber", cNo);
             Cookie c_remember = new Cookie("remember", remember);
             //设置cookie时间为7天
