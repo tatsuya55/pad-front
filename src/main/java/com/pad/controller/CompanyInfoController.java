@@ -58,6 +58,20 @@ public class CompanyInfoController {
         return user.getAuthStatus();
     }
 
+    @ApiOperation("修改用户认证状态")
+    @GetMapping("/editAuthStatus")
+    @ResponseBody
+    public boolean editAuthStatus(
+            @ApiParam(name = "status",value = "认证状态",required = true)Integer status,
+            HttpSession session
+    ){
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)){
+            return false;//未登录
+        }
+        return companyInfoService.updateAuthStatus(user.getCNo(),status);
+    }
+
     @ApiOperation("检查cno是否重复")
     @GetMapping("/checkCno")
     @ResponseBody
