@@ -325,10 +325,12 @@
                     <span style="display:inline-block;width:200px;font-weight:bold; text-align:center;">留言时间:</span>
                     <span th:text="${#dates.format(message.createTime, 'yyyy-MM-dd HH:mm')}"></span>
                     <br>
+                    <br>
                     <span style="display:inline-block;width:200px;font-weight:bold; color: #00FF00">回复留言:</span>
                     <span>[[${{message.reply}}]]</span>
                     <span style="display:inline-block;width:200px;font-weight:bold;text-align:center; color: #00FF00">回复时间:</span>
                     <span th:text="${#dates.format(message.updateTime, 'yyyy-MM-dd HH:mm')}"></span>
+                    <br>
                     <br>
                     <br>
                 </div>
