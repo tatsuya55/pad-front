@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" href="assets/css/bootstrap.min.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/animate.css}" href="assets/css/animate.css">
+    <!-- Meanmenu CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/meanmenu.css}" href="assets/css/meanmenu.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/boxicons.min.css}" href="assets/css/boxicons.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}" href="assets/css/flaticon.css">
+    <!-- Carousel CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}" href="assets/css/owl.carousel.min.css">
+    <!-- Carousel Default CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}" href="assets/css/owl.theme.default.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}" href="assets/css/magnific-popup.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}" href="assets/css/nice-select.css">
+    <!-- Odometer CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/odometer.css}" href="assets/css/odometer.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" href="assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/responsive.css}" href="assets/css/responsive.css">
+
+    <title></title>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}" href="assets/img/favicon.png">
+</head>
+
+<body>
+
+<!-- Start Navbar Area -->
+<div class="navbar-area">
+    <div class="main-responsive-nav">
+        <div class="container">
+            <div class="main-responsive-menu">
+                <div class="logo">
+                    <a th:href="@{/}">
+                        <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-navbar">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
+                </a>
+
+                <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a th:href="@{/}" class="nav-link active">
+                                首 页
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                发 现
+                                <i class='bx bx-chevron-down'></i>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a th:href="@{/details}" class="nav-link">
+                                        详细信息
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="team.html" class="nav-link">
+                                        Team
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="faq.html" class="nav-link">
+                                        FAQ
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="gallery.html" class="nav-link">
+                                        Gallery
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="loan-calculator.html" class="nav-link">
+                                        Loan Calculator
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="apply-now.html" class="nav-link">
+                                        Apply now
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="testimonials.html" class="nav-link">
+                                        Testimonials
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        Projects
+                                        <i class='bx bx-chevron-down'></i>
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="projects.html" class="nav-link">
+                                                Projects
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a th:href="@{/message/query}" class="nav-link">
+                                                留言详情
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a th:href="@{/signIn}" class="nav-link">
+                                        登 录
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a th:href="@{/signUp}" class="nav-link">
+                                        注 册
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="terms-condition.html" class="nav-link">
+                                        Terms & Conditions
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="privacy-policy.html" class="nav-link">
+                                        Privacy Policy
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="error-404.html" class="nav-link">
+                                        Error Page
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a th:href="@{/contact}" class="nav-link">
+                                        留言
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Services
+                                <i class='bx bx-chevron-down'></i>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="services.html" class="nav-link">
+                                        Services
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="services-details.html" class="nav-link">
+                                        Services Details
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="funding.html" class="nav-link">
+                                Funding
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="loans.html" class="nav-link">
+                                Loans
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                News
+                                <i class='bx bx-chevron-down'></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="news.html" class="nav-link">
+                                        News Grid
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="news-details.html" class="nav-link">
+                                        News Details
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a th:href="@{/contact}" class="nav-link">
+                                留言
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="others-options d-flex align-items-center">
+                        <div class="option-item">
+                            <i class="search-btn flaticon-magnifying-glass"></i>
+                            <i class="close-btn flaticon-close"></i>
+                            <div class="search-overlay search-popup">
+                                <div class='search-box'>
+                                    <form class="search-form">
+                                        <input class="search-input" name="search" placeholder="Search" type="text">
+
+                                        <button class="search-button" type="submit">
+                                            <i class="flaticon-magnifying-glass"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-item">
+                            <div class="info">
+                                <i class="flaticon-telephone"></i>
+                                <span>Call Now</span>
+                                <p>
+                                    <a href="tel:1514312-5678">+1 (514) 312-5678</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="option-item">
+                            <a href="apply-now.html" class="default-btn">
+                                Apply now
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- End Navbar Area -->
+
+<!-- Start Page Title Area -->
+<div class="page-title-area item-bg-1">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <div class="page-title-content">
+                    <h2>Sign Up</h2>
+                    <ul>
+                        <li><a th:href="@{/index.html}" href="index.html">Home</a></li>
+                        <li>Sign Up</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+
+<!-- Start Signup Area -->
+<div class="signup-area ptb-100">
+    <div class="container">
+        <div class="signup-form">
+            <h3>人脸注册</h3>
+                <div class="row">
+
+
+                    <div class="col-lg-12">
+                            <div class="form-group" >
+                                <label>姓名：</label>
+                                <input class="form-control" placeholder="在此输入姓名" type="text" name="userName" id="userName">
+                            </div>
+                        <div id="mainDiv">
+
+                        </div>
+                            <div>
+                                <table frame="void" >
+                                    <tr>
+                                        <div class="col-lg-12">
+                                            <div class="send-btn">
+                                                <button class="default-btn" title="摄像头注册" value="摄像头注册" onclick="getMedia()" >
+                                                    摄像头注册
+                                                    <span></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    </br>
+                                    <tr>
+                                        <div class="col-lg-12">
+                                            <div class="send-btn">
+                                                <button class="default-btn" id="snap" onclick="takePhoto()" >
+                                                    提交
+                                                    <span></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Signup Area -->
+
+<!-- Start Footer Area -->
+<section class="footer-area pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="single-footer-widget">
+                    <div class="logo">
+                        <a href="#">
+                            <img src="assets/img/logo2.png" alt="image">
+                        </a>
+                    </div>
+                    <p>我今天做核酸了,什么酸,得不到你的心酸.</p>
+                    <ul class="social">
+                        <li>
+                            <b>联系我们:</b>
+                        </li>
+
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="flaticon-twitter"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="flaticon-instagram"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="flaticon-facebook"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" target="_blank">
+                                <i class="flaticon-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="single-footer-widget">
+                    <h3>Quick Links</h3>
+
+                    <ul class="quick-links">
+                        <li>
+                            <a href="about.html">About</a>
+                        </li>
+                        <li>
+                            <a href="#">Our Performance</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">Help (FAQ)</a>
+                        </li>
+                        <li>
+                            <a href="news.html">Blog</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="single-footer-widget">
+                    <h3>Other Resources</h3>
+
+                    <ul class="quick-links">
+                        <li>
+                            <a href="#">Support</a>
+                        </li>
+                        <li>
+                            <a href="privacy-policy.html">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="terms-condition.html">Terms of Service</a>
+                        </li>
+                        <li>
+                            <a href="#">Business Loans</a>
+                        </li>
+                        <li>
+                            <a href="#">Loan Services</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="single-footer-widget">
+                    <h3>联系我们</h3>
+
+                    <div class="info-contact">
+                        <i class="flaticon-pin"></i>
+                        <span>苍盐海大街250号</span>
+                    </div>
+
+                    <div class="info-contact">
+                        <i class="flaticon-mail"></i>
+                        <span>
+                                    <a href="mailto:Cyh@finix.com">Cyh@finix.com</a>
+                                </span>
+                    </div>
+
+                    <div class="info-contact">
+                        <i class="flaticon-telephone"></i>
+                        <span>
+                                    <a href="tel:2504312-6688">+1 (250) 312-5678</a>
+                                </span>
+                        <span>
+                                    <a href="tel:2504312-6688">+1 (250) 312-6688</a>
+                                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Footer Area -->
+
+<!-- Start Copy Right Area -->
+<div class="copy-right-area">
+    <div class="container">
+        <div class="copy-right-content">
+            <p>
+                &copy;版权和副本:2022苍盐海 版权所有.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- End Copy Right Area -->
+
+<!-- Start Go Top Area -->
+<div class="go-top">
+    <i class='bx bx-chevron-up'></i>
+</div>
+<!-- End Go Top Area -->
+
+
+
+<!--弹框start-->
+<div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">提示</h4>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+            </div>
+            <div class="modal-body">
+                <p id="ModalContext">内容</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="location.href=('/index')" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Jquery Slim JS -->
+<script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
+<!-- Popper JS -->
+<script th:src="@{/assets/js/popper.min.js}" src="assets/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
+<!-- Meanmenu JS -->
+<script th:src="@{/assets/js/jquery.meanmenu.js}" src="assets/js/jquery.meanmenu.js"></script>
+<!-- Carousel JS -->
+<script th:src="@{/assets/js/owl.carousel.min.js}" src="assets/js/owl.carousel.min.js"></script>
+<!-- Nice Select JS -->
+<script th:src="@{/assets/js/jquery.nice-select.min.js}" src="assets/js/jquery.nice-select.min.js"></script>
+<!-- Magnific Popup JS -->
+<script th:src="@{/assets/js/jquery.magnific-popup.min.js}" src="assets/js/jquery.magnific-popup.min.js"></script>
+<!-- Odometer JS -->
+<script th:src="@{/assets/js/odometer.min.js}" src="assets/js/odometer.min.js"></script>
+<!-- Appear JS -->
+<script th:src="@{/assets/js/jquery.appear.js}" src="assets/js/jquery.appear.js"></script>
+<!-- Form Ajaxchimp JS -->
+<script th:src="@{/assets/js/jquery.ajaxchimp.min.js}" src="assets/js/jquery.ajaxchimp.min.js"></script>
+<!-- Form Validator JS -->
+<script th:src="@{/assets/js/form-validator.min.js}" src="assets/js/form-validator.min.js"></script>
+<!-- Contact JS -->
+<script th:src="@{/assets/js/contact-form-script.js}" src="assets/js/contact-form-script.js"></script>
+<!-- Wow JS -->
+<script th:src="@{/assets/js/wow.min.js}" src="assets/js/wow.min.js"></script>
+<!-- Custom JS -->
+<script th:src="@{/assets/js/main.js}" src="assets/js/main.js"></script>
+</body>
+</html>
+<script>
+    function getMedia() {
+        $("#mainDiv").empty();
+        let videoComp = " <video id='video' width='500px' height='500px' autoplay='autoplay' style='margin-top: 20px'></video><canvas id='canvas' width='500px' height='500px' style='display: none'></canvas>";
+        $("#mainDiv").append(videoComp);
+
+        let constraints = {
+            video: {width: 500, height: 500},
+            audio: true
+        };
+        //获得video摄像头区域
+        let video = document.getElementById("video");
+        //这里介绍新的方法，返回一个 Promise对象
+        // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
+        // then()是Promise对象里的方法
+        // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
+        // 避免数据没有获取到
+        let promise = navigator.mediaDevices.getUserMedia(constraints);
+        promise.then(function (MediaStream) {
+            video.srcObject = MediaStream;
+            video.play();
+        });
+
+        // var t1 = window.setTimeout(function() {
+        //     takePhoto();
+        // },2000)
+    }
+    //拍照事件
+    function takePhoto() {
+        let mainComp = $("#mainDiv");
+        if(mainComp.has('video').length)
+        {
+            let userNameInput = $("#userName").val();
+            if(userNameInput == "")
+            {
+                alert("姓名不能为空!");
+                return false;
+            }
+            //获得Canvas对象
+            let video = document.getElementById("video");
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, 500, 500);
+            var formData = new FormData();
+            var base64File = canvas.toDataURL();
+            var userName = $("#userName").val();
+            formData.append("file", base64File);
+            formData.append("name", userName);
+            formData.append("groupId", "101");
+            $.ajax({
+                type: "post",
+                url: "/faceAdd",
+                data: formData,
+                contentType: false,
+                processData: false,
+                async: false,
+                success: function (text) {
+                    var res = JSON.stringify(text)
+                    if (text.code == 0) {
+                        checkAuthStatus();
+                    } else {
+                        alert(text.message)
+                    }
+                },
+                error: function (error) {
+                    alert(JSON.stringify(error))
+                }
+            });
+        }
+        else{
+            var formData = new FormData();
+            let userName = $("#userName").val();
+            formData.append("groupId", "101");
+            var file = $("#file0")[0].files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                var base64 = reader.result;
+                formData.append("file", base64);
+                formData.append("name",userName);
+                $.ajax({
+                    type: "post",
+                    url: "/faceAdd",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    success: function (text) {
+                        var res = JSON.stringify(text)
+                        if (text.code == 0) {
+                            checkAuthStatus();
+                        } else {
+                            alert(text.message)
+                        }
+                    },
+                    error: function (error) {
+                        alert(JSON.stringify(error))
+                    }
+                });
+                location.reload();
+            }
+        }
+
+    }
+
+    function checkAuthStatus() {
+        $("#ModalContext").html('注册成功');
+        $("#MyModal").modal('show')
+    }
+
+
+</script>
