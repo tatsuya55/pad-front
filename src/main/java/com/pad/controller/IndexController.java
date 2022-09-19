@@ -46,12 +46,6 @@ public class IndexController {
         return "sign-up";
     }
 
-    @ApiOperation("人脸注册页")
-    @GetMapping("/face")
-    public String face(){
-        return "face";
-    }
-
     @ApiOperation("人脸识别页")
     @GetMapping("/spot")
     public String spot(){
