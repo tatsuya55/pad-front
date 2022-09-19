@@ -545,6 +545,28 @@
 </div>
 <!-- End Go Top Area -->
 
+
+<!--弹框start-->
+<div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">提示</h4>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+            </div>
+            <div class="modal-body">
+                <p id="ModalContext">内容</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="location.href=('/index')" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹框end-->
+
+
 <!-- Jquery Slim JS -->
 <script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
 <!-- Popper JS -->
@@ -696,15 +718,20 @@
             success:function (res) {
                 if(res){
                     $("#checkSpan").html('提交成功');
-                    setTimeout(function() { location.reload(); }, 1000 );
+                    checkAuthStatus();
                 }else {
                     $("#checkSpan").html('提交失败');
                 }
             }
         })
 
+        return false;
     }
 
+    function checkAuthStatus() {
+        $("#ModalContext").html('提交成功');
+        $("#MyModal").modal('show')
+    }
     //!*回显身份证图片*!/
     function showPreview(source){
         let file = source.files[0];

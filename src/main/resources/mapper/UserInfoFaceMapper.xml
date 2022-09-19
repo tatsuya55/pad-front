@@ -24,7 +24,7 @@
     </select>
 
     <insert id="insertUserFaceInfo" parameterType="com.pad.entity.UserFaceInfo" >
-            INSERT INTO user_face_info (group_id,face_id,name,face_feature) VALUES (#{groupId},#{faceId},#{name},#{faceFeature})
+            INSERT INTO user_face_info (c_no,group_id,face_id,name,face_feature) VALUES (#{cNo},#{groupId},#{faceId},#{name},#{faceFeature})
     </insert>
 
     <select id="getUserFaceInfoByGroupId" resultMap="userFace2" parameterType="java.lang.Integer" resultType="com.pad.dto.FaceUserInfo">

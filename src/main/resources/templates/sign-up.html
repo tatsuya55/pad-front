@@ -329,16 +329,52 @@
                                 </div>
                             </div>
 
+
                             <div class="col-lg-12">
-                                <div class="form-group">
-                                    <span id="checkSpan" style="color: #ff0000"></span>
+                                <div class="form-group" >
+                                    <input class="form-control" placeholder="在此输入姓名" type="text" name="userName" id="userName">
+                                </div>
+                                <div id="mainDiv">
+
+                                </div>
+                                <div>
+                                    <table frame="void" >
+                                        <tr>
+                                            <div class="col-lg-12">
+                                                <div class="send-btn">
+                                                    <button class="default-btn" title="摄像头注册" value="摄像头注册" onclick="getMedia()" >
+                                                        摄像头注册
+                                                        <span></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div class="col-lg-12">
+                                                <div class="send-btn">
+                                                    <button class="default-btn" id="snap" onclick="takePhoto()" >
+                                                        提交
+                                                        <span></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
+
+
 
                             <div class="col-lg-12">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="agree" name="agree">
                                     <label class="form-check-label" for="agree">同意条款</label>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <span id="checkSpan" style="color: #ff0000"></span>
                                 </div>
                             </div>
 
@@ -681,7 +717,113 @@
                     $("#formRegister")[0].reset()
                 }
             }
+
         })
         return false;
+    }
+
+
+    function getMedia() {
+        $("#mainDiv").empty();
+        let videoComp = " <video id='video' width='500px' height='500px' autoplay='autoplay' style='margin-top: 20px'></video><canvas id='canvas' width='500px' height='500px' style='display: none'></canvas>";
+        $("#mainDiv").append(videoComp);
+
+        let constraints = {
+            video: {width: 500, height: 500},
+            audio: true
+        };
+        //获得video摄像头区域
+        let video = document.getElementById("video");
+        //这里介绍新的方法，返回一个 Promise对象
+        // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
+        // then()是Promise对象里的方法
+        // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
+        // 避免数据没有获取到
+        let promise = navigator.mediaDevices.getUserMedia(constraints);
+        promise.then(function (MediaStream) {
+            video.srcObject = MediaStream;
+            video.play();
+        });
+
+        // var t1 = window.setTimeout(function() {
+        //     takePhoto();
+        // },2000)
+    }
+    //拍照事件
+    function takePhoto() {
+        let mainComp = $("#mainDiv");
+        if(mainComp.has('video').length)
+        {
+            let userNameInput = $("#userName").val();
+            if(userNameInput == "")
+            {
+                alert("姓名不能为空!");
+                return false;
+            }
+            //获得Canvas对象
+            let video = document.getElementById("video");
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, 500, 500);
+            var formData = new FormData();
+            var base64File = canvas.toDataURL();
+            var userName = $("#userName").val();
+            formData.append("file", base64File);
+            formData.append("name", userName);
+            formData.append("groupId", "101");
+            $.ajax({
+                type: "post",
+                url: "/faceAdd",
+                data: formData,
+                contentType: false,
+                processData: false,
+                async: false,
+                success: function (text) {
+                    var res = JSON.stringify(text)
+                    if (text.code == 0) {
+                        alert("注册成功")
+                    } else {
+                        alert(text.message)
+                    }
+                },
+                error: function (error) {
+                    alert(JSON.stringify(error))
+                }
+            });
+        }
+        else{
+            var formData = new FormData();
+            let userName = $("#userName").val();
+            formData.append("groupId", "101");
+            var file = $("#file0")[0].files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                var base64 = reader.result;
+                formData.append("file", base64);
+                formData.append("name",userName);
+                $.ajax({
+                    type: "post",
+                    url: "/faceAdd",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    success: function (text) {
+                        var res = JSON.stringify(text)
+                        if (text.code == 0) {
+                            alert("注册成功")
+                        } else {
+                            alert(text.message)
+                        }
+                    },
+                    error: function (error) {
+                        alert(JSON.stringify(error))
+                    }
+                });
+                location.reload();
+            }
+        }
+
     }
 </script>

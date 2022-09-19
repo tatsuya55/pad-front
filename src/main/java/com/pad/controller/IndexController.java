@@ -46,6 +46,12 @@ public class IndexController {
         return "sign-up";
     }
 
+    @ApiOperation("人脸识别页")
+    @GetMapping("/spot")
+    public String spot(){
+        return "face-recognition";
+    }
+
     @ApiOperation("留言页")
     @GetMapping("/contact")
     public String toMessage(){

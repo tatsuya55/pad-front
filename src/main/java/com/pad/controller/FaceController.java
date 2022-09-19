@@ -13,6 +13,7 @@ import com.pad.base.Results;
 import com.pad.dto.FaceSearchResDto;
 import com.pad.dto.FaceUserInfo;
 import com.pad.dto.ProcessInfo;
+import com.pad.entity.CompanyInfo;
 import com.pad.entity.UserFaceInfo;
 import com.pad.enums.ErrorCodeEnum;
 import com.pad.service.FaceEngineService;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -50,17 +52,18 @@ public class FaceController {
     @Autowired
     UserFaceInfoService userFaceInfoService;
 
-    @RequestMapping(value = "/demo")
-    public String demo() {
-        return "demo";
-    }
-
     /*
     人脸添加
      */
     @RequestMapping(value = "/faceAdd", method = RequestMethod.POST)
     @ResponseBody
-    public Result<Object> faceAdd(@RequestParam("file") String file, @RequestParam("groupId") Integer groupId, @RequestParam("name") String name) {
+    public Result<Object> faceAdd(@RequestParam("file") String file,
+                                  @RequestParam("groupId") Integer groupId,
+                                  @RequestParam("name") String name,
+                                  HttpSession session) {
+        CompanyInfo user= (CompanyInfo) session.getAttribute("user");
+        String cNo=user.getCNo();
+
 
         try {
             if (file == null) {
@@ -83,6 +86,7 @@ public class FaceController {
             }
 
             UserFaceInfo userFaceInfo = new UserFaceInfo();
+            userFaceInfo.setCNo(cNo);
             userFaceInfo.setName(name);
             userFaceInfo.setGroupId(groupId);
             userFaceInfo.setFaceFeature(bytes);
