@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -36,12 +38,30 @@ public class CompanyInfoController {
     public boolean login(
             @ApiParam(name = "cNo",value = "企业统一编号",required = true)String cNo,
             @ApiParam(name = "password",value = "密码",required = true)String password,
-            HttpSession session
-    ){
+            @ApiParam(name = "remember",value = "记住密码",required = true)String remember,
+            HttpSession session, HttpServletResponse response
+            ){
         //将密码经MD5加密后 与数据库中密码进行比对
-        CompanyInfo companyInfo = companyInfoService.login(cNo, MD5.encrypt(password));
+        CompanyInfo companyInfo = companyInfoService.login(cNo,MD5.encrypt(password));
         if (ObjectUtils.isEmpty(companyInfo)){
             return false;
+        }
+        if ("on".equals(remember)){
+            //将用户名和密码存入cookie
+            Cookie c_password = new Cookie("password", password);
+            Cookie c_userNumber = new Cookie("userNumber", cNo);
+            Cookie c_remember = new Cookie("remember", remember);
+            //设置cookie时间为7天
+            c_password.setMaxAge(60 * 60 * 24 * 7);
+            c_userNumber.setMaxAge(60 * 60 * 24 * 7);
+            c_remember.setMaxAge(60 * 60 * 24 * 7);
+            //设置cookie共享路径
+            c_password.setPath("/");
+            c_userNumber.setPath("/");
+            c_remember.setPath("/");
+            response.addCookie(c_password);
+            response.addCookie(c_userNumber);
+            response.addCookie(c_remember);
         }
         session.setAttribute("user",companyInfo);
         return true;

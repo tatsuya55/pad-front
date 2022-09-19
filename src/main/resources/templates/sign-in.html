@@ -297,7 +297,7 @@
                 <div class="sign-in-form">
                     <div class="sign-in-title">
                         <h3>欢迎回来!</h3>
-                        <p>请登录您的账号.</p>
+                        <p>请登录您的账号</p>
                     </div>
 
                     <form onsubmit="return check()">
@@ -322,8 +322,8 @@
 
                             <div class="col-lg-12">
                                 <div class="form-check">
-                                    <input name="remember-me" type="checkbox" class="form-check-input" id="checkme">
-                                    <label class="form-check-label" for="checkme">记住我</label>
+                                    <input name="remember-me" type="checkbox" class="form-check-input" id="remember">
+                                    <label class="form-check-label" for="remember">记住密码</label>
                                 </div>
                             </div>
 
@@ -489,6 +489,26 @@
         </div>
         <!-- End Go Top Area -->
 
+        <!--弹框start-->
+        <div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">提示</h4>
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                    </div>
+                    <div class="modal-body">
+                        <p id="ModalContext">内容</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="location.href=('/details')" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!--弹框end-->
+
         <!-- Jquery Slim JS -->
         <script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
         <!-- Popper JS -->
@@ -521,9 +541,34 @@
     </body>
 </html>
 <script>
+    /*获取cookie*/
+    let cookies = document.cookie.split(';');
+    function getCookie(mkey) {
+        for (let i = 0; i < cookies.length; i++) {
+            let kv = cookies[i].split('=');
+            if (kv[0].trim() == mkey) {
+                console.log(kv[1].trim())
+                return kv[1].trim();
+            }
+        }
+        return '';
+    }
+    //获取cookie回显
+    window.onload = function () {
+        let userNumber = getCookie("userNumber");
+        let password = getCookie("password");
+        let remember = getCookie("remember");
+        if (remember == 'on') {
+            $("#cNo").val(userNumber);
+            $("#password").val(password);
+            $("#remember").prop("checked", true);
+        }
+    }
+    /*提交登录*/
     function check(){
         let cNo = $("#cNo").val();
         let password =$("#password").val();
+        let remember =$("#remember").val();
         if (cNo=="" || password==""){
             $("#checkSpan").html('企业编号和密码不能为空');
             return false;
@@ -533,7 +578,8 @@
             type:'post',
             data:{
                 "cNo":cNo,
-                "password":password
+                "password":password,
+                "remember":remember
             },
             success:function (res) {
                 if(res){
@@ -547,7 +593,7 @@
         })
         return false;
     }
-
+    /*检查用户认证*/
     function checkAuthStatus() {
         $.ajax({
             url:'/company/checkAuthStatus',
@@ -559,11 +605,12 @@
                         setTimeout(function() { location.reload(); }, 1000 );
                         break;
                     case 1:
-                        setTimeout(function() { location.reload(); }, 1000 );
+                        setTimeout(function() { location.href="/" }, 1000 );
                         break;
                     default:
-                        $("#checkSpan").html('请认证身份');
-                        setTimeout(function() { location.href="/details" }, 1000 );
+                        $("#ModalContext").html('请完善身份信息');
+                        $("#MyModal").modal('show')
+                        /* setTimeout(function() { location.href="/details" }, 1000 );*/
                 }
             }
         })
