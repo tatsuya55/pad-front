@@ -299,23 +299,33 @@
                     <img th:src="@{/assets/img/single-projects.jpg}" src="assets/img/single-projects.jpg" alt="image">
                 </div>
 
-                <div class="projects-details-content" th:each="message:${messageList}">
-                    <span style="display:inline-block;width:200px;font-weight:bold; text-align:center;">你的留言:</span>
-                    <span style="display: inline-block;width:200px;font-weight: bold;text-align:center;">[[${{message.context}}]]</span>
-                    <span style="display:inline-block;width:200px;font-weight:bold; text-align:center;">留言时间:</span>
-                    <span th:text="${#dates.format(message.createTime, 'yyyy-MM-dd HH:mm')}"></span>
-                    <br>
-                    <br>
-                    <span style="display:inline-block;width:200px;font-weight:bold; color: #00FF00;text-align:center;">回复留言:</span>
-                    <span style="display: inline-block;width:200px;font-weight: bold;text-align:center;">[[${{message.reply}}]] </span>
-                    <span style="display: inline-block;width:200px;font-weight:bold;text-align:center; color: #00FF00;">回复时间:</span>
-                    <span  th:text="${#dates.format(message.updateTime, 'yyyy-MM-dd HH:mm')}"></span>
-                    <br>
-                    <br>
-                    <br>
+                <div class="col-md-12 column">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>留言</th>
+                            <th>留言时间</th>
+                            <th>回复留言</th>
+                            <th>回复时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="message:${messageList}">
+                            <td style="display:inline-block;width:280px;">[[${{message.context}}]]</td>
+                            <td>
+                                <span style="display:inline-block;width:280px;"
+                                      th:text="${#dates.format(message.createTime, 'yyyy-MM-dd HH:mm')}"></span>
+                            </td>
+                            <td style="display:inline-block;width:280px;">[[${{message.reply}}]]</td>
+                            <td>
+                                <span style="display:inline-block;width:280px;"
+                                      th:text="${#dates.format(message.updateTime, 'yyyy-MM-dd HH:mm')}"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
         </div>
 
         <!-- End Project Details -->
