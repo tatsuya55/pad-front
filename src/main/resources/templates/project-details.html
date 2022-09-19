@@ -319,7 +319,7 @@
             </div>
         </div>
         <!-- End Page Title Area -->
-<button onclick="show()">点我</button>
+
         <!-- Project Details -->
         <div class="projects-details ptb-100">
             <div class="container">
@@ -528,7 +528,7 @@
     if ( typeof WebSocket != 'undefined'){
         /*ws://  websocket
         * 地址端口号+后台定义的server-servlet-context-path+webSocket服务路径*/
-        websocket = new WebSocket('ws://localhost:8002/padAdmin/webSocket');
+        websocket = new WebSocket('ws://localhost:8002/webSocket');
     }else {
         alert('该浏览器不支持websocket')
     }
