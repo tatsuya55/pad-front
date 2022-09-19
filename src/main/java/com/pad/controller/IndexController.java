@@ -3,7 +3,9 @@ package com.pad.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
+import com.pad.entity.CompanyMaterial;
 import com.pad.service.CompanyDetailService;
+import com.pad.service.CompanyMaterialService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class IndexController {
 
     @Autowired
     private CompanyDetailService detailService;
+
+    @Autowired
+    private CompanyMaterialService companyMaterialService;
 
     @ApiOperation("首页跳转")
     @RequestMapping({"/","/index","/index.html"})
@@ -61,6 +66,22 @@ public class IndexController {
         }
         return "companyDetail";
     }
+
+    @GetMapping("/material")
+    @ApiOperation("企业用户详情查询接口")
+    public String material(HttpSession session, Model model){
+        CompanyInfo user = (CompanyInfo) session.getAttribute("user");
+        LambdaQueryWrapper<CompanyMaterial> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CompanyMaterial::getCNo,user.getCNo());
+        //不显示已经删除的
+        wrapper.eq(CompanyMaterial::getIsDeleted,1);
+        CompanyMaterial companyMaterial = companyMaterialService.getOne(wrapper);
+        if (!ObjectUtils.isEmpty(companyMaterial)){
+            model.addAttribute("material",companyMaterial);
+        }
+        return "companyMaterial";
+    }
+
 
     @ApiOperation("贷款")
     @GetMapping("/loans")
