@@ -530,6 +530,25 @@
 </div>
 <!-- End Go Top Area -->
 
+<!--弹框start-->
+<div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">提示</h4>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+            </div>
+            <div class="modal-body">
+                <p id="ModalContext">内容</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="location.href=('/index')" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹框end-->
 <!-- Jquery Slim JS -->
 <script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
 <!-- Popper JS -->
@@ -572,6 +591,11 @@
                         $("#message").html('请登录后再进行操作');
                         setTimeout(function() { location.reload(); }, 1000 );
                         break;
+                    case 3:
+                        disable();
+                        $("#message").html('认证信息审核中，请耐心等待');
+                        $("#checkSpan").html('认证信息审核中，不可修改');
+                        break;
                     case 1:
                         disable();
                         $("#message").html('认证信息审核中，请耐心等待');
@@ -605,6 +629,7 @@
         let credit = $("#credit").val()
         let licTime = $("#licTime").val()
         let file = $("#license")[0].files[0]
+        let expression = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
         if (type==""){
             $("#checkSpan").html('企业类型不能为空');
             return false;
@@ -615,6 +640,10 @@
         }
         if (legalId==""){
             $("#checkSpan").html('证件号不能为空');
+            return false;
+        }
+        if (!expression.test(legalId)){
+            $("#checkSpan").html('请输入正确的身份证号');
             return false;
         }
         formData.append("type",type);
@@ -636,13 +665,17 @@
             success:function (res) {
                 if(res){
                     $("#checkSpan").html('提交成功');
-                    setTimeout(function() { location.reload(); }, 1000 );
+                    checkAuthStatus();
                 }else {
                     $("#checkSpan").html('提交失败');
                 }
             }
         })
         return false;
+    }
+    function checkAuthStatus() {
+        $("#ModalContext").html('提交成功');
+        $("#MyModal").modal('show')
     }
     /*回显图片*/
     function showPreview(source){
