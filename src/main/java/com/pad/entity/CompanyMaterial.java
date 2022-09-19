@@ -56,11 +56,17 @@ public class CompanyMaterial implements Serializable {
     @ApiModelProperty(value = "抵押物")
     private String collateral;
 
+    @ApiModelProperty(value = "抵押物照片")
+    private String collateralPhoto;
+
     @ApiModelProperty(value = "纳税记录")
     private String records;
 
     @ApiModelProperty(value = "状态 0未审核，1审核通过，-1审核失败")
     private Integer status;
+
+    @ApiModelProperty(value = "逻辑删除 0已删除，1未删除")
+    private Integer isDeleted;
 
 
 }

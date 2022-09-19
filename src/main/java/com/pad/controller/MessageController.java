@@ -47,14 +47,13 @@ public class MessageController {
     @ApiOperation("查询留言")
     @GetMapping("/query")
     public String queryMessage(HttpSession session, Model model){
-//        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
-//        if (ObjectUtils.isEmpty(user)){
-//            model.addAttribute("message","用户未登录");
-//            return "project-details";
-//        }
-//        String cNo = user.getCNo();
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)){
+            return "sign-in";
+        }
+        String cNo = user.getCNo();
         LambdaQueryWrapper<Message> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Message::getCNo,1);
+        wrapper.eq(Message::getCNo,cNo);
         List<Message> messageList = messageService.list(wrapper);
         model.addAttribute("messageList",messageList);
         return "project-details";

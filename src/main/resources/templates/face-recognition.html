@@ -17,8 +17,7 @@
     <!-- Carousel CSS -->
     <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}" href="assets/css/owl.carousel.min.css">
     <!-- Carousel Default CSS -->
-    <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}"
-          href="assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}" href="assets/css/owl.theme.default.min.css">
     <!-- Magnific Popup CSS -->
     <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}" href="assets/css/magnific-popup.css">
     <!-- Nice Select CSS -->
@@ -36,6 +35,7 @@
 </head>
 
 <body>
+
 <!-- Start Navbar Area -->
 <div class="navbar-area">
     <div class="main-responsive-nav">
@@ -75,12 +75,6 @@
                                 <li class="nav-item">
                                     <a th:href="@{/details}" class="nav-link">
                                         详细信息
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a th:href="@{/material}" class="nav-link">
-                                        材料信息
                                     </a>
                                 </li>
 
@@ -286,10 +280,10 @@
         <div class="d-table-cell">
             <div class="container">
                 <div class="page-title-content">
-                    <h2>企业信息认证</h2>
+                    <h2>Sign Up</h2>
                     <ul>
-                        <li><a th:href="@{/index.html}" href="index.html">首页</a></li>
-                        <li>企业信息认证</li>
+                        <li><a th:href="@{/index.html}" href="index.html">Home</a></li>
+                        <li>Sign Up</li>
                     </ul>
                 </div>
             </div>
@@ -298,89 +292,53 @@
 </div>
 <!-- End Page Title Area -->
 
-<!-- Start Apply Area -->
-<section class="apply-area ptb-100">
+<!-- Start Signup Area -->
+<div class="signup-area ptb-100">
     <div class="container">
-        <div class="apply-title">
-            <h3 id="message" style="color: red">请完善相关信息</h3>
-        </div>
-
-        <form onsubmit="return check()" id="formRegister"  enctype="multipart/form-data">
+        <div class="signup-form">
+            <h3>人脸识别</h3>
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="apply-form">
-                        <div class="form-group">
-                            <label>企业类型</label>
-                            <div class="select-box">
-                                <select class="form-control" id="type">
-                                    <option ></option>
-                                    <option th:value="1" th:selected="${detail?.type eq 1}">合伙企业</option>
-                                    <option th:value="2" th:selected="${detail?.type eq 2}">有限责任公司</option>
-                                    <option th:value="0" th:selected="${detail?.type eq 0}">独资企业</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="form-group" >
-                            <label >法人姓名</label>
-                            <input id="legalName" name="legalName" type="text" class="form-control"
-                                   th:value="${detail?.legalName}">
-                        </div>
 
-                        <div class="form-group">
-                            <label>法人证件号</label>
-                            <input id="legalId" name="legalId" type="text" class="form-control"
-                                   th:value="${detail?.legalId}">
-                        </div>
-
-                        <div class="form-group">
-                            <label>企业详细地址</label>
-                            <input id="address" name="address" type="text" class="form-control"
-                                   th:value="${detail?.address}">
-                        </div>
-
-                        <div class="form-group">
-                            <label>经营范围</label>
-                            <input id="scope" name="scope" type="text" class="form-control"
-                                   th:value="${detail?.scope}">
-                        </div>
-
-                        <div class="form-group">
-                            <label>企业信誉度</label>
-                            <input id="credit" name="credit" type="text" class="form-control"
-                                   th:value="${detail?.credit}">
-                        </div>
-
-                        <div class="form-group">
-                            <label>营业执照</label> </br>
-                            <input type="file" class="form-control" id="license" placeholder="添加图片" onchange="showPreview(this)">
-                            <img src="" style="" id="addimg"><br>
-                            <img th:if="${detail}!=null" th:src="@{|/images/license/${detail?.license}|}"><br>
-                        </div>
-                        <div class="form-group">
-                            <label>营业执照有效期</label>
-                            <input id="licTime" name="licTime" type="date" class="form-control" required="required"
-                                   th:value="${#dates.format(detail?.licTime,'yyyy-MM-dd')}">
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <span id="checkSpan" style="color: #ff0000"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input id="button" type="submit" class="default-btn" value="提 交">
-                        </div>
+                <div class="col-lg-12">
+                    <div id="regcoDiv">
 
                     </div>
-
+                    <div>
+                        <table frame="void" >
+                            <tr>
+                                <div class="col-lg-12">
+                                    <div class="send-btn">
+                                        <button class="default-btn" title="人脸识别" value="人脸识别" onclick="getMedia2()" >
+                                            摄像头识别
+                                            <span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </tr>
+                            </br>
+                            <tr>
+                                <div class="col-lg-12">
+                                    <div class="send-btn">
+                                        <button class="default-btn" id="snap" onclick="chooseFileChangeComp()"  >
+                                            提交
+                                            <span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
+
+
             </div>
+        </div>
         </form>
     </div>
-
-</section>
-<!-- End Apply Area -->
+</div>
+</div>
+<!-- End Signup Area -->
 
 <!-- Start Footer Area -->
 <section class="footer-area pt-100 pb-70">
@@ -389,37 +347,36 @@
             <div class="col-lg-3 col-md-6">
                 <div class="single-footer-widget">
                     <div class="logo">
-                        <a th:href="@{/}" href="#">
-                            <img th:src="@{/assets/img/logo2.png}" src="assets/img/logo2.png" alt="image">
+                        <a href="#">
+                            <img src="assets/img/logo2.png" alt="image">
                         </a>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                    <p>我今天做核酸了,什么酸,得不到你的心酸.</p>
                     <ul class="social">
                         <li>
-                            <b>Follow us:</b>
+                            <b>联系我们:</b>
                         </li>
 
                         <li>
-                            <a th:href="@{/}" href="#" target="_blank">
+                            <a href="#" target="_blank">
                                 <i class="flaticon-twitter"></i>
                             </a>
                         </li>
 
                         <li>
-                            <a th:href="@{/}" href="#" target="_blank">
+                            <a href="#" target="_blank">
                                 <i class="flaticon-instagram"></i>
                             </a>
                         </li>
 
                         <li>
-                            <a th:href="@{/}" href="#" target="_blank">
+                            <a href="#" target="_blank">
                                 <i class="flaticon-facebook"></i>
                             </a>
                         </li>
 
                         <li>
-                            <a th:href="@{/}" href="#" target="_blank">
+                            <a href="#" target="_blank">
                                 <i class="flaticon-linkedin"></i>
                             </a>
                         </li>
@@ -433,19 +390,19 @@
 
                     <ul class="quick-links">
                         <li>
-                            <a th:href="@{/about.html}" href="about.html">About</a>
+                            <a href="about.html">About</a>
                         </li>
                         <li>
-                            <a th:href="@{/}" href="#">Our Performance</a>
+                            <a href="#">Our Performance</a>
                         </li>
                         <li>
-                            <a th:href="@{/faq.html}" href="faq.html">Help (FAQ)</a>
+                            <a href="faq.html">Help (FAQ)</a>
                         </li>
                         <li>
-                            <a th:href="@{/news.html}" href="news.html">Blog</a>
+                            <a href="news.html">Blog</a>
                         </li>
                         <li>
-                            <a th:href="@{/contact.html}" href="contact.html">Contact</a>
+                            <a href="contact.html">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -457,19 +414,19 @@
 
                     <ul class="quick-links">
                         <li>
-                            <a th:href="@{/}" href="#">Support</a>
+                            <a href="#">Support</a>
                         </li>
                         <li>
-                            <a th:href="@{/privacy-policy.html}" href="privacy-policy.html">Privacy Policy</a>
+                            <a href="privacy-policy.html">Privacy Policy</a>
                         </li>
                         <li>
-                            <a th:href="@{/terms-condition.html}" href="terms-condition.html">Terms of Service</a>
+                            <a href="terms-condition.html">Terms of Service</a>
                         </li>
                         <li>
-                            <a th:href="@{/}" href="#">Business Loans</a>
+                            <a href="#">Business Loans</a>
                         </li>
                         <li>
-                            <a th:href="@{/}" href="#">Loan Services</a>
+                            <a href="#">Loan Services</a>
                         </li>
                     </ul>
                 </div>
@@ -477,30 +434,27 @@
 
             <div class="col-lg-3 col-md-6">
                 <div class="single-footer-widget">
-                    <h3>Contact Us</h3>
+                    <h3>联系我们</h3>
 
                     <div class="info-contact">
                         <i class="flaticon-pin"></i>
-                        <span>6890 Blvd, The Bronx, NY 1058 New York, USA</span>
+                        <span>苍盐海大街250号</span>
                     </div>
 
                     <div class="info-contact">
                         <i class="flaticon-mail"></i>
                         <span>
-                                    <a href="mailto:hello@finix.com">hello@finix.com</a>
-                                </span>
-                        <span>
-                                    <a th:href="@{/}" href="#">Skype: example</a>
+                                    <a href="mailto:Cyh@finix.com">Cyh@finix.com</a>
                                 </span>
                     </div>
 
                     <div class="info-contact">
                         <i class="flaticon-telephone"></i>
                         <span>
-                                    <a th:href="@{/tel:1514312-6688}" href="tel:1514312-6688">+1 (514) 312-5678</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-5678</a>
                                 </span>
                         <span>
-                                    <a th:href="@{/tel:1514312-6688}" href="tel:1514312-6688">+1 (514) 312-6688</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-6688</a>
                                 </span>
                     </div>
                 </div>
@@ -515,9 +469,7 @@
     <div class="container">
         <div class="copy-right-content">
             <p>
-                Copyright &copy; 2020.Company name All rights reserved.<a target="_blank"
-                                                                          th:href="@{/http://sc.chinaz.com/moban/}"
-                                                                          href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                &copy;版权和副本:2022苍盐海 版权所有.
             </p>
         </div>
     </div>
@@ -529,6 +481,8 @@
     <i class='bx bx-chevron-up'></i>
 </div>
 <!-- End Go Top Area -->
+
+
 
 <!--弹框start-->
 <div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
@@ -548,7 +502,9 @@
         </div>
     </div>
 </div>
-<!--弹框end-->
+
+
+
 <!-- Jquery Slim JS -->
 <script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
 <!-- Popper JS -->
@@ -580,143 +536,113 @@
 </body>
 </html>
 <script>
-    $(function () {
-        //判断用户认证状态
-        $.ajax({
-            url:'/company/checkAuthStatus',
-            type:'get',
-            success:function (res) {
-                switch (res) {
-                    case -2:
-                        $("#message").html('请登录后再进行操作');
-                        setTimeout(function() { location.reload(); }, 1000 );
-                        break;
-                    case 3:
-                        disable();
-                        $("#message").html('认证信息审核中，请耐心等待');
-                        $("#checkSpan").html('认证信息审核中，不可修改');
-                        break;
-                    case 1:
-                        disable();
-                        $("#message").html('认证信息审核中，请耐心等待');
-                        $("#checkSpan").html('认证信息审核中，不可修改');
-                        break;
-                    case 2:
-                        disable();
-                        $("#message").html('认证通过');
-                        $("#checkSpan").html('认证通过，不可修改');
-                        break;
-                    case -1:
-                        able();
-                        $("#message").html('认证失败，请重新认证');
-                        break;
-                    default:
-                        able();
-                        $("#message").html('请认证身份');
-                        break;
-                }
-            }
-        })
-    })
-    /*非空判断 提交表单*/
-    function check() {
-        let formData=new FormData;
-        let type = $("#type").val()
-        let legalName = $("#legalName").val()
-        let legalId = $("#legalId").val()
-        let address = $("#address").val()
-        let scope = $("#scope").val()
-        let credit = $("#credit").val()
-        let licTime = $("#licTime").val()
-        let file = $("#license")[0].files[0]
-        let expression = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
-        if (type==""){
-            $("#checkSpan").html('企业类型不能为空');
-            return false;
-        }
-        if (legalName==""){
-            $("#checkSpan").html('法人不能为空');
-            return false;
-        }
-        if (legalId==""){
-            $("#checkSpan").html('证件号不能为空');
-            return false;
-        }
-        if (!expression.test(legalId)){
-            $("#checkSpan").html('请输入正确的身份证号');
-            return false;
-        }
-        formData.append("type",type);
-        formData.append("legalName",legalName);
-        formData.append("legalId",legalId);
-        formData.append("address",address);
-        formData.append("scope",scope);
-        formData.append("credit",credit);
-        formData.append("licTime",licTime);
-        formData.append("file",file);
-        $.ajax({
-            url:'/company-detail/save',
-            type:'post',
-            data:formData,
-            ache: false,//不缓存数据
-            processData: false,//不转换数据
-            contentType: false,
-            dataType: "json",
-            success:function (res) {
-                if(res){
-                    $("#checkSpan").html('提交成功');
-                    checkAuthStatus();
-                }else {
-                    $("#checkSpan").html('提交失败');
-                }
-            }
-        })
-        return false;
+    function chooseFile() {
+        $("#file1").trigger('click');
     }
-    function checkAuthStatus() {
-        $("#ModalContext").html('提交成功');
-        $("#MyModal").modal('show')
-    }
-    /*回显图片*/
-    function showPreview(source){
-        let file = source.files[0];
-        /*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*/
-        if(window.FileReader){
-            let fr = new FileReader();
-            console.log(fr);
-            let protrait = document.getElementById('addimg');
-            fr.onloadend = function (e){
-                protrait.src = e.target.result;
-            };
-            fr.readAsDataURL(file);
-            protrait.style.display = 'block';
-        }
-    }
-    /*修改样式 禁用*/
-    function disable() {
-        $("#type").attr("disabled","disabled");
-        $("#legalName").attr("disabled","disabled");
-        $("#legalId").attr("disabled","disabled");
-        $("#address").attr("disabled","disabled");
-        $("#scope").attr("disabled","disabled");
-        $("#credit").attr("disabled","disabled");
-        $("#license").attr("disabled","disabled");
-        $("#button").attr("disabled","disabled");
-        $("#licTime").attr("disabled","disabled");
 
-        $("#button").css("background-color","#cfcfcf");
+
+    $(document).on("change","#file1",function(){
+        var objUrl = getObjectURL(this.files[0]) ;//获取文件信息
+        console.log("objUrl = "+objUrl);
+        if (objUrl) {
+            $("#img0").attr("src", objUrl);
+        }
+    });
+
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL!=undefined) {
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
     }
-    /*修改样式 可用*/
-    function able() {
-        $("#type").removeAttr("disabled");
-        $("#legalName").removeAttr("disabled");
-        $("#legalId").removeAttr("disabled");
-        $("#address").removeAttr("disabled");
-        $("#scope").removeAttr("disabled");
-        $("#credit").removeAttr("disabled");
-        $("#license").removeAttr("disabled");
-        $("#button").removeAttr("disabled");
-        $("#licTime").removeAttr("disabled");
-        $("#button").css("background-color","#e73c3e");
+
+    $("#imageDivComp").click(function () {
+        $("#chooseFileComp").click();
+
+    });
+
+    function getMedia2() {
+        $("#regcoDiv").empty();
+        let vedioComp = "<video id='video2' width='500px' height='500px' autoplay='autoplay' style='margin-top: 20px'></video><canvas id='canvas2' width='500px' height='500px' style='display: none'></canvas>";
+        $("#regcoDiv").append(vedioComp);
+        let constraints = {
+            video: {width: 500, height: 500},
+            audio: true
+        };
+        //获得video摄像头区域
+        let video = document.getElementById("video2");
+        //这里介绍新的方法，返回一个 Promise对象
+        // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
+        // then()是Promise对象里的方法
+        // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
+        // 避免数据没有获取到
+        let promise = navigator.mediaDevices.getUserMedia(constraints);
+        promise.then(function (MediaStream) {
+            video.srcObject = MediaStream;
+            video.play();
+        });
+        // var t1 = window.setTimeout(function() {
+        //     chooseFileChangeComp()
+        // },2000)
     }
+
+    function chooseFileChangeComp() {
+        let regcoDivComp = $("#regcoDiv");
+        if(regcoDivComp.has('video').length)
+        {
+            let video = document.getElementById("video2");
+            let canvas = document.getElementById("canvas2");
+            let ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, 500, 500);
+            var base64File = canvas.toDataURL();
+            var formData = new FormData();
+            formData.append("groupId", "101")
+            formData.append("file", base64File);
+
+            $.ajax({
+                type: "post",
+                url: "/faceSearch",
+                data: formData,
+                contentType: false,
+                processData: false,
+                async: false,
+                success: function (text) {
+                    var res = JSON.stringify(text)
+                    if (text.code == 0) {
+                        var name = text.data.name;
+                        $("#nameDiv").html("姓名：" + name);
+                        var similar = text.data.similarValue;
+                        $("#similarDiv").html("相似度：" + similar + "%");
+                        var age = text.data.age;
+                        $("#ageDiv").html("年龄：" + age);
+                        var gender = text.data.gender;
+                        $("#genderDiv").html("性别：" + gender);
+                        // img.css("background-image", 'url(' + text.data.image + ')');
+                        alert("姓名：" + name +"\n相似度：" + similar + "%" + "\n年龄：" + age +"\n性别：" + gender);
+                    } else {
+                        $("#nameDiv").html("");
+                        $("#similarDiv").html("");
+                        $("#ageDiv").html("");
+                        $("#genderDiv").html("");
+                        alert("人脸不匹配")
+                    }
+
+                },
+                error: function (error) {
+                    $("#nameDiv").html("");
+                    $("#similarDiv").html("");
+                    $("#ageDiv").html("");
+                    $("#genderDiv").html("");
+                    alert(JSON.stringify(error))
+                }
+            });
+        }
+    }
+
+
 </script>
