@@ -79,7 +79,7 @@ public class IndexController {
     }
 
     @GetMapping("/material")
-    @ApiOperation("企业用户详情查询接口")
+    @ApiOperation("企业用户材料查询接口")
     public String material(HttpSession session, Model model){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
         LambdaQueryWrapper<CompanyMaterial> wrapper = new LambdaQueryWrapper<>();
