@@ -3,8 +3,12 @@ package com.pad.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
+import com.pad.entity.Message;
+import com.pad.entity.CompanyMaterial;
 import com.pad.entity.LoanInfo;
 import com.pad.service.CompanyDetailService;
+import com.pad.service.CompanyMaterialService;
+import com.pad.service.MessageService;
 import com.pad.service.LoanInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,9 +26,14 @@ import java.util.List;
 @Api(tags = "页面跳转")
 @Controller
 public class IndexController {
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private CompanyDetailService detailService;
+
+    @Autowired
+    private CompanyMaterialService companyMaterialService;
 
     @Autowired
     private LoanInfoService loanInfoService;
@@ -45,6 +54,12 @@ public class IndexController {
     @GetMapping("/signUp")
     public String toSignUp(){
         return "sign-up";
+    }
+
+    @ApiOperation("人脸识别页")
+    @GetMapping("/spot")
+    public String spot(){
+        return "face-recognition";
     }
 
     @ApiOperation("留言页")
@@ -68,16 +83,43 @@ public class IndexController {
         return "companyDetail";
     }
 
+    @GetMapping("/material")
+    @ApiOperation("企业用户材料查询接口")
+    public String material(HttpSession session, Model model){
+        CompanyInfo user = (CompanyInfo) session.getAttribute("user");
+        LambdaQueryWrapper<CompanyMaterial> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(CompanyMaterial::getCNo,user.getCNo());
+        //不显示已经删除的
+        wrapper.eq(CompanyMaterial::getIsDeleted,1);
+        CompanyMaterial companyMaterial = companyMaterialService.getOne(wrapper);
+        if (!ObjectUtils.isEmpty(companyMaterial)){
+            model.addAttribute("material",companyMaterial);
+        }
+        return "companyMaterial";
+    }
+
+
     @ApiOperation("贷款")
     @GetMapping("/loans")
     public String toLoans(){
         return "loans";
     }
 
-    @ApiOperation("留言详情")
-    @GetMapping("/project-details")
-    public String toProjectDetails(){
-        return "project-details";
+    @ApiOperation("查询留言")
+    @GetMapping("/message-details")
+    public String queryMessage(HttpSession session, Model model){
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)){
+            return "sign-in";
+        }
+        String cNo = user.getCNo();
+        LambdaQueryWrapper<Message> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Message::getCNo,cNo);
+        //不显示已经删除的
+        wrapper.eq(Message::getIsDeleted,1);
+        List<Message> messageList = messageService.list(wrapper);
+        model.addAttribute("messageList",messageList);
+        return "message-details";
     }
 
     @ApiOperation("贷款详情")

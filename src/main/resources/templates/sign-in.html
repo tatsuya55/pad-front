@@ -41,8 +41,8 @@
                 <div class="container">
                     <div class="main-responsive-menu">
                         <div class="logo">
-                            <a th:href="@{/index.html}" href="index.html">
-                                <img th:src="@{/assets/img/logo.png}" src="assets/img/logo.png" alt="image">
+                            <a th:href="@{/}">
+                                <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
                             </a>
                         </div>
                     </div>
@@ -52,141 +52,141 @@
             <div class="main-navbar">
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" th:href="@{/index.html}" href="index.html">
-                            <img th:src="@{/assets/img/logo.png}" src="assets/img/logo.png" alt="image">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
                         </a>
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a th:href="@{/}" href="#" class="nav-link">
+                                    <a th:href="@{/}" class="nav-link active">
                                         首 页
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/#}" href="#" class="nav-link active">
-                                        Pages
+                                    <a href="#" class="nav-link">
+                                        发 现
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
 
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a th:href="@{/about.html}" href="about.html" class="nav-link">
-                                                About
+                                            <a th:href="@{/details}" class="nav-link">
+                                                详细信息
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/team.html}" href="team.html" class="nav-link">
+                                            <a href="team.html" class="nav-link">
                                                 Team
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/faq.html}" href="faq.html" class="nav-link">
+                                            <a href="faq.html" class="nav-link">
                                                 FAQ
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/gallery.html}" href="gallery.html" class="nav-link">
+                                            <a href="gallery.html" class="nav-link">
                                                 Gallery
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/loan-calculator.html}" href="loan-calculator.html" class="nav-link">
+                                            <a href="loan-calculator.html" class="nav-link">
                                                 Loan Calculator
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/apply-now.html}" href="apply-now.html" class="nav-link">
+                                            <a href="apply-now.html" class="nav-link">
                                                 Apply now
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/testimonials.html}" href="testimonials.html" class="nav-link">
+                                            <a href="testimonials.html" class="nav-link">
                                                 Testimonials
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/#}" href="#" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 Projects
                                                 <i class='bx bx-chevron-down'></i>
                                             </a>
 
                                             <ul class="dropdown-menu">
                                                 <li class="nav-item">
-                                                    <a th:href="@{/projects.html}" href="projects.html" class="nav-link">
+                                                    <a href="projects.html" class="nav-link">
                                                         Projects
                                                     </a>
                                                 </li>
-
                                                 <li class="nav-item">
-                                                    <a th:href="@{/project-details.html}" href="project-details.html" class="nav-link">
-                                                        Project Details
+                                                    <a th:href="@{/message-details}" class="nav-link">
+                                                        留言详情
                                                     </a>
                                                 </li>
                                             </ul>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/sign-in.html}" href="sign-in.html" class="nav-link active">
-                                                Sign In
+                                            <a th:href="@{/signIn}" class="nav-link">
+                                                登 录
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/sign-up.html}" href="sign-up.html" class="nav-link">
-                                                Sign Up
+                                            <a th:href="@{/signUp}" class="nav-link">
+                                                注 册
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/terms-condition.html}" href="terms-condition.html" class="nav-link">
+                                            <a href="terms-condition.html" class="nav-link">
                                                 Terms & Conditions
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/privacy-policy.html}" href="privacy-policy.html" class="nav-link">
+                                            <a href="privacy-policy.html" class="nav-link">
                                                 Privacy Policy
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/error-404.html}" href="error-404.html" class="nav-link">
+                                            <a href="error-404.html" class="nav-link">
                                                 Error Page
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/contact.html}" href="contact.html" class="nav-link">
-                                                Contact
+                                            <a th:href="@{/contact}" class="nav-link">
+                                                留言
                                             </a>
                                         </li>
+
                                     </ul>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/}" href="#" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         Services
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
 
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a th:href="@{/services.html}" href="services.html" class="nav-link">
+                                            <a href="services.html" class="nav-link">
                                                 Services
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/services-details.html}" href="services-details.html" class="nav-link">
+                                            <a href="services-details.html" class="nav-link">
                                                 Services Details
                                             </a>
                                         </li>
@@ -194,31 +194,31 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/funding.html}" href="funding.html" class="nav-link">
+                                    <a href="funding.html" class="nav-link">
                                         Funding
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/loans.html}" href="loans.html" class="nav-link">
+                                    <a href="loans.html" class="nav-link">
                                         Loans
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/}" href="#" class="nav-link">
+                                    <a href="#" class="nav-link">
                                         News
                                         <i class='bx bx-chevron-down'></i>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a th:href="@{/news.html}" href="news.html" class="nav-link">
+                                            <a href="news.html" class="nav-link">
                                                 News Grid
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a th:href="@{/news-details.html}" href="news-details.html" class="nav-link">
+                                            <a href="news-details.html" class="nav-link">
                                                 News Details
                                             </a>
                                         </li>
@@ -226,8 +226,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/contact.html}" href="contact.html" class="nav-link">
-                                        Contact
+                                    <a th:href="@{/contact}" class="nav-link">
+                                        留言
                                     </a>
                                 </li>
                             </ul>
@@ -254,13 +254,13 @@
                                         <i class="flaticon-telephone"></i>
                                         <span>Call Now</span>
                                         <p>
-                                            <a th:href="@{/tel:1514312-5678}" href="tel:1514312-5678">+1 (514) 312-5678</a>
+                                            <a href="tel:1514312-5678">+1 (514) 312-5678</a>
                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="option-item">
-                                    <a th:href="@{/apply-now.html}" href="apply-now.html" class="default-btn">
+                                    <a href="apply-now.html" class="default-btn">
                                         Apply now
                                         <span></span>
                                     </a>
@@ -297,7 +297,7 @@
                 <div class="sign-in-form">
                     <div class="sign-in-title">
                         <h3>欢迎回来!</h3>
-                        <p>请登录您的账号.</p>
+                        <p>请登录您的账号</p>
                     </div>
 
                     <form onsubmit="return check()">
@@ -322,8 +322,8 @@
 
                             <div class="col-lg-12">
                                 <div class="form-check">
-                                    <input name="remember-me" type="checkbox" class="form-check-input" id="checkme">
-                                    <label class="form-check-label" for="checkme">记住我</label>
+                                    <input name="remember-me" type="checkbox" class="form-check-input" id="remember">
+                                    <label class="form-check-label" for="remember">记住密码</label>
                                 </div>
                             </div>
 
@@ -489,6 +489,26 @@
         </div>
         <!-- End Go Top Area -->
 
+        <!--弹框start-->
+        <div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">提示</h4>
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                    </div>
+                    <div class="modal-body">
+                        <p id="ModalContext">内容</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="location.href=('/details')" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!--弹框end-->
+
         <!-- Jquery Slim JS -->
         <script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
         <!-- Popper JS -->
@@ -521,9 +541,34 @@
     </body>
 </html>
 <script>
+    /*获取cookie*/
+    let cookies = document.cookie.split(';');
+    function getCookie(mkey) {
+        for (let i = 0; i < cookies.length; i++) {
+            let kv = cookies[i].split('=');
+            if (kv[0].trim() == mkey) {
+                console.log(kv[1].trim())
+                return kv[1].trim();
+            }
+        }
+        return '';
+    }
+    //获取cookie回显
+    window.onload = function () {
+        let userNumber = getCookie("userNumber");
+        let password = getCookie("password");
+        let remember = getCookie("remember");
+        if (remember == 'on') {
+            $("#cNo").val(userNumber);
+            $("#password").val(password);
+            $("#remember").prop("checked", true);
+        }
+    }
+    /*提交登录*/
     function check(){
         let cNo = $("#cNo").val();
         let password =$("#password").val();
+        let remember =$("#remember").val();
         if (cNo=="" || password==""){
             $("#checkSpan").html('企业编号和密码不能为空');
             return false;
@@ -533,7 +578,8 @@
             type:'post',
             data:{
                 "cNo":cNo,
-                "password":password
+                "password":password,
+                "remember":remember
             },
             success:function (res) {
                 if(res){
@@ -547,7 +593,7 @@
         })
         return false;
     }
-
+    /*检查用户认证*/
     function checkAuthStatus() {
         $.ajax({
             url:'/company/checkAuthStatus',
@@ -559,11 +605,12 @@
                         setTimeout(function() { location.reload(); }, 1000 );
                         break;
                     case 1:
-                        setTimeout(function() { location.reload(); }, 1000 );
+                        setTimeout(function() { location.href="/" }, 1000 );
                         break;
                     default:
-                        $("#checkSpan").html('请认证身份');
-                        setTimeout(function() { location.href="/details" }, 1000 );
+                        $("#ModalContext").html('请完善身份信息');
+                        $("#MyModal").modal('show')
+                        /* setTimeout(function() { location.href="/details" }, 1000 );*/
                 }
             }
         })

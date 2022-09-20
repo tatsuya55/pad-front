@@ -5,33 +5,33 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" href="assets/css/bootstrap.min.css">
         <!-- Animate CSS -->
-        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" th:href="@{/assets/css/animate.css}" href="assets/css/animate.css">
         <!-- Meanmenu CSS -->
-        <link rel="stylesheet" href="assets/css/meanmenu.css">
+        <link rel="stylesheet" th:href="@{/assets/css/meanmenu.css}" href="assets/css/meanmenu.css">
         <!-- Boxicons CSS -->
-        <link rel="stylesheet" href="assets/css/boxicons.min.css">
+        <link rel="stylesheet" th:href="@{/assets/css/boxicons.min.css}" href="assets/css/boxicons.min.css">
         <!-- Flaticon CSS -->
-        <link rel="stylesheet" href="assets/css/flaticon.css">
+        <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}" href="assets/css/flaticon.css">
         <!-- Carousel CSS -->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}" href="assets/css/owl.carousel.min.css">
         <!-- Carousel Default CSS -->
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" th:href="@{/assets/css/owl.theme.default.min.css}" href="assets/css/owl.theme.default.min.css">
         <!-- Magnific Popup CSS -->
-        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}" href="assets/css/magnific-popup.css">
         <!-- Nice Select CSS -->
-        <link rel="stylesheet" href="assets/css/nice-select.css">
+        <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}" href="assets/css/nice-select.css">
         <!-- Odometer CSS -->
-        <link rel="stylesheet" href="assets/css/odometer.css">
+        <link rel="stylesheet" th:href="@{/assets/css/odometer.css}" href="assets/css/odometer.css">
         <!-- Style CSS -->
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" th:href="@{/assets/css/style.css}" href="assets/css/style.css">
         <!-- Responsive CSS -->
-		<link rel="stylesheet" href="assets/css/responsive.css">
+		<link rel="stylesheet" th:href="@{/assets/css/responsive.css}" href="assets/css/responsive.css">
 
 		<title></title>
 
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+        <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}" href="assets/img/favicon.png">
     </head>
 
     <body>
@@ -274,16 +274,24 @@
     </div>
     <!-- End Navbar Area -->
 
+        <!--提示框start-->
+        <div class="alert alert-dismissable alert-info" id="my_alert" style="display: none;">
+            <button type="button" class="close" onclick="$('#my_alert').hide();">×</button>
+            <strong>提醒：</strong> <span id="alertText">内容</span>
+            <a href="" class="alert-link">点此查看</a>
+        </div>
+        <!--提示框end-->
+
         <!-- Start Page Title Area -->
-        <div class="page-title-area item-bg-7">
+        <div class="page-title-area item-bg-1">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>贷款</h2>
+                            <h2>我的留言</h2>
                             <ul>
-                                <li><a th:href="@{/}">首页</a></li>
-                                <li>Loans</li>
+                                <li><a th:href="@{/index}" href="index.html">首页</a></li>
+                                <li>我的留言</li>
                             </ul>
                         </div>
                     </div>
@@ -292,298 +300,43 @@
         </div>
         <!-- End Page Title Area -->
 
-        <!-- Start Loan Area -->
-        <section class="loan-area ptb-100">
+        <!-- Project Details -->
+        <div class="projects-details ptb-100">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="loan-image">
-                            <img src="assets/img/loan.png" alt="image">
+                <div class="projects-details-image">
+                    <img th:src="@{/assets/img/single-projects.jpg}" src="assets/img/single-projects.jpg" alt="image">
+                </div>
 
-                            <div class="loan-shape">
-                                <div class="text">
-                                    <img src="assets/img/finix.png" alt="image">
-                                    <span>我们相信那些“做得更多”的人</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="loan-content">
-                            <h3>什么是贷款？</h3>
-                            <p>广义的贷款指贷款、贴现 、透支等出贷资金的总称。银行通过贷款的方式将所集中的货币和货币资金投放出去，可以满足社会扩大再生产对补充资金的需要，促进经济的发展，同时，银行也可以由此取得贷款利息收入，增加银行自身的积累。</p>
-
-                            <ul class="list">
-                                <li>无担保贷款 $500 - $5,000</li>
-                                <li>以6%的固定利率借款1-5年</li>
-                                <li>贷款第一年的免费辅导</li>
-                                <li>没有最低交易要求</li>
-                            </ul>
-                            <h4>帮助您贷款的资源</h4>
-                            <ul class="loan-list">
-                                <li>
-                                    <i class="flaticon-check"></i>
-                                    商业计划
-                                </li>
-                                <li>
-                                    <i class="flaticon-check"></i>
-                                    预算规划师
-                                </li>
-                                <li>
-                                    <i class="flaticon-check"></i>
-                                    现金流预测
-                                </li>
-                            </ul>
-                            <div class="loan-btn">
-                                <a href="apply-now.html" class="default-btn">
-                                    立即申请
-                                    <span></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-12 column">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>留言</th>
+                            <th>留言时间</th>
+                            <th>回复留言</th>
+                            <th>回复时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="message:${messageList}">
+                            <td style="display:inline-block;width:280px;">[[${{message.context}}]]</td>
+                            <td>
+                                <span style="display:inline-block;width:280px;"
+                                      th:text="${#dates.format(message.createTime, 'yyyy-MM-dd HH:mm')}"></span>
+                            </td>
+                            <td style="display:inline-block;width:280px;">[[${{message.reply}}]]</td>
+                            <td>
+                                <span style="display:inline-block;width:280px;"
+                                      th:text="${#dates.format(message.updateTime, 'yyyy-MM-dd HH:mm')}"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </section>
-        <!-- End Loan Area -->
+        </div>
 
-        <!-- Start Overview Area -->
-        <section class="overview-area pt-100 pb-70">
-            <div class="container">
-                <div class="section-title">
-                    <span>过程是什么?</span>
-                    <h2>这些贷款帮助我们推动了业务的发展</h2>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="overview-item">
-                            <div class="number">
-                                <span>申请</span>
-                                <strong>1</strong>
-                            </div>
-                            <h3>容易申请</h3>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="overview-item">
-                            <div class="number">
-                                <span>过程</span>
-                                <strong>2</strong>
-                            </div>
-                            <h3>清晰透明</h3>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="overview-item">
-                            <div class="number">
-                                <span>支持</span>
-                                <strong>3</strong>
-                            </div>
-                            <h3>来自人民的支持</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="overview-shape">
-                <div class="shape">
-                    <img src="assets/img/works-shape.png" alt="image">
-                </div>
-                <div class="shape2">
-                    <img src="assets/img/works-shape2.png" alt="image">
-                </div>
-            </div>
-        </section>
-        <!-- End Overview Area -->
-
-        <!-- Start Deserve Area -->
-        <section class="deserve-area ptb-100">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="deserve-item">
-                            <h3>我如何申请贷款</h3>
-
-                            <div class="deserve-content">
-                                <span>1</span>
-                                <h4>10分钟后申请</h4>
-                                <p>洛雷姆·伊普索姆·多洛尔·希特（Lorem ipsum dolor sit amet）是一位杰出的专业人士，他在工作和生活中都是专业性的.</p>
-                            </div>
-
-                            <div class="deserve-content">
-                                <span>2</span>
-                                <h4>1小时后收到我们的消息</h4>
-                                <p>洛雷姆·伊普索姆·多洛尔·希特（Lorem ipsum dolor sit amet）是一位杰出的专业人士，他在工作和生活中都是专业性的.</p>
-                            </div>
-
-                            <div class="deserve-content">
-                                <span>3</span>
-                                <h4>24小时内作出决定</h4>
-                                <p>洛雷姆·伊普索姆·多洛尔·希特（Lorem ipsum dolor sit amet）是一位杰出的专业人士，他在工作和生活中都是专业性的.</p>
-                            </div>
-
-                            <div class="deserve-content">
-                                <span>4</span>
-                                <h4>你的贷款是有资金的</h4>
-                                <p>洛雷姆·伊普索姆·多洛尔·希特（Lorem ipsum dolor sit amet）是一位杰出的专业人士，他在工作和生活中都是专业性的.</p>
-                            </div>
-
-                            <div class="deserve-btn">
-                                <a href="apply-now.html" class="default-btn">
-                                    立即申请
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="default-image">
-                            <img src="assets/img/loan2.png" alt="image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Deserve Area -->
-
-        <!-- Start Check Area -->
-        <section class="check-area ptb-100">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <div class="check-image">
-                            <img src="assets/img/check.png" alt="image">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-5">
-                        <div class="check-content">
-                            <h3>想在申请前检查您的资格吗?</h3>
-                            <p>洛雷姆·伊普索姆·多洛尔坐在阿梅特，这是一位成功的精英，因为他是一个专业性的员工，他是一位伟大的人才.</p>
-                        </div>
-                        <div class="check-text">
-                            <h3>为您的贷款提供支付灵活性</h3>
-                            <p>洛雷姆·伊普索姆·多洛尔坐在阿梅特，这是一位成功的精英，因为他是一个专业性的员工，他是一位伟大的人才.</p>
-
-                            <ul class="list">
-                                <li>填写贷款申请表</li>
-                                <li>选择您喜欢的每月付款</li>
-                                <li>随时增加您的付款金额</li>
-                                <li>无费用，隐藏或其他</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Check Area -->
-
-        <!-- Start Inquiry Area -->
-        <section class="inquiry-area ptb-100">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="inquiry-content">
-                            <h3>启动贷款查询</h3>
-                            <p>请填写下面的简短表格，并提供您的详细信息，我们的顾问将很快与您联系</p>
-                        </div>
-
-                        <form id="loansForm" onsubmit="return check()">
-                            <div class="inquiry-form">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>企业编号</label>
-                                            <input type="text" id="cNo" name="cNo" class="form-control" required data-error="请输入您的企业编号">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <span id="checkSpan" style="color: #ff0000"></span>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!--<div class="inquiry-btn">
-                                    <a href="apply-now.html" class="default-btn">
-                                        Submit
-                                        <span></span>
-                                    </a>
-                                </div>-->
-                                <div class="col-lg-12 col-md-12">
-                                    <button type="submit" class="default-btn">
-                                        查询贷款信息
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="rate-form">
-                            <div class="rate-content">
-                                <span>Calculate your rate</span>
-                                <h3>How much do you need?</h3>
-                            </div>
-
-                            <div class="form">
-                                <div class="form-group">
-                                    <label>Type The Money</label>
-                                    <input type="text" class="form-control" placeholder="$1000">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Select The Month/Years</label>
-                                    <div class="select-box">
-                                        <select class="form-control">
-                                            <option value="5">1 month</option>
-                                            <option value="1">2 month</option>
-                                            <option value="2">3 month</option>
-                                            <option value="0">4 month</option>
-                                            <option value="3">6 month</option>
-                                            <option value="3">1 Year</option>
-                                            <option value="0">2 Years</option>
-                                            <option value="3">3 Years</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Borrowing</label>
-                                    <input type="text" class="form-control" placeholder="$10000">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Term of use</label>
-                                    <input type="text" class="form-control" placeholder="6 month">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>The total you will pay</label>
-                                    <input type="text" class="form-control" placeholder="$11200">
-                                </div>
-
-                                <div class="rate-btn">
-                                    <button type="submit" class="default-btn">
-                                        Apply for this loan
-                                        <span></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Inquiry Area -->
-
+        <!-- End Project Details -->
         <!-- Start Footer Area -->
         <section class="footer-area pt-100 pb-70">
             <div class="container">
@@ -727,52 +480,47 @@
         <!-- End Go Top Area -->
 
         <!-- Jquery Slim JS -->
-        <script src="assets/js/jquery.min.js"></script>
+        <script th:src="@{/assets/js/jquery.min.js}" src="assets/js/jquery.min.js"></script>
         <!-- Popper JS -->
-        <script src="assets/js/popper.min.js"></script>
+        <script th:src="@{/assets/js/popper.min.js}" src="assets/js/popper.min.js"></script>
         <!-- Bootstrap JS -->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
         <!-- Meanmenu JS -->
-        <script src="assets/js/jquery.meanmenu.js"></script>
+        <script th:src="@{/assets/js/jquery.meanmenu.js}" src="assets/js/jquery.meanmenu.js"></script>
         <!-- Carousel JS -->
-        <script src="assets/js/owl.carousel.min.js"></script>
+        <script th:src="@{/assets/js/owl.carousel.min.js}" src="assets/js/owl.carousel.min.js"></script>
         <!-- Nice Select JS -->
-        <script src="assets/js/jquery.nice-select.min.js"></script>
+        <script th:src="@{/assets/js/jquery.nice-select.min.js}" src="assets/js/jquery.nice-select.min.js"></script>
         <!-- Magnific Popup JS -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script th:src="@{/assets/js/jquery.magnific-popup.min.js}" src="assets/js/jquery.magnific-popup.min.js"></script>
         <!-- Odometer JS -->
-        <script src="assets/js/odometer.min.js"></script>
+        <script th:src="@{/assets/js/odometer.min.js}" src="assets/js/odometer.min.js"></script>
         <!-- Appear JS -->
-        <script src="assets/js/jquery.appear.js"></script>
+        <script th:src="@{/assets/js/jquery.appear.js}" src="assets/js/jquery.appear.js"></script>
         <!-- Form Ajaxchimp JS -->
-		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
+		<script th:src="@{/assets/js/jquery.ajaxchimp.min.js}" src="assets/js/jquery.ajaxchimp.min.js"></script>
 		<!-- Form Validator JS -->
-		<script src="assets/js/form-validator.min.js"></script>
+		<script th:src="@{/assets/js/form-validator.min.js}" src="assets/js/form-validator.min.js"></script>
 		<!-- Contact JS -->
-        <script src="assets/js/contact-form-script.js"></script>
+        <script th:src="@{/assets/js/contact-form-script.js}" src="assets/js/contact-form-script.js"></script>
         <!-- Wow JS -->
-		<script src="assets/js/wow.min.js"></script>
+		<script th:src="@{/assets/js/wow.min.js}" src="assets/js/wow.min.js"></script>
         <!-- Custom JS -->
-        <script src="assets/js/main.js"></script>
+        <script th:src="@{/assets/js/main.js}" src="assets/js/main.js"></script>
+        <!--websocket-->
+        <script th:src="@{/js/websocket.js}" src="js/websocket.js"></script>
     </body>
 </html>
 <script>
-    function check(){
-        let cNo = $("#cNo").val();
-        if(cNo==""){
-            $("#checkSpan").html('企业编号不能为空');
-            return false;
-        }
-        $.ajax({
-            url:`/loan-info/findBy/${cNo}`,
-            type:'get',
-            success:function (res){
-                if(res){
-                    console.log(111)
-                    alert(1111)
-                    $("#checkSpan").html('查询成功')
-                }
-            }
-        })
+    /*显示提示*/
+    function show(message) {
+        $("#alertText").html(message)
+        $("#my_alert").css("display","block");
+    }
+    /*websocket*/
+    websocket.onmessage = function (event) {
+        console.log('收到消息')
+        console.log(event.data)
+        show(event.data)
     }
 </script>

@@ -1,14 +1,20 @@
 package com.pad.controller;
 
 
-import com.pad.entity.CompanyDetail;
+import com.pad.entity.CompanyInfo;
 import com.pad.entity.CompanyMaterial;
+import com.pad.service.CompanyInfoService;
 import com.pad.service.CompanyMaterialService;
+import com.pad.utils.ImageType;
+import com.pad.utils.UploadTool;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * <p>
@@ -18,56 +24,16 @@ import org.springframework.web.bind.annotation.*;
  * @author F4
  * @since 2022-09-12
  */
-@RestController
+@Controller
 @RequestMapping("/company-material")
-public class CompanyMaterialController {
+public class CompanyMaterialController<file> {
 
     @Autowired
     private CompanyMaterialService service;
 
+    @Autowired
+    private CompanyInfoService companyInfoService;
 
-    /**
-     * 材料展示页面
-     * @return
-     */
-    @GetMapping("/material")
-    private String material(){
-        return "";
-    }
-
-    /**
-     * 材料上传页面（添加）
-     * @return
-     */
-    @GetMapping("/addMaterial")
-    private String add(){
-        return "";
-    }
-
-    /**
-     * 材料修改页面
-     * @return
-     */
-    @GetMapping("/revise")
-    private String update(){
-        return "";
-    }
-
-
-    /**
-     * 外键查询材料信息
-     * @param cNo
-     * @return
-     */
-    @ApiOperation("企业用户材料查询接口")
-    @GetMapping("/findMaterialByFK/{id}")
-    @ResponseBody
-    private CompanyMaterial findByFk(
-            @ApiParam(value = "企业用户外键")
-            @PathVariable("id") String cNo){
-        System.out.println(service.selectByFk(cNo));
-        return service.selectByFk(cNo);
-    }
 
     /**
      * 修改材料信息
@@ -83,6 +49,7 @@ public class CompanyMaterialController {
         return service.updateById(companyMaterial);
     }
 
+
     /**
      * 添加材料信息
      * @param companyMaterial
@@ -92,9 +59,39 @@ public class CompanyMaterialController {
     @PostMapping("/save")
     @ResponseBody
     public boolean save(
-            @ApiParam(name = "companyDetail" ,value = "详细信息")
-            @RequestBody CompanyMaterial companyMaterial){
-        return service.save(companyMaterial);
+            @ApiParam(name = "companyMaterial" ,value = "材料表")
+            CompanyMaterial companyMaterial,
+            MultipartFile legalImgFile,
+            MultipartFile turnoverFile,
+            MultipartFile creditFile,
+            MultipartFile collateralPhotoFile,
+            MultipartFile recordsFile,
+            HttpSession session
+    ) throws IOException {
+        CompanyInfo user= (CompanyInfo) session.getAttribute("user");
+        String cNo=user.getCNo();
+        companyMaterial.setCNo(cNo);
+        String legalImgImage= UploadTool.uploadImage(ImageType.LEGAL_IMG,legalImgFile);
+        String turnoverImage=UploadTool.uploadImage(ImageType.TURNOVER,turnoverFile);
+        String creditImage=UploadTool.uploadImage(ImageType.CREDIT,creditFile);
+        String collateralImage=UploadTool.uploadImage(ImageType.COLLATERAL_PHOTO,collateralPhotoFile);
+        String recordsImage=UploadTool.uploadImage(ImageType.RECORDS,recordsFile);
+        companyMaterial.setLegalImg(legalImgImage);
+        companyMaterial.setTurnover(turnoverImage);
+        companyMaterial.setCredit(creditImage);
+        companyMaterial.setCollateralPhoto(collateralImage);
+        companyMaterial.setRecords(recordsImage);
+        boolean save=service.save(companyMaterial);
+        if (save){
+            //添加成功 将认证状态改为认证中
+            companyInfoService.updateAuthStatus(cNo,1);
+            //更新session
+            session.setAttribute("user",companyInfoService.getById(cNo));
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 

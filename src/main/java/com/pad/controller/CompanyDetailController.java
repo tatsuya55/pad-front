@@ -1,7 +1,7 @@
 package com.pad.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+
 import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
 import com.pad.service.CompanyDetailService;
@@ -13,11 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -39,14 +36,6 @@ public class CompanyDetailController {
 
     @Autowired
     private CompanyDetailService service;
-
-    @ApiOperation("详细信息")
-    @GetMapping("/details")
-    public String toSignIn(){
-        return "companyDetail";
-    }
-
-
     /**修改
      *
      * @param companyDetail
@@ -84,7 +73,7 @@ public class CompanyDetailController {
         boolean save = service.save(companyDetail);
         if (save){
             //添加成功 将认证状态改为认证中
-            companyInfoService.updateAuthStatus(cNo,1);
+            companyInfoService.updateAuthStatus(cNo,3);
             //更新session
             session.setAttribute("user",companyInfoService.getById(cNo));
             return true;

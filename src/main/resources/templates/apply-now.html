@@ -36,263 +36,243 @@
 
     <body>
 
-        <!-- Start Navbar Area -->
-        <div class="navbar-area">
-            <div class="main-responsive-nav">
-                <div class="container">
-                    <div class="main-responsive-menu">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo.png" alt="image">
-                            </a>
-                        </div>
+    <!-- Start Navbar Area -->
+    <div class="navbar-area">
+        <div class="main-responsive-nav">
+            <div class="container">
+                <div class="main-responsive-menu">
+                    <div class="logo">
+                        <a th:href="@{/}">
+                            <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="main-navbar">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" alt="image">
-                        </a>
+        <div class="main-navbar">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logo.png" th:src="@{/assets/img/logo.png}" alt="image">
+                    </a>
 
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Home
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="index.html" class="nav-link">
-                                                Home One
-                                            </a>
-                                        </li>
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a th:href="@{/}" class="nav-link active">
+                                    首 页
+                                </a>
+                            </li>
 
-                                        <li class="nav-item">
-                                            <a href="index-2.html" class="nav-link">
-                                                Home Two
-                                            </a>
-                                        </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    发 现
+                                    <i class='bx bx-chevron-down'></i>
+                                </a>
 
-                                        <li class="nav-item">
-                                            <a href="index-3.html" class="nav-link">
-                                                Home Three
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a th:href="@{/details}" class="nav-link">
+                                            详细信息
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        Pages
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
+                                    <li class="nav-item">
+                                        <a href="team.html" class="nav-link">
+                                            Team
+                                        </a>
+                                    </li>
 
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="about.html" class="nav-link">
-                                                About
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="faq.html" class="nav-link">
+                                            FAQ
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="team.html" class="nav-link">
-                                                Team
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="gallery.html" class="nav-link">
+                                            Gallery
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="faq.html" class="nav-link">
-                                                FAQ
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="loan-calculator.html" class="nav-link">
+                                            Loan Calculator
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="gallery.html" class="nav-link">
-                                                Gallery
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="apply-now.html" class="nav-link">
+                                            Apply now
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="loan-calculator.html" class="nav-link">
-                                                Loan Calculator
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="testimonials.html" class="nav-link">
+                                            Testimonials
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="apply-now.html" class="nav-link active">
-                                                Apply now
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            Projects
+                                            <i class='bx bx-chevron-down'></i>
+                                        </a>
 
-                                        <li class="nav-item">
-                                            <a href="testimonials.html" class="nav-link">
-                                                Testimonials
-                                            </a>
-                                        </li>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a href="projects.html" class="nav-link">
+                                                    Projects
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a th:href="@{/message-details}" class="nav-link">
+                                                    留言详情
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                Projects
-                                                <i class='bx bx-chevron-down'></i>
-                                            </a>
+                                    <li class="nav-item">
+                                        <a th:href="@{/signIn}" class="nav-link">
+                                            登 录
+                                        </a>
+                                    </li>
 
-                                            <ul class="dropdown-menu">
-                                                <li class="nav-item">
-                                                    <a href="projects.html" class="nav-link">
-                                                        Projects
-                                                    </a>
-                                                </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/signUp}" class="nav-link">
+                                            注 册
+                                        </a>
+                                    </li>
 
-                                                <li class="nav-item">
-                                                    <a href="project-details.html" class="nav-link">
-                                                        Project Details
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="terms-condition.html" class="nav-link">
+                                            Terms & Conditions
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="sign-in.html" class="nav-link">
-                                                Sign In
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="privacy-policy.html" class="nav-link">
+                                            Privacy Policy
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="sign-up.html" class="nav-link">
-                                                Sign Up
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a href="error-404.html" class="nav-link">
+                                            Error Page
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="terms-condition.html" class="nav-link">
-                                                Terms & Conditions
-                                            </a>
-                                        </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/contact}" class="nav-link">
+                                            留言
+                                        </a>
+                                    </li>
 
-                                        <li class="nav-item">
-                                            <a href="privacy-policy.html" class="nav-link">
-                                                Privacy Policy
-                                            </a>
-                                        </li>
+                                </ul>
+                            </li>
 
-                                        <li class="nav-item">
-                                            <a href="error-404.html" class="nav-link">
-                                                Error Page
-                                            </a>
-                                        </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Services
+                                    <i class='bx bx-chevron-down'></i>
+                                </a>
 
-                                        <li class="nav-item">
-                                            <a href="contact.html" class="nav-link">
-                                                Contact
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="services.html" class="nav-link">
+                                            Services
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Services
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
+                                    <li class="nav-item">
+                                        <a href="services-details.html" class="nav-link">
+                                            Services Details
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="services.html" class="nav-link">
-                                                Services
-                                            </a>
-                                        </li>
+                            <li class="nav-item">
+                                <a href="funding.html" class="nav-link">
+                                    Funding
+                                </a>
+                            </li>
 
-                                        <li class="nav-item">
-                                            <a href="services-details.html" class="nav-link">
-                                                Services Details
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                            <li class="nav-item">
+                                <a href="loans.html" class="nav-link">
+                                    Loans
+                                </a>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a href="funding.html" class="nav-link">
-                                        Funding
-                                    </a>
-                                </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    News
+                                    <i class='bx bx-chevron-down'></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="news.html" class="nav-link">
+                                            News Grid
+                                        </a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a href="loans.html" class="nav-link">
-                                        Loans
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a href="news-details.html" class="nav-link">
+                                            News Details
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        News
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="news.html" class="nav-link">
-                                                News Grid
-                                            </a>
-                                        </li>
+                            <li class="nav-item">
+                                <a th:href="@{/contact}" class="nav-link">
+                                    留言
+                                </a>
+                            </li>
+                        </ul>
 
-                                        <li class="nav-item">
-                                            <a href="news-details.html" class="nav-link">
-                                                News Details
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                        <div class="others-options d-flex align-items-center">
+                            <div class="option-item">
+                                <i class="search-btn flaticon-magnifying-glass"></i>
+                                <i class="close-btn flaticon-close"></i>
+                                <div class="search-overlay search-popup">
+                                    <div class='search-box'>
+                                        <form class="search-form">
+                                            <input class="search-input" name="search" placeholder="Search" type="text">
 
-                                <li class="nav-item">
-                                    <a href="contact.html" class="nav-link">
-                                        Contact
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <div class="others-options d-flex align-items-center">
-                                <div class="option-item">
-                                    <i class="search-btn flaticon-magnifying-glass"></i>
-                                    <i class="close-btn flaticon-close"></i>
-                                    <div class="search-overlay search-popup">
-                                        <div class='search-box'>
-                                            <form class="search-form">
-                                                <input class="search-input" name="search" placeholder="Search" type="text">
-
-                                                <button class="search-button" type="submit">
-                                                    <i class="flaticon-magnifying-glass"></i>
-                                                </button>
-                                            </form>
-                                        </div>
+                                            <button class="search-button" type="submit">
+                                                <i class="flaticon-magnifying-glass"></i>
+                                            </button>
+                                        </form>
                                     </div>
-                                </div>
-
-                                <div class="option-item">
-                                    <div class="info">
-                                        <i class="flaticon-telephone"></i>
-                                        <span>Call Now</span>
-                                        <p>
-                                            <a href="tel:1514312-5678">+1 (514) 312-5678</a>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="option-item">
-                                    <a href="apply-now.html" class="default-btn">
-                                        Apply now
-                                        <span></span>
-                                    </a>
                                 </div>
                             </div>
+
+                            <div class="option-item">
+                                <div class="info">
+                                    <i class="flaticon-telephone"></i>
+                                    <span>Call Now</span>
+                                    <p>
+                                        <a href="tel:1514312-5678">+1 (514) 312-5678</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="option-item">
+                                <a href="apply-now.html" class="default-btn">
+                                    Apply now
+                                    <span></span>
+                                </a>
+                            </div>
                         </div>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
             </div>
         </div>
-        <!-- End Navbar Area -->
+    </div>
+    <!-- End Navbar Area -->
 
         <!-- Start Page Title Area -->
         <div class="page-title-area item-bg-1">
