@@ -3,7 +3,9 @@ package com.pad.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
+import com.pad.entity.LoanInfo;
 import com.pad.service.CompanyDetailService;
+import com.pad.service.LoanInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Api(tags = "页面跳转")
@@ -22,6 +25,9 @@ public class IndexController {
 
     @Autowired
     private CompanyDetailService detailService;
+
+    @Autowired
+    private LoanInfoService loanInfoService;
 
     @ApiOperation("首页跳转")
     @RequestMapping({"/","/index","/index.html"})
@@ -72,5 +78,14 @@ public class IndexController {
     @GetMapping("/project-details")
     public String toProjectDetails(){
         return "project-details";
+    }
+
+    @ApiOperation("贷款详情")
+    @GetMapping("/loan-calculator")
+    public String toLoanCalculator(HttpSession session, Model model){
+        CompanyInfo user = (CompanyInfo) session.getAttribute("user");
+        List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
+        model.addAttribute("list",list);
+        return "loan-calculator";
     }
 }

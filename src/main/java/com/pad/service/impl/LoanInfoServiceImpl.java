@@ -6,6 +6,8 @@ import com.pad.service.LoanInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 贷款信息表 服务实现类
@@ -16,5 +18,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LoanInfoServiceImpl extends ServiceImpl<LoanInfoMapper, LoanInfo> implements LoanInfoService {
-
+    @Override
+    public List<LoanInfo> findBy(String cNo) {
+        return baseMapper.findBy(cNo);
+    }
 }
