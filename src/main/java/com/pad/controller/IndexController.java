@@ -3,9 +3,11 @@ package com.pad.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
+import com.pad.entity.Message;
 import com.pad.entity.CompanyMaterial;
 import com.pad.service.CompanyDetailService;
 import com.pad.service.CompanyMaterialService;
+import com.pad.service.MessageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Api(tags = "页面跳转")
 @Controller
 public class IndexController {
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private CompanyDetailService detailService;
@@ -74,7 +79,7 @@ public class IndexController {
     }
 
     @GetMapping("/material")
-    @ApiOperation("企业用户详情查询接口")
+    @ApiOperation("企业用户材料查询接口")
     public String material(HttpSession session, Model model){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
         LambdaQueryWrapper<CompanyMaterial> wrapper = new LambdaQueryWrapper<>();
@@ -95,9 +100,20 @@ public class IndexController {
         return "loans";
     }
 
-    @ApiOperation("留言详情")
-    @GetMapping("/project-details")
-    public String toProjectDetails(){
-        return "project-details";
+    @ApiOperation("查询留言")
+    @GetMapping("/message-details")
+    public String queryMessage(HttpSession session, Model model){
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)){
+            return "sign-in";
+        }
+        String cNo = user.getCNo();
+        LambdaQueryWrapper<Message> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Message::getCNo,cNo);
+        //不显示已经删除的
+        wrapper.eq(Message::getIsDeleted,1);
+        List<Message> messageList = messageService.list(wrapper);
+        model.addAttribute("messageList",messageList);
+        return "message-details";
     }
 }
