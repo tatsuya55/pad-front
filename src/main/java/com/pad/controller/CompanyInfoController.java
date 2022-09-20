@@ -42,7 +42,7 @@ public class CompanyInfoController {
             HttpSession session, HttpServletResponse response
             ){
         //将密码经MD5加密后 与数据库中密码进行比对
-        CompanyInfo companyInfo = companyInfoService.login(cNo,MD5.encrypt(password));
+        CompanyInfo companyInfo = companyInfoService.login(cNo,password);//MD5.encrypt(password)
         if (ObjectUtils.isEmpty(companyInfo)){
             return false;
         }
