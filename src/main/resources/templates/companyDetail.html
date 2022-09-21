@@ -133,7 +133,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a th:href="@{/message/query}" class="nav-link">
+                                            <a th:href="@{/message-details}" class="nav-link">
                                                 留言详情
                                             </a>
                                         </li>
@@ -331,6 +331,36 @@
                             <label>法人证件号</label>
                             <input id="legalId" name="legalId" type="text" class="form-control"
                                    th:value="${detail?.legalId}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>省份</label>
+                            <select class="form-control" id="select_address_province">
+                                <option value="">--请选择省份--</option>
+                                <option th:each="province:${provinceList}" th:value="${province.addressAreaId}" th:selected="${detail.province} == ${province.addressAreaId}">
+                                        [[${province.addressName}]]
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>所在市</label>
+                            <select class="form-control" id="select_address_city">
+                                <option value="">--请选择所在市--</option>
+                                <option th:each="city:${cityList}" th:value="${city.addressAreaId}" th:selected="${detail.city} == ${city.addressAreaId}">
+                                    [[${city.addressName}]]
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>所在区</label>
+                            <select class="form-control" id="select_address_area">
+                                <option value="">--请选择所在区--</option>
+                                <option th:each="area:${areaList}" th:value="${area.addressAreaId}" th:selected="${detail.area} == ${area.addressAreaId}">
+                                    [[${area.addressName}]]
+                                </option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -619,6 +649,9 @@
         let type = $("#type").val()
         let legalName = $("#legalName").val()
         let legalId = $("#legalId").val()
+        let province = $("#select_address_province").val()
+        let city = $("#select_address_city").val()
+        let area = $("#select_address_area").val()
         let address = $("#address").val()
         let scope = $("#scope").val()
         let credit = $("#credit").val()
@@ -644,6 +677,9 @@
         formData.append("type",type);
         formData.append("legalName",legalName);
         formData.append("legalId",legalId);
+        formData.append("province",province);
+        formData.append("city",city);
+        formData.append("area",area);
         formData.append("address",address);
         formData.append("scope",scope);
         formData.append("credit",credit);
@@ -690,8 +726,15 @@
     /*修改样式 禁用*/
     function disable() {
         $("#type").attr("disabled","disabled");
+        $('#type').niceSelect('update');
         $("#legalName").attr("disabled","disabled");
         $("#legalId").attr("disabled","disabled");
+        $("#select_address_province").attr("disabled","disabled");
+        $("#select_address_city").attr("disabled","disabled");
+        $("#select_address_area").attr("disabled","disabled");
+        $('#select_address_province').niceSelect('update');
+        $('#select_address_city').niceSelect('update');
+        $('#select_address_area').niceSelect('update');
         $("#address").attr("disabled","disabled");
         $("#scope").attr("disabled","disabled");
         $("#credit").attr("disabled","disabled");
@@ -704,8 +747,15 @@
     /*修改样式 可用*/
     function able() {
         $("#type").removeAttr("disabled");
+        $('#type').niceSelect('update');
         $("#legalName").removeAttr("disabled");
         $("#legalId").removeAttr("disabled");
+        $("#select_address_province").removeAttr("disabled");
+        $("#select_address_city").removeAttr("disabled");
+        $("#select_address_area").removeAttr("disabled");
+        $('#select_address_province').niceSelect('update');
+        $('#select_address_city').niceSelect('update');
+        $('#select_address_area').niceSelect('update');
         $("#address").removeAttr("disabled");
         $("#scope").removeAttr("disabled");
         $("#credit").removeAttr("disabled");
@@ -714,4 +764,58 @@
         $("#licTime").removeAttr("disabled");
         $("#button").css("background-color","#e73c3e");
     }
+    /*省改变 重新获取下拉框*/
+    $("#select_address_province").change(function () {
+        let areaId = $(this).val()
+        if (areaId == "")return;
+        $.ajax({
+            url:`/address/getCity/${areaId}`,
+            type:'get',
+            success:function (res) {
+                if (res!=null){
+                    $("#select_address_city").empty();
+                    $('#select_address_city').niceSelect('update');
+                    $("#select_address_area").empty();
+                    $('#select_address_area').niceSelect('update');
+                    let addressList = res.addressList
+                    let childList = res.childList
+                    for(let i = 0; i < addressList.length; i++){
+                        let addressAreaId = addressList[i].addressAreaId
+                        let addressName = addressList[i].addressName
+                        $("#select_address_city").append("<option value='"+addressAreaId+"'>"+addressName+"</option>")
+                        $('#select_address_city').niceSelect('update');
+                    }
+                    for(let j = 0; j < childList.length; j++){
+                        let addressAreaId = childList[j].addressAreaId
+                        let addressName = childList[j].addressName
+                        $("#select_address_area").append("<option value='"+addressAreaId+"'>"+addressName+"</option>")
+                        $('#select_address_area').niceSelect('update');
+                    }
+                }
+            }
+        })
+    })
+    /*市改变 重新获取下拉框*/
+    $("#select_address_city").change(function () {
+        let areaId = $(this).val()
+        if (areaId == "")return;
+        $.ajax({
+            url:`/address/getCity/${areaId}`,
+            type:'get',
+            success:function (res) {
+                if (res!=null){
+                    $("#select_address_area").empty();
+                    $('#select_address_area').niceSelect('update');
+                    let addressList = res.addressList
+                    let childList = res.childList
+                    for(let i = 0; i < addressList.length; i++){
+                        let addressAreaId = addressList[i].addressAreaId
+                        let addressName = addressList[i].addressName
+                        $("#select_address_area").append("<option value='"+addressAreaId+"'>"+addressName+"</option>")
+                        $('#select_address_area').niceSelect('update');
+                    }
+                }
+            }
+        })
+    })
 </script>

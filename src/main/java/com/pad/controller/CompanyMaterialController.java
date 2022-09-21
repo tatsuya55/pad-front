@@ -84,6 +84,7 @@ public class CompanyMaterialController<file> {
         companyMaterial.setCredit(creditImage);
         companyMaterial.setCollateralPhoto(collateralImage);
         companyMaterial.setRecords(recordsImage);
+        companyMaterial.setStatus(0);
         boolean save=service.save(companyMaterial);
         if (save){
             return true;

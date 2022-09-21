@@ -71,5 +71,8 @@ public class LoanInfo implements Serializable {
     @ApiModelProperty(value = "逻辑删除 0已删除，1未删除")
     private Integer isDeleted;
 
+    @TableField(exist = false)
+    @ApiModelProperty(value = "银行名称")
+    private String bankName;
 
 }
