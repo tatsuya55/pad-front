@@ -606,15 +606,16 @@
             success:function (res) {
                 console.log(res)
                 switch (res) {
-                    case 0:
-                        disable();
-                        $("#message").html('审核中，请耐心等待');
-                        $("#checkSpan").html('审核中，不可修改');
-                        break;
+
                     case 1:
                         disable();
                         $("#message").html('审核通过');
                         $("#checkSpan").html('审核通过，不可修改');
+                        break;
+                    case 2:
+                        disable();
+                        $("#message").html('审核中，请耐心等待');
+                        $("#checkSpan").html('审核中，不可修改');
                         break;
                     case -1:
                         able();
@@ -622,7 +623,7 @@
                         break;
                     default:
                         able();
-                        $("#message").html('请认证身份');
+                        $("#message").html('请提交材料');
                         break;
                 }
             }
