@@ -127,7 +127,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a th:href="@{/message/query}" class="nav-link">
+                                                <a th:href="@{/message-details}" class="nav-link">
                                                     留言详情
                                                 </a>
                                             </li>
@@ -507,6 +507,8 @@
 		<script th:src="@{/assets/js/wow.min.js}" src="assets/js/wow.min.js"></script>
         <!-- Custom JS -->
         <script th:src="@{/assets/js/main.js}" src="assets/js/main.js"></script>
+        <!--websocket-->
+        <script th:src="@{/js/websocket.js}" src="js/websocket.js"></script>
     </body>
 </html>
 <script>
@@ -516,29 +518,9 @@
         $("#my_alert").css("display","block");
     }
     /*websocket*/
-    let websocket = null;
-    if ( typeof WebSocket != 'undefined'){
-        /*ws://  websocket
-        * 地址端口号+后台定义的server-servlet-context-path+webSocket服务路径*/
-        websocket = new WebSocket('ws://localhost:8002/webSocket');
-    }else {
-        alert('该浏览器不支持websocket')
-    }
-    websocket.onopen = function (event) {
-        console.log('建立连接')
-    }
-    websocket.onclose = function (event) {
-        console.log('关闭连接')
-    }
     websocket.onmessage = function (event) {
         console.log('收到消息')
         console.log(event.data)
         show(event.data)
-    }
-    websocket.onerror = function (event) {
-        alert('websocket通信发生错误')
-    }
-    websocket.onbeforeunload = function (event) {
-        websocket.close();
     }
 </script>

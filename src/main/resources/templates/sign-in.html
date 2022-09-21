@@ -126,7 +126,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a th:href="@{/message/query}" class="nav-link">
+                                                    <a th:href="@{/message-details}" class="nav-link">
                                                         留言详情
                                                     </a>
                                                 </li>
@@ -605,6 +605,9 @@
                         setTimeout(function() { location.reload(); }, 1000 );
                         break;
                     case 1:
+                        setTimeout(function() { location.href="/" }, 1000 );
+                        break;
+                    case 2:
                         setTimeout(function() { location.href="/" }, 1000 );
                         break;
                     default:

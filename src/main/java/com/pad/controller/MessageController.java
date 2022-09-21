@@ -44,19 +44,5 @@ public class MessageController {
         return messageService.save(message);
     }
 
-    @ApiOperation("查询留言")
-    @GetMapping("/query")
-    public String queryMessage(HttpSession session, Model model){
-        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
-        if (ObjectUtils.isEmpty(user)){
-            return "sign-in";
-        }
-        String cNo = user.getCNo();
-        LambdaQueryWrapper<Message> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Message::getCNo,cNo);
-        List<Message> messageList = messageService.list(wrapper);
-        model.addAttribute("messageList",messageList);
-        return "project-details";
-    }
 }
 
