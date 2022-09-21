@@ -292,41 +292,6 @@
         </div>
         <!-- End Page Title Area -->
 
-        <!-- Start Loan Calculator Area -->
-        <section class="loan-calculator ptb-100">
-            <div class="container">
-                <div class="calculator-form">
-                    <div class="text">
-                        <span>Loan Calculator</span>
-                        <h3>How much do you need?</h3>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Loan Amount</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Interest Rate (%)</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Loan Term (Years)</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Loan Start Date</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="calculator-btn">
-                        <a href="#" class="btn-one">View schedule</a>
-                        <a href="#" class="btn-two">Download schedule</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Loan Calculator Area -->
-
         <!-- End Table Area -->
         <section class="table-area pb-100">
             <div class="container">
@@ -335,79 +300,50 @@
                         <thead>
                           <tr>
                             <th class="text-left">
-                                Date
+                                编号
                             </th>
                             <th class="text-left">
-                                Period
+                                贷款银行
                             </th>
                             <th class="text-left">
-                                Balance
+                                收款账户
                             </th>
                             <th class="text-left">
-                                Pandle
+                                开户行
                             </th>
                             <th class="text-left">
-                                Interest
+                                贷款金额
                             </th>
                             <th class="text-left">
-                                Principle
+                                贷款用途
                             </th>
+                          <th class="text-left">
+                              借款期限
+                          </th>
+                          <th class="text-left">
+                              还款方式
+                          </th>
+                          <th class="text-left">
+                              审核状态
+                          </th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          <tr>
-                            <th class="text-nowrap" scope="row">07/07/2020</th>
-                            <td>0</td>
-                            <td>$500.00</td>
-                            <td>$0.00</td>
-                            <td>$0.00</td>
-                            <td>$0.00</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">08/07/2020</th>
-                            <td>1</td>
-                            <td>$459.28</td>
-                            <td>$42.80</td>
-                            <td> $2.08</td>
-                            <td>$40.72</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">09/07/2020</th>
-                            <td>2</td>
-                            <td>$418.39</td>
-                            <td>$42.00</td>
-                            <td>$1.91</td>
-                            <td>$40.89</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">10/07/2020</th>
-                            <td>3</td>
-                            <td>$377.33</td>
-                            <td>$42.00</td>
-                            <td>$1.74</td>
-                            <td>$41.06</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">11/07/2020</th>
-                            <td>4</td>
-                            <td>$336.10</td>
-                            <td>$42.00</td>
-                            <td>$1.57</td>
-                            <td>$41.23</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">12/07/2020</th>
-                            <td>5</td>
-                            <td>$294.67</td>
-                            <td>$42.00</td>
-                            <td>$1.40</td>
-                            <td>$41.40</td>
+                          <tr th:each="loan:${list}">
+                            <th class="text-nowrap" scope="row">[[${{loan.id}}]]</th>
+                            <td>[[${{loan.bankName}}]]</td>
+                            <td>[[${{loan.bankNumber}}]]</td>
+                            <td>[[${{loan.bankType}}]]</td>
+                            <td>[[${{loan.amount}}]]</td>
+                            <td>[[${{loan.purpose}}]]</td>
+                            <td th:text="${#dates.format(loan?.period,'yyyy-MM-dd')}"></td>
+                            <td>
+                                <span th:text="${loan.returnMethod}==1?'等额本息':(${loan.returnMethod}==2?'等额本金':(${loan.returnMethod}==3?'每月还息':'一次性还款'))"></span>
+                            </td>
+                            <td>
+                                <span th:text="${loan.status}==0?'未审核':(${loan.status}==1?'审核通过':(${loan.status}==-1?'审核失败':''))";></span>
+                            </td>
                           </tr>
                         </tbody>
                     </table>

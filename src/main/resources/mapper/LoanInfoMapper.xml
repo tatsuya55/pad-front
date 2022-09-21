@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pad.mapper.LoanInfoMapper">
 
+    <!--根据企业编号 查询贷款信息-->
+    <select id="findBy" parameterType="String" resultType="loanInfo">
+        select l.*,b.bank_name from loan_info l
+        left join bank b on l.bank_no = b.bank_no
+        where c_no=#{cNo}
+    </select>
 </mapper>

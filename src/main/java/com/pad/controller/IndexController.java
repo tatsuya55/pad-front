@@ -5,9 +5,11 @@ import com.pad.entity.CompanyDetail;
 import com.pad.entity.CompanyInfo;
 import com.pad.entity.Message;
 import com.pad.entity.CompanyMaterial;
+import com.pad.entity.LoanInfo;
 import com.pad.service.CompanyDetailService;
 import com.pad.service.CompanyMaterialService;
 import com.pad.service.MessageService;
+import com.pad.service.LoanInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class IndexController {
 
     @Autowired
     private CompanyMaterialService companyMaterialService;
+
+    @Autowired
+    private LoanInfoService loanInfoService;
 
     @ApiOperation("首页跳转")
     @RequestMapping({"/","/index","/index.html"})
@@ -115,5 +120,14 @@ public class IndexController {
         List<Message> messageList = messageService.list(wrapper);
         model.addAttribute("messageList",messageList);
         return "message-details";
+    }
+
+    @ApiOperation("贷款详情")
+    @GetMapping("/loan-calculator")
+    public String toLoanCalculator(HttpSession session, Model model){
+        CompanyInfo user = (CompanyInfo) session.getAttribute("user");
+        List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
+        model.addAttribute("list",list);
+        return "loan-calculator";
     }
 }
