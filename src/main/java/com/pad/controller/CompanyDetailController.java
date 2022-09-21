@@ -36,20 +36,7 @@ public class CompanyDetailController {
 
     @Autowired
     private CompanyDetailService service;
-    /**修改
-     *
-     * @param companyDetail
-     * @return
-     */
-    @ApiOperation("企业用户详情修改")
-    @PutMapping("/update")
-    @ResponseBody
-    public boolean update(
-            @ApiParam(name = "companyDetail" ,value = "详细信息")
-            @RequestBody CompanyDetail companyDetail){
-        return service.updateById(companyDetail);
 
-    }
 
     /**
      * 添加详细信息
@@ -73,7 +60,7 @@ public class CompanyDetailController {
         boolean save = service.save(companyDetail);
         if (save){
             //添加成功 将认证状态改为认证中
-            companyInfoService.updateAuthStatus(cNo,3);
+            companyInfoService.updateAuthStatus(cNo,1);
             //更新session
             session.setAttribute("user",companyInfoService.getById(cNo));
             return true;

@@ -1,6 +1,7 @@
 package com.pad.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.CompanyInfo;
 import com.pad.entity.CompanyMaterial;
 import com.pad.service.CompanyInfoService;
@@ -11,10 +12,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -35,18 +38,18 @@ public class CompanyMaterialController<file> {
     private CompanyInfoService companyInfoService;
 
 
-    /**
-     * 修改材料信息
-     * @param companyMaterial
-     * @return
-     */
-    @ApiOperation("企业用户材料修改接口")
-    @PutMapping("/update")
+    @ApiOperation("判断材料是否审核")
+    @GetMapping("/status")
     @ResponseBody
-    private boolean update(
-            @ApiParam(name = "companyMaterial",value = "企业用户材料")
-            @RequestBody CompanyMaterial companyMaterial){
-        return service.updateById(companyMaterial);
+    public Serializable materialStatus(HttpSession session){
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)){
+            return "sign-in";
+        }
+        String cNo = user.getCNo();
+
+        return service.selectByFk(cNo);
+
     }
 
 
@@ -83,10 +86,6 @@ public class CompanyMaterialController<file> {
         companyMaterial.setRecords(recordsImage);
         boolean save=service.save(companyMaterial);
         if (save){
-            //添加成功 将认证状态改为认证中
-            companyInfoService.updateAuthStatus(cNo,1);
-            //更新session
-            session.setAttribute("user",companyInfoService.getById(cNo));
             return true;
         }else {
             return false;
