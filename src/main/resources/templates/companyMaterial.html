@@ -601,31 +601,29 @@
     $(function () {
         //判断用户认证状态
         $.ajax({
-            url:'/company/checkAuthStatus',
+            url:'/company-material/status',
             type:'get',
             success:function (res) {
+                console.log(res)
                 switch (res) {
-                    case -2:
-                        $("#message").html('请登录后再进行操作');
-                        setTimeout(function() { location.reload(); }, 1000 );
-                        break;
+
                     case 1:
                         disable();
-                        $("#message").html('认证信息审核中，请耐心等待');
-                        $("#checkSpan").html('认证信息审核中，不可修改');
+                        $("#message").html('审核通过');
+                        $("#checkSpan").html('审核通过，不可修改');
                         break;
                     case 2:
                         disable();
-                        $("#message").html('认证通过');
-                        $("#checkSpan").html('认证通过，不可修改');
+                        $("#message").html('审核中，请耐心等待');
+                        $("#checkSpan").html('审核中，不可修改');
                         break;
                     case -1:
                         able();
-                        $("#message").html('认证失败，请重新认证');
+                        $("#message").html('审核失败，请重新提交审核');
                         break;
                     default:
                         able();
-                        $("#message").html('请认证身份');
+                        $("#message").html('请提交材料');
                         break;
                 }
             }
