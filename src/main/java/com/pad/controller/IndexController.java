@@ -73,12 +73,15 @@ public class IndexController {
         //不显示已经删除的
         wrapper.eq(CompanyDetail::getIsDeleted,1);
         CompanyDetail companyDetail = detailService.getOne(wrapper);
+        String province = "110000";
+        String city = "110100";
+
         if (!ObjectUtils.isEmpty(companyDetail)){
             model.addAttribute("detail",companyDetail);
+            province = companyDetail.getProvince();
+            city = companyDetail.getCity();
         }
         //返回地址列表
-        String province = companyDetail.getProvince();
-        String city = companyDetail.getCity();
         //获取省
         List<Address> provinceList = addressService.getProvince();
         //获取市
