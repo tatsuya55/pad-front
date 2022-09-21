@@ -1,11 +1,8 @@
 package com.pad.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.pad.entity.CompanyDetail;
-import com.pad.entity.CompanyInfo;
-import com.pad.entity.Message;
-import com.pad.entity.CompanyMaterial;
-import com.pad.entity.LoanInfo;
+import com.pad.entity.*;
+import com.pad.service.AddressService;
 import com.pad.service.CompanyDetailService;
 import com.pad.service.CompanyMaterialService;
 import com.pad.service.MessageService;
@@ -34,6 +31,9 @@ public class IndexController {
 
     @Autowired
     private CompanyMaterialService companyMaterialService;
+
+    @Autowired
+    private AddressService addressService;
 
     @Autowired
     private LoanInfoService loanInfoService;
@@ -77,9 +77,25 @@ public class IndexController {
         //不显示已经删除的
         wrapper.eq(CompanyDetail::getIsDeleted,1);
         CompanyDetail companyDetail = detailService.getOne(wrapper);
+        String province = "110000";
+        String city = "110100";
+
         if (!ObjectUtils.isEmpty(companyDetail)){
             model.addAttribute("detail",companyDetail);
+            province = companyDetail.getProvince();
+            city = companyDetail.getCity();
         }
+        //返回地址列表
+        //获取省
+        List<Address> provinceList = addressService.getProvince();
+        //获取市
+        List<Address> cityList  = addressService.getList(null, province);
+        //获取区
+        List<Address> areaList  = addressService.getList(null, city);
+        //返回页面
+        model.addAttribute("provinceList",provinceList);
+        model.addAttribute("cityList",cityList);
+        model.addAttribute("areaList",areaList);
         return "companyDetail";
     }
 
