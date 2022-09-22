@@ -92,4 +92,10 @@ public class CompanyInfoServiceImpl extends ServiceImpl<CompanyInfoMapper, Compa
         companyInfo.setAuthStatus(status);
         return baseMapper.updateById(companyInfo)>0;
     }
+
+    //返回用户认证状态
+    @Override
+    public int getAuthStatus(String cNo) {
+        return baseMapper.getAuthStatus(cNo);
+    }
 }

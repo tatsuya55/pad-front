@@ -24,4 +24,6 @@ public interface CompanyInfoService extends IService<CompanyInfo> {
     boolean checkEmail(String email);
     //修改用户认证状态
     boolean updateAuthStatus(String cNo, Integer status);
+    //返回用户认证状态
+    int getAuthStatus(String cNo);
 }

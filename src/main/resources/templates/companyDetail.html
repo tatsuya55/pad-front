@@ -616,6 +616,7 @@
             url:'/company/checkAuthStatus',
             type:'get',
             success:function (res) {
+                console.log(res)
                 switch (res) {
                     case -2:
                         $("#message").html('请登录后再进行操作');

@@ -13,5 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-09-12
  */
 public interface CompanyInfoMapper extends BaseMapper<CompanyInfo> {
-
+    //返回用户认证状态
+    int getAuthStatus(String cNo);
 }

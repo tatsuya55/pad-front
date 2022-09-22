@@ -75,7 +75,8 @@ public class CompanyInfoController {
         if (ObjectUtils.isEmpty(user)){
             return -2;//未登录
         }
-        return user.getAuthStatus();
+        //返回用户认证状态
+        return companyInfoService.getAuthStatus(user.getCNo());
     }
 
     @ApiOperation("修改用户认证状态")
