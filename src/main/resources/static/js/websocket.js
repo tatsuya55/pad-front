@@ -14,7 +14,7 @@ websocket.onclose = function (event) {
 }
 
 websocket.onerror = function (event) {
-    alert('websocket通信发生错误')
+  /*  alert('websocket通信发生错误')*/
 }
 websocket.onbeforeunload = function (event) {
     websocket.close();

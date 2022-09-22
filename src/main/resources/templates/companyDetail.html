@@ -337,7 +337,7 @@
                             <label>省份</label>
                             <select class="form-control" id="select_address_province">
                                 <option value="">--请选择省份--</option>
-                                <option th:each="province:${provinceList}" th:value="${province.addressAreaId}" th:selected="${detail.province} == ${province.addressAreaId}">
+                                <option th:each="province:${provinceList}" th:value="${province.addressAreaId}" th:selected="${detail?.province} == ${province.addressAreaId}">
                                         [[${province.addressName}]]
                                 </option>
                             </select>
@@ -347,7 +347,7 @@
                             <label>所在市</label>
                             <select class="form-control" id="select_address_city">
                                 <option value="">--请选择所在市--</option>
-                                <option th:each="city:${cityList}" th:value="${city.addressAreaId}" th:selected="${detail.city} == ${city.addressAreaId}">
+                                <option th:each="city:${cityList}" th:value="${city.addressAreaId}" th:selected="${detail?.city} == ${city.addressAreaId}">
                                     [[${city.addressName}]]
                                 </option>
                             </select>
@@ -357,7 +357,7 @@
                             <label>所在区</label>
                             <select class="form-control" id="select_address_area">
                                 <option value="">--请选择所在区--</option>
-                                <option th:each="area:${areaList}" th:value="${area.addressAreaId}" th:selected="${detail.area} == ${area.addressAreaId}">
+                                <option th:each="area:${areaList}" th:value="${area.addressAreaId}" th:selected="${detail?.area} == ${area.addressAreaId}">
                                     [[${area.addressName}]]
                                 </option>
                             </select>
