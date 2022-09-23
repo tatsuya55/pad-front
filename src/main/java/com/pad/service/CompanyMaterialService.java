@@ -19,5 +19,5 @@ public interface CompanyMaterialService extends IService<CompanyMaterial> {
      * @param cNo
      * @return
      */
-    CompanyMaterial selectByFk(String cNo);
+    Integer  selectByFk(String cNo);
 }

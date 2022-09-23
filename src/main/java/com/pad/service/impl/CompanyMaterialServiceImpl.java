@@ -24,7 +24,7 @@ public class CompanyMaterialServiceImpl extends ServiceImpl<CompanyMaterialMappe
 
 
     @Override
-    public CompanyMaterial selectByFk(String cNo) {
+    public Integer selectByFk(String cNo) {
         return companyMaterialMapper.selectByFk(cNo);
     }
 }

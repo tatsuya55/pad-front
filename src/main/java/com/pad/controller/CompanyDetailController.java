@@ -36,20 +36,7 @@ public class CompanyDetailController {
 
     @Autowired
     private CompanyDetailService service;
-    /**修改
-     *
-     * @param companyDetail
-     * @return
-     */
-    @ApiOperation("企业用户详情修改")
-    @PutMapping("/update")
-    @ResponseBody
-    public boolean update(
-            @ApiParam(name = "companyDetail" ,value = "详细信息")
-            @RequestBody CompanyDetail companyDetail){
-        return service.updateById(companyDetail);
 
-    }
 
     /**
      * 添加详细信息

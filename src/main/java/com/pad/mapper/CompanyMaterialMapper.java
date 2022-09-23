@@ -19,5 +19,5 @@ public interface CompanyMaterialMapper extends BaseMapper<CompanyMaterial> {
      * @param cNo
      * @return
      */
-    CompanyMaterial selectByFk(String cNo);
+    Integer selectByFk(String cNo);
 }
