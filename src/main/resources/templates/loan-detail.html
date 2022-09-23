@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/head :: common_header(~{::title},~{::links},~{})">
-    <title>立即申请</title>
+    <title>贷款详情</title>
 </head>
 
-<body>
+    <body>
+
     <!--引入navbar-->
     <div th:include="common/navbar :: navbar"></div>
 
@@ -14,10 +15,10 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>Apply now</h2>
+                            <h2>贷款详情</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Apply now</li>
+                                <li><a th:href="@{/}">首页</a></li>
+                                <li>贷款详情</li>
                             </ul>
                         </div>
                     </div>
@@ -26,135 +27,65 @@
         </div>
         <!-- End Page Title Area -->
 
-        <!-- Start Apply Area -->
-        <section class="apply-area ptb-100">
+        <!-- End Table Area -->
+        <section class="table-area pb-100">
             <div class="container">
-                <div class="apply-title">
-                    <h3>Loan Application</h3>
-                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th class="text-left">
+                                编号
+                            </th>
+                            <th class="text-left">
+                                贷款银行
+                            </th>
+                            <th class="text-left">
+                                收款账户
+                            </th>
+                            <th class="text-left">
+                                开户行
+                            </th>
+                            <th class="text-left">
+                                贷款金额
+                            </th>
+                            <th class="text-left">
+                                贷款用途
+                            </th>
+                          <th class="text-left">
+                              借款期限
+                          </th>
+                          <th class="text-left">
+                              还款方式
+                          </th>
+                          <th class="text-left">
+                              审核状态
+                          </th>
+                          </tr>
+                        </thead>
 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="apply-form">
-                            <div class="form-group">
-                                <label>Desired Loan Amount*</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Firstname</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Date of Birth</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Address*</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Email Address*</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Phone Number*</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Designation</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Purpose of Loan*</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="apply-form">
-                            <div class="form-group">
-                                <label>Annual Income*</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Lastname*</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Gender</label>
-                                <div class="select-box">
-                                    <select class="form-control">
-                                        <option value="5">Male</option>
-                                        <option value="1">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Country*</label>
-                                <div class="select-box">
-                                    <select class="form-control">
-                                        <option value="5">United Arab Emirates</option>
-                                        <option value="1">China</option>
-                                        <option value="2">United Kingdom</option>
-                                        <option value="0">Germany</option>
-                                        <option value="3">France</option>
-                                        <option value="4">Japan</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Alternative Email Address*</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Company Name</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Company Address</label>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Choose here</label>
-                                <div class="select-box">
-                                    <select class="form-control">
-                                        <option value="5">Agricultural Loan</option>
-                                        <option value="1">Business Loan</option>
-                                        <option value="2">House Loan</option>
-                                        <option value="0">Personal Loan</option>
-                                        <option value="3">Education Loan</option>
-                                        <option value="4">Payday Loan</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="apply-btn">
-                    <a href="#" class="default-btn">
-                        Apply now
-                        <span></span>
-                    </a>
+                        <tbody>
+                          <tr th:each="loan:${list}">
+                            <th class="text-nowrap" scope="row">[[${{loan.id}}]]</th>
+                            <td>[[${{loan.bankName}}]]</td>
+                            <td>[[${{loan.bankNumber}}]]</td>
+                            <td>[[${{loan.bankType}}]]</td>
+                            <td>[[${{loan.amount}}]]</td>
+                            <td>[[${{loan.purpose}}]]</td>
+                            <td th:text="${#dates.format(loan?.period,'yyyy-MM-dd')}"></td>
+                            <td>
+                                <span th:text="${loan.returnMethod}==1?'等额本息':(${loan.returnMethod}==2?'等额本金':(${loan.returnMethod}==3?'每月还息':'一次性还款'))"></span>
+                            </td>
+                            <td>
+                                <span th:text="${loan.status}==0?'未审核':(${loan.status}==1?'审核通过':(${loan.status}==-1?'审核失败':''))";></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
-        <!-- End Apply Area -->
+        <!-- End Table Area -->
 
         <!-- Start Footer Area -->
         <section class="footer-area pt-100 pb-70">
