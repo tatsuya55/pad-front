@@ -1,298 +1,13 @@
 <!doctype html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <!-- Animate CSS -->
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <!-- Meanmenu CSS -->
-        <link rel="stylesheet" href="assets/css/meanmenu.css">
-        <!-- Boxicons CSS -->
-        <link rel="stylesheet" href="assets/css/boxicons.min.css">
-        <!-- Flaticon CSS -->
-        <link rel="stylesheet" href="assets/css/flaticon.css">
-        <!-- Carousel CSS -->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <!-- Carousel Default CSS -->
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-        <!-- Magnific Popup CSS -->
-        <link rel="stylesheet" href="assets/css/magnific-popup.css">
-        <!-- Nice Select CSS -->
-        <link rel="stylesheet" href="assets/css/nice-select.css">
-        <!-- Odometer CSS -->
-        <link rel="stylesheet" href="assets/css/odometer.css">
-        <!-- Style CSS -->
-        <link rel="stylesheet" href="assets/css/style.css">
-        <!-- Responsive CSS -->
-		<link rel="stylesheet" href="assets/css/responsive.css">
-
-		<title></title>
-
-        <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    </head>
+<head th:replace="common/head :: common_header(~{::title},~{::links},~{})">
+    <title>贷款计算器</title>
+</head>
 
     <body>
 
-        <!-- Start Navbar Area -->
-        <div class="navbar-area">
-            <div class="main-responsive-nav">
-                <div class="container">
-                    <div class="main-responsive-menu">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo.png" alt="image">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="main-navbar">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/logo.png" alt="image">
-                        </a>
-
-                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Home
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="index.html" class="nav-link">
-                                                Home One
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="index-2.html" class="nav-link">
-                                                Home Two
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="index-3.html" class="nav-link">
-                                                Home Three
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        Pages
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="about.html" class="nav-link">
-                                                About
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="team.html" class="nav-link">
-                                                Team
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="faq.html" class="nav-link">
-                                                FAQ
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="gallery.html" class="nav-link">
-                                                Gallery
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="loan-calculator.html" class="nav-link active">
-                                                Loan Calculator
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="apply-now.html" class="nav-link">
-                                                Apply now
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="testimonials.html" class="nav-link">
-                                                Testimonials
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                Projects
-                                                <i class='bx bx-chevron-down'></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu">
-                                                <li class="nav-item">
-                                                    <a href="projects.html" class="nav-link">
-                                                        Projects
-                                                    </a>
-                                                </li>
-
-                                                <li class="nav-item">
-                                                    <a href="project-details.html" class="nav-link">
-                                                        Project Details
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="sign-in.html" class="nav-link">
-                                                Sign In
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="sign-up.html" class="nav-link">
-                                                Sign Up
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="terms-condition.html" class="nav-link">
-                                                Terms & Conditions
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="privacy-policy.html" class="nav-link">
-                                                Privacy Policy
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="error-404.html" class="nav-link">
-                                                Error Page
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="contact.html" class="nav-link">
-                                                Contact
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Services
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="services.html" class="nav-link">
-                                                Services
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="services-details.html" class="nav-link">
-                                                Services Details
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="funding.html" class="nav-link">
-                                        Funding
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="loans.html" class="nav-link">
-                                        Loans
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        News
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="news.html" class="nav-link">
-                                                News Grid
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="news-details.html" class="nav-link">
-                                                News Details
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="contact.html" class="nav-link">
-                                        Contact
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <div class="others-options d-flex align-items-center">
-                                <div class="option-item">
-                                    <i class="search-btn flaticon-magnifying-glass"></i>
-                                    <i class="close-btn flaticon-close"></i>
-                                    <div class="search-overlay search-popup">
-                                        <div class='search-box'>
-                                            <form class="search-form">
-                                                <input class="search-input" name="search" placeholder="Search" type="text">
-
-                                                <button class="search-button" type="submit">
-                                                    <i class="flaticon-magnifying-glass"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="option-item">
-                                    <div class="info">
-                                        <i class="flaticon-telephone"></i>
-                                        <span>Call Now</span>
-                                        <p>
-                                            <a href="tel:1514312-5678">+1 (514) 312-5678</a>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="option-item">
-                                    <a href="apply-now.html" class="default-btn">
-                                        Apply now
-                                        <span></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- End Navbar Area -->
+    <!--引入navbar-->
+    <div th:include="common/navbar :: navbar"></div>
 
         <!-- Start Page Title Area -->
         <div class="page-title-area item-bg-1">
@@ -314,6 +29,7 @@
 
         <!-- Start Loan Calculator Area -->
         <section class="loan-calculator ptb-100">
+            <form onsubmit="return check()">
             <div class="container">
                 <div class="calculator-form">
                     <div class="text">
@@ -322,30 +38,31 @@
                     </div>
 
                     <div class="form-group">
-                        <label>贷款金额</label>
-                        <input id="principal" name="principal" type="text" class="form-control">元
+                        <label>贷款金额：元</label>
+                        <input id="principal" name="principal" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>贷款期限</label>
-                        <input id="term" name="term" type="text" class="form-control">月（1-360）
+                        <label>贷款期限：月（1-360）</label>
+                        <input id="term" name="term" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>贷款年利率</label>
-                        <input id="rate" name="rate" type="text" class="form-control">%
+                        <label>贷款年利率：%</label>
+                        <input id="rate" name="rate" type="text" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>还款方式</label>
-                        <select id="type" name="type">
+                        <select class="form-control" id="type" name="type">
                             <option value="de">等额本息还款</option>
                             <option value="dj">等额本金还款</option>
                         </select>
                     </div>
 
                     <div class="calculator-btn">
-                        <a href="#" class="btn-one">计算</a>
+                        <input id="button" type="submit" class="btn-one" value="提 交">
                     </div>
                 </div>
             </div>
+            </form>
         </section>
         <!-- End Loan Calculator Area -->
 
@@ -583,6 +300,26 @@
         </div>
         <!-- End Go Top Area -->
 
+        <!--弹框start-->
+        <div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">提示</h4>
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                    </div>
+                    <div class="modal-body">
+                        <p id="ModalContext">内容</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="close" type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--弹框end-->
+
         <!-- Jquery Slim JS -->
         <script src="assets/js/jquery.min.js"></script>
         <!-- Popper JS -->
@@ -613,3 +350,29 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<script>
+    function check() {
+        alert(111111)
+        if($("#principal").value == "" || isNaN($("#principal").value) || $("#principal").value <= 0)
+        {
+            $("#ModalContext").html('请输入正确的贷款金额');
+            $("#MyModal").modal('show')
+            return false;
+        }
+
+        if($("#term").value == "" || isNaN($("#term").value) || $("#term").value <= 0 || $("#cm_term").value > 360)
+        {
+            $("#ModalContext").html('请输入正确的贷款总期数');
+            $("#MyModal").modal('show')
+            return false;
+        }
+
+        if($("#rate").value == "" || isNaN($("#rate").value) || $("#rate").value <= 0)
+        {
+            $("#ModalContext").html('请输入正确的贷款年利率');
+            $("#MyModal").modal('show')
+            return false;
+        }
+        return false;
+    }
+</script>
