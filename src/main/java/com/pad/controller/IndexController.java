@@ -145,11 +145,17 @@ public class IndexController {
     }
 
     @ApiOperation("贷款详情")
-    @GetMapping("/loan-calculator")
-    public String toLoanCalculator(HttpSession session, Model model){
+    @GetMapping("/loan-detail")
+    public String toLoanDetail(HttpSession session, Model model){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
         List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
         model.addAttribute("list",list);
+        return "loan-detail";
+    }
+
+    @ApiOperation("利率计算")
+    @GetMapping("/loan-calculator")
+    public String toLoanCalculator(){
         return "loan-calculator";
     }
 }
