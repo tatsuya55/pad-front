@@ -275,15 +275,15 @@
     <!-- End Navbar Area -->
 
         <!-- Start Page Title Area -->
-        <div class="page-title-area item-bg-5">
+        <div class="page-title-area item-bg-1">
             <div class="d-table">
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>Gallery</h2>
+                            <h2>Loan Calculator</h2>
                             <ul>
                                 <li><a href="index.html">Home</a></li>
-                                <li>Gallery</li>
+                                <li>Loan Calculator</li>
                             </ul>
                         </div>
                     </div>
@@ -292,155 +292,65 @@
         </div>
         <!-- End Page Title Area -->
 
-        <!-- Start Gallery Area -->
-        <section class="gallery-area pt-100 pb-100">
+        <!-- End Table Area -->
+        <section class="table-area pb-100">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image1.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Financial Planning</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th class="text-left">
+                                编号
+                            </th>
+                            <th class="text-left">
+                                贷款银行
+                            </th>
+                            <th class="text-left">
+                                收款账户
+                            </th>
+                            <th class="text-left">
+                                开户行
+                            </th>
+                            <th class="text-left">
+                                贷款金额
+                            </th>
+                            <th class="text-left">
+                                贷款用途
+                            </th>
+                          <th class="text-left">
+                              借款期限
+                          </th>
+                          <th class="text-left">
+                              还款方式
+                          </th>
+                          <th class="text-left">
+                              审核状态
+                          </th>
+                          </tr>
+                        </thead>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image2.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Startup Funding</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image3.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Fund Management</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image4.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Investment Shares</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image5.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Strategy</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image6.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Finance</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image7.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Investments Loan</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image8.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Business Purpose</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="gallery-item">
-                            <div class="image">
-                                <a href="#">
-                                    <img src="assets/img/gallery/image9.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h3>
-                                    <a href="#">Commercial Loan</a>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
+                        <tbody>
+                          <tr th:each="loan:${list}">
+                            <th class="text-nowrap" scope="row">[[${{loan.id}}]]</th>
+                            <td>[[${{loan.bankName}}]]</td>
+                            <td>[[${{loan.bankNumber}}]]</td>
+                            <td>[[${{loan.bankType}}]]</td>
+                            <td>[[${{loan.amount}}]]</td>
+                            <td>[[${{loan.purpose}}]]</td>
+                            <td th:text="${#dates.format(loan?.period,'yyyy-MM-dd')}"></td>
+                            <td>
+                                <span th:text="${loan.returnMethod}==1?'等额本息':(${loan.returnMethod}==2?'等额本金':(${loan.returnMethod}==3?'每月还息':'一次性还款'))"></span>
+                            </td>
+                            <td>
+                                <span th:text="${loan.status}==0?'未审核':(${loan.status}==1?'审核通过':(${loan.status}==-1?'审核失败':''))";></span>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="gallery-btn">
-                <a href="apply-now.html" class="default-btn">
-                    Load more
-                    <span></span>
-                </a>
-            </div>
         </section>
-        <!-- End Gallery Area -->
+        <!-- End Table Area -->
 
         <!-- Start Footer Area -->
         <section class="footer-area pt-100 pb-70">
