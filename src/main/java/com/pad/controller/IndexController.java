@@ -163,7 +163,10 @@ public class IndexController {
 
     @ApiOperation("银行信息")
     @GetMapping("/faq")
-    public String tofaq(){
+    public String toFaq(Model model){
+        //查询所有银行
+        List<Bank> list = bankService.list(null);
+        model.addAttribute("bankAllList",list);
         return "faq";
     }
 }

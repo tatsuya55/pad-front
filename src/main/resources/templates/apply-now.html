@@ -313,36 +313,36 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <span id="checKBank" style="color: #ff0000"></span>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <label>收款账户</label>
                                     <input name="bankNumber" id="bankNumber" type="text" class="form-control">
                                 </div>
 
-                                <div class="form-group">
-                                    <span id="checkBankNumber" style="color: #ff0000"></span>
-                                </div>
+<!--                                <div class="form-group">-->
+<!--                                    <span id="checkBankNumber" style="color: #ff0000"></span>-->
+<!--                                </div>-->
 
                                 <div class="form-group">
                                     <label>开户行</label>
                                     <input name="bankType" id="bankType" type="text" class="form-control">
                                 </div>
 
-                                <div class="form-group">
+                               <!-- <div class="form-group">
                                     <span id="checkBankType" style="color: #ff0000"></span>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <label>贷款金额</label>
                                     <input name="amount" id="amount" type="text" class="form-control">
                                 </div>
 
-                                <div class="form-group">
-                                    <span id="checkAmount" style="color: #ff0000"></span>
-                                </div>
+<!--                                <div class="form-group">-->
+<!--                                    <span id="checkAmount" style="color: #ff0000"></span>-->
+<!--                                </div>-->
 
                                 <div class="form-group">
                                     <label>贷款用途</label>
@@ -354,18 +354,18 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <span id="checkPurpose" style="color: #ff0000"></span>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <label>借款期限</label>
                                     <input name="period" id="period" type="date" class="form-control">
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <span id="checkPeriod" style="color: #ff0000"></span>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <label>还款方式</label>
@@ -379,7 +379,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <span id="checkReturnMethod" style="color: #ff0000"></span>
+                                    <span id="checkSpan" style="color: #ff0000"></span>
                                 </div>
 
                                 <div class="form-group">
@@ -596,7 +596,13 @@
         let purpose = $("#purpose").val()
         let period = $("#period").val()
         let returnMethod = $("#returnMethod").val()
-        $("#bankSelect").blur(function () {
+
+        if(bank=='' || bankNumber=='' || bankType=='' || amount=='' || purpose=='' || period=='' || returnMethod==''){
+            $("#checkSpan").html('以上字段都不能为空');
+            return false;
+        }
+
+        /*$("#bankSelect").blur(function () {
             if (bank==""){
 
                 $("#checKBank").html('银行不能为空');
@@ -629,7 +635,7 @@
         if (returnMethod==""){
             $("#checkReturnMethod").html('还款方式不能为空');
             return false;
-        }
+        }*/
         let formData=new FormData;
         formData.append("bankNo",bank);
         formData.append("bankNumber",bankNumber);
@@ -638,7 +644,7 @@
         formData.append("purpose",purpose);
         formData.append("period",period);
         formData.append("returnMethod",returnMethod);
-        /*$.ajax({
+        $.ajax({
             url:"/loan_info/add",
             type:'post',
             data:formData,
@@ -649,7 +655,7 @@
                     $("#MyModal").modal('show')
                 }
             }
-        })*/
+        })
         return false;
     }
 
