@@ -195,4 +195,10 @@ public class IndexController {
         model.addAttribute("bankAllList",list);
         return "faq";
     }
+
+    @ApiOperation("贷款详情信息")
+    @GetMapping("/detailToLoanCalculator")
+    public String detailToLoanCalculator(){
+        return "loan-calculator";
+    }
 }
