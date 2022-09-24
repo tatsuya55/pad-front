@@ -202,4 +202,10 @@ public class IndexController {
         model.addAttribute("bankPage",page);
         return "faq";
     }
+
+    @ApiOperation("贷款详情信息")
+    @GetMapping("/detailToLoanCalculator")
+    public String detailToLoanCalculator(){
+        return "loan-calculator";
+    }
 }

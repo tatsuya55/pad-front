@@ -52,15 +52,18 @@
                             <th class="text-left">
                                 贷款用途
                             </th>
-                          <th class="text-left">
-                              借款期限
-                          </th>
-                          <th class="text-left">
-                              还款方式
-                          </th>
-                          <th class="text-left">
-                              审核状态
-                          </th>
+                            <th class="text-left">
+                                借款期限
+                            </th>
+                            <th class="text-left">
+                                还款方式
+                            </th>
+                            <th class="text-left">
+                                审核状态
+                            </th>
+                            <th class="text-left">
+                                查看详情
+                            </th>
                           </tr>
                         </thead>
 
@@ -80,6 +83,9 @@
                             </td>
                             <td>
                                 <span th:text="${loan.status}==0?'未审核':(${loan.status}==1?'审核通过':(${loan.status}==-1?'审核失败':''))";></span>
+                            </td>
+                            <td>
+                                <a th:href="@{/detailToLoanCalculator}">查看详情</a>
                             </td>
                           </tr>
                         </tbody>
