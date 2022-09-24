@@ -1,6 +1,8 @@
 package com.pad.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pad.entity.*;
 import com.pad.service.*;
 import com.pad.utils.LoanCalculator;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -189,10 +192,14 @@ public class IndexController {
 
     @ApiOperation("银行信息")
     @GetMapping("/faq")
-    public String toFaq(Model model){
+    public String toFaq(
+            @RequestParam(defaultValue = "1")long current,
+            @RequestParam(defaultValue = "4")long size,
+            Model model){
         //查询所有银行
-        List<Bank> list = bankService.list(null);
-        model.addAttribute("bankAllList",list);
+        Page<Bank> bankPage = new Page<>(current,size);
+        IPage<Bank> page = bankService.page(bankPage, null);
+        model.addAttribute("bankPage",page);
         return "faq";
     }
 }
