@@ -2,9 +2,16 @@ package com.pad.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.*;
-import com.pad.service.*;
+import com.pad.service.AddressService;
+import com.pad.service.CompanyDetailService;
+import com.pad.service.CompanyMaterialService;
+import com.pad.service.MessageService;
+import com.pad.service.LoanInfoService;
+import com.pad.utils.LoanCalculator;
+import com.pad.vo.LoanData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -152,10 +159,27 @@ public class IndexController {
         return "loan-detail";
     }
 
-    @ApiOperation("利率计算")
+    @ApiOperation("贷款计算器")
     @GetMapping("/loan-calculator")
     public String toLoanCalculator(){
         return "loan-calculator";
+    }
+
+    @ApiOperation("利率计结果")
+    @GetMapping("/loan-data")
+    public String toLoanData(LoanData loanData,Model model){
+        String type = loanData.getType();
+        LoanData data = null;
+        if ("de".equals(type)){
+            //等额本息还款
+            data = LoanCalculator.EqualPrincipalandInterestMethod(loanData);
+        }
+        if ("dj".equals(type)){
+            //等额本金还款
+            data = LoanCalculator.EqualPrincipalMethod(loanData);
+        }
+        model.addAttribute("data",data);
+        return "loan-data";
     }
 
     @ApiOperation("贷款申请")
