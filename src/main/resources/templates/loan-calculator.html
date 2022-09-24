@@ -36,25 +36,26 @@
                         <span>贷款计算器</span>
                         <h3>计算贷款明细</h3>
                     </div>
-
                     <div class="form-group">
-                        <label>贷款金额：元</label>
+                        <label>贷款金额（元）</label>
                         <input id="principal" name="principal" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>贷款期限：月（1-360）</label>
+                        <label>贷款期限（月（1-360））</label>
                         <input id="term" name="term" type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>贷款年利率：%</label>
+                        <label>贷款年利率（%）</label>
                         <input id="rate" name="rate" type="text" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>还款方式</label>
-                        <select class="form-control" id="type" name="type">
-                            <option value="de">等额本息还款</option>
-                            <option value="dj">等额本金还款</option>
-                        </select>
+                        <div class="form-control">
+                            <select style="width: 100%" id="type" name="type">
+                                <option value="de">等额本息还款</option>
+                                <option value="dj">等额本金还款</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="calculator-btn">
@@ -65,95 +66,6 @@
             </form>
         </section>
         <!-- End Loan Calculator Area -->
-
-        <!-- End Table Area -->
-        <section class="table-area pb-100">
-            <div class="container">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                          <tr>
-                            <th class="text-left">
-                                Date
-                            </th>
-                            <th class="text-left">
-                                Period
-                            </th>
-                            <th class="text-left">
-                                Balance
-                            </th>
-                            <th class="text-left">
-                                Pandle
-                            </th>
-                            <th class="text-left">
-                                Interest
-                            </th>
-                            <th class="text-left">
-                                Principle
-                            </th>
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                          <tr>
-                            <th class="text-nowrap" scope="row">07/07/2020</th>
-                            <td>0</td>
-                            <td>$500.00</td>
-                            <td>$0.00</td>
-                            <td>$0.00</td>
-                            <td>$0.00</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">08/07/2020</th>
-                            <td>1</td>
-                            <td>$459.28</td>
-                            <td>$42.80</td>
-                            <td> $2.08</td>
-                            <td>$40.72</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">09/07/2020</th>
-                            <td>2</td>
-                            <td>$418.39</td>
-                            <td>$42.00</td>
-                            <td>$1.91</td>
-                            <td>$40.89</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">10/07/2020</th>
-                            <td>3</td>
-                            <td>$377.33</td>
-                            <td>$42.00</td>
-                            <td>$1.74</td>
-                            <td>$41.06</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">11/07/2020</th>
-                            <td>4</td>
-                            <td>$336.10</td>
-                            <td>$42.00</td>
-                            <td>$1.57</td>
-                            <td>$41.23</td>
-                          </tr>
-
-                          <tr>
-                            <th class="text-nowrap" scope="row">12/07/2020</th>
-                            <td>5</td>
-                            <td>$294.67</td>
-                            <td>$42.00</td>
-                            <td>$1.40</td>
-                            <td>$41.40</td>
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-        <!-- End Table Area -->
 
         <!-- Start Footer Area -->
         <section class="footer-area pt-100 pb-70">
@@ -313,7 +225,7 @@
                         <p id="ModalContext">内容</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="close" type="button" class="btn btn-primary">确定</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
                     </div>
                 </div>
             </div>
@@ -352,27 +264,36 @@
 </html>
 <script>
     function check() {
-        alert(111111)
-        if($("#principal").value == "" || isNaN($("#principal").value) || $("#principal").value <= 0)
+        let principal = $("#principal").val()
+        if(principal == "" || isNaN(principal) || principal <= 0)
         {
             $("#ModalContext").html('请输入正确的贷款金额');
             $("#MyModal").modal('show')
             return false;
         }
-
-        if($("#term").value == "" || isNaN($("#term").value) || $("#term").value <= 0 || $("#cm_term").value > 360)
+        let term =$("#term").val()
+        if(term == "" || isNaN(term) || term <= 0 || term > 360)
         {
             $("#ModalContext").html('请输入正确的贷款总期数');
             $("#MyModal").modal('show')
             return false;
         }
-
-        if($("#rate").value == "" || isNaN($("#rate").value) || $("#rate").value <= 0)
+        let rate = $("#rate").val()
+        if(rate == "" || isNaN(rate) || rate <= 0)
         {
             $("#ModalContext").html('请输入正确的贷款年利率');
             $("#MyModal").modal('show')
             return false;
         }
+        let type = $("#type").val()
+        let url = `/loan-data?principal=${principal}&term=${term}&rate=${rate}&type=${type}`
+        let open = null
+        let left = (screen.width-585)/2
+        let top = (screen.height-400)/2
+        if (open !=null){
+            open.close()
+        }
+        open = window.open(url,'open','scrollbars=yes,resizable=yes,status=yes,width=580,height=400,left='+left+',top='+top)
         return false;
     }
 </script>
