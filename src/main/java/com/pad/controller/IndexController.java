@@ -1,12 +1,10 @@
 package com.pad.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pad.entity.*;
-import com.pad.service.AddressService;
-import com.pad.service.CompanyDetailService;
-import com.pad.service.CompanyMaterialService;
-import com.pad.service.MessageService;
-import com.pad.service.LoanInfoService;
+import com.pad.service.*;
 import com.pad.utils.LoanCalculator;
 import com.pad.vo.LoanData;
 import io.swagger.annotations.Api;
@@ -18,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -40,6 +39,9 @@ public class IndexController {
 
     @Autowired
     private LoanInfoService loanInfoService;
+
+    @Autowired
+    private BankService bankService;
 
     @ApiOperation("首页跳转")
     @RequestMapping({"/","/index","/index.html"})
@@ -177,5 +179,27 @@ public class IndexController {
         }
         model.addAttribute("data",data);
         return "loan-data";
+    }
+
+    @ApiOperation("贷款申请")
+    @GetMapping("/apply-now")
+    public String toApplyNow(Model model){
+        //查询所有银行
+        List<Bank> bankList = bankService.list(null);
+        model.addAttribute("bankList",bankList);
+        return "apply-now";
+    }
+
+    @ApiOperation("银行信息")
+    @GetMapping("/faq")
+    public String toFaq(
+            @RequestParam(defaultValue = "1")long current,
+            @RequestParam(defaultValue = "4")long size,
+            Model model){
+        //查询所有银行
+        Page<Bank> bankPage = new Page<>(current,size);
+        IPage<Bank> page = bankService.page(bankPage, null);
+        model.addAttribute("bankPage",page);
+        return "faq";
     }
 }

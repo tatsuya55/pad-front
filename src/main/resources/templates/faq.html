@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/head :: common_header(~{::title},~{::links},~{})">
-    <title>faq</title>
+    <title>银行列表</title>
 </head>
 
     <body>
@@ -14,10 +14,10 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>FAQ</h2>
+                            <h2>银行列表</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Faq</li>
+                                <li><a th:href="@{/}">首页</a></li>
+                                <li>银行列表</li>
                             </ul>
                         </div>
                     </div>
@@ -30,247 +30,55 @@
         <section class="faq-area ptb-100">
             <div class="container">
                 <div class="section-title">
-                    <h2>Frequently ask question</h2>
-                    <b>Just find your answers below</b>
+                    <h2>银行信息</h2>
+                    <!--<b>Just find your answers below</b>-->
                 </div>
 
-                <div class="tab faq-list-tab">
-                    <ul class="tabs-list">
-                        <li>
-                            <a href="#">Top questions</a>
-                        </li>
-                        <li>
-                            <a href="#">General questions</a>
-                        </li>
-                        <li>
-                            <a href="#">About qinix</a>
-                        </li>
-                    </ul>
+                <div class="container">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <address th:each="bank:${bankPage.records}">
+                                <strong >银行名称: [[${bank.bankName}]]</strong><br />
+                                银行电话: [[${bank.phone}]]<br />
+                                年化利率: [[${bank.borrowYearRate}]]<br />
+                                逾期利率: [[${bank.overdueRate}]]<br />
+                                银行详细地址: [[${bank.address}]]<br />
+                                <p title="description">产品说明: [[${bank.description}]]</p>
+                            </address>
+                            <div class="pagination clearfix style2">
+                                <a th:if="not ${bankPage.hasPrevious}"
+                                   href="javascript:void(0)"
+                                   class="page-numbers">
+                                    <
+                                </a>
+                                <a th:if="${bankPage.hasPrevious}"
+                                   th:href="@{/faq(current=${bankPage.current-1})}"
+                                   class="page-numbers">
+                                    <
+                                </a>
 
-                    <div class="tab_content">
-                        <div class="tabs_item">
-                            <div class="faq-accordion">
-                                <ul class="accordion">
-                                    <li class="accordion-item">
-                                        <a class="accordion-title active" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            What is State Aid?
-                                        </a>
+                                <a th:href="@{/faq(current=${i})}"
+                                   th:class="${i==bankPage.current}?'page-numbers current':'page-numbers'"
+                                   th:each="i:${#numbers.sequence(1,bankPage.pages)}">[[${i}]]</a>
 
-                                        <p class="accordion-content show">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            Why do you charge interest on the loan?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            Can I apply for a loan if I have poor credit?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            How long does the application process take?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            My business internationally. Am I still eligible to apply?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            What kind of financial advice do you give?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="tabs_item">
-                            <div class="faq-accordion">
-                                <ul class="accordion">
-                                    <li class="accordion-item">
-                                        <a class="accordion-title active" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            What is State Aid?
-                                        </a>
-
-                                        <p class="accordion-content show">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            Why do you charge interest on the loan?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            Can I apply for a loan if I have poor credit?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            How long does the application process take?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            My business internationally. Am I still eligible to apply?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            What kind of financial advice do you give?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="tabs_item">
-                            <div class="faq-accordion">
-                                <ul class="accordion">
-                                    <li class="accordion-item">
-                                        <a class="accordion-title active" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            What is State Aid?
-                                        </a>
-
-                                        <p class="accordion-content show">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            Why do you charge interest on the loan?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            Can I apply for a loan if I have poor credit?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            How long does the application process take?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            My business internationally. Am I still eligible to apply?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-
-                                    <li class="accordion-item">
-                                        <a class="accordion-title" href="javascript:void(0)">
-                                            <i class="flaticon-plus"></i>
-                                            What kind of financial advice do you give?
-                                        </a>
-
-                                        <p class="accordion-content">Lorem ipsum dolor consectetur adipiscing Fusce varius euismod lacus eget feugiat rorem lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor massa sociis natoque penatibus. ipsum dolor consectetur Fusce varius Fusce varius euismod lacus eget feugiat...</p>
-                                    </li>
-                                </ul>
+                                <a
+                                        th:if="${bankPage.hasNext}"
+                                        th:href="@{/faq(current=${bankPage.current+1})}"
+                                        class="page-numbers">
+                                    >
+                                </a>
+                                <a
+                                        th:if="not ${bankPage.hasNext}"
+                                        href="javascript:void(0)"
+                                        class="page-numbers">
+                                    >
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="faq-contact">
-                    <div class="section-title">
-                        <h2>Still, have questions?</h2>
-                    </div>
 
-                    <div class="faq-contact-form">
-                        <form id="contactForm">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your name" placeholder="Your Name">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        <input type="email" name="email" id="email" class="form-control" required data-error="Please enter your email" placeholder="Email">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="form-group">
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="5" required data-error="Write your message" placeholder="Text Here"></textarea>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-12">
-                                    <button type="submit" class="default-btn">
-                                        Submit Now
-                                        <span></span>
-                                    </button>
-                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </section>
         <!-- End FAQ Area -->
@@ -417,33 +225,84 @@
         </div>
         <!-- End Go Top Area -->
 
-        <!-- Jquery Slim JS -->
-        <script src="assets/js/jquery.min.js"></script>
-        <!-- Popper JS -->
-        <script src="assets/js/popper.min.js"></script>
-        <!-- Bootstrap JS -->
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- Meanmenu JS -->
-        <script src="assets/js/jquery.meanmenu.js"></script>
-        <!-- Carousel JS -->
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <!-- Nice Select JS -->
-        <script src="assets/js/jquery.nice-select.min.js"></script>
-        <!-- Magnific Popup JS -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <!-- Odometer JS -->
-        <script src="assets/js/odometer.min.js"></script>
-        <!-- Appear JS -->
-        <script src="assets/js/jquery.appear.js"></script>
-        <!-- Form Ajaxchimp JS -->
-		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
-		<!-- Form Validator JS -->
-		<script src="assets/js/form-validator.min.js"></script>
-		<!-- Contact JS -->
-        <script src="assets/js/contact-form-script.js"></script>
-        <!-- Wow JS -->
-		<script src="assets/js/wow.min.js"></script>
-        <!-- Custom JS -->
-        <script src="assets/js/main.js"></script>
+
+    <!-- Jquery Slim JS -->
+    <script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
+    <!-- Popper JS -->
+    <script src="assets/js/popper.min.js" th:src="@{/assets/js/popper.min.js}"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <!-- Meanmenu JS -->
+    <script src="assets/js/jquery.meanmenu.js" th:src="@{/assets/js/jquery.meanmenu.js}"></script>
+    <!-- Carousel JS -->
+    <script src="assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
+    <!-- Nice Select JS -->
+    <script src="assets/js/jquery.nice-select.min.js" th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+    <!-- Magnific Popup JS -->
+    <script src="assets/js/jquery.magnific-popup.min.js" th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+    <!-- Odometer JS -->
+    <script src="assets/js/odometer.min.js" th:src="@{/assets/js/odometer.min.js}"></script>
+    <!-- Appear JS -->
+    <script src="assets/js/jquery.appear.js" th:src="@{/assets/js/jquery.appear.js}"></script>
+    <!-- Form Ajaxchimp JS -->
+    <script src="assets/js/jquery.ajaxchimp.min.js" th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
+    <!-- Form Validator JS -->
+    <script src="assets/js/form-validator.min.js" th:src="@{/assets/js/form-validator.min.js}"></script>
+    <!-- Contact JS -->
+    <script src="assets/js/contact-form-script.js" th:src="@{/assets/js/contact-form-script.js}"></script>
+    <!-- Wow JS -->
+    <script src="assets/js/wow.min.js" th:src="@{/assets/js/wow.min.js}"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
     </body>
 </html>
+<style>
+    .pagination {
+        display: block;
+        margin: 50px 0 0;
+        padding: 0;
+    }
+    .pagination.grid {
+        margin-top: 20px;
+    }
+    .pagination .page-numbers {
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        line-height: 39px;
+        text-align: center;
+        border: 1px solid #F1F1F1;
+        font-size: 16px;
+        color: #888;
+        font-weight: 500;
+        margin-left: 5px;
+        border-radius: 0;
+    }
+    .pagination .page-numbers:first-child {
+        margin-left: 0;
+    }
+    .pagination .page-numbers.current, .pagination .page-numbers:hover {
+        color: #fff;
+        border-color: transparent;
+        background-color: #65a15a;
+    }
+    .pagination .page-numbers .icon {
+        font-weight: 700;
+    }
+    .pagination.style1 {
+        text-align: right;
+    }
+    .pagination.style2 {
+        text-align: center;
+    }
+    .shop-grid-content .pagination {
+        margin-top: 10px;
+    }
+    .content-inlookbook .pagination {
+        margin-top: 10px;
+        margin-bottom: 60px
+    }
+    .main-content-blog.mansory .pagination {
+        margin-top: 10px;
+    }
+</style>

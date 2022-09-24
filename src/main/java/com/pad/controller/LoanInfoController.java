@@ -2,18 +2,18 @@ package com.pad.controller;
 
 
 import com.baomidou.mybatisplus.extension.api.R;
+import com.pad.entity.CompanyInfo;
 import com.pad.entity.LoanInfo;
+import com.pad.entity.Message;
 import com.pad.service.LoanInfoService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
-
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -28,6 +28,22 @@ import java.util.List;
 @RequestMapping("/loan-info")
 public class LoanInfoController {
 
+    @Autowired
+    private LoanInfoService loanInfoService;
 
+    @ApiOperation("添加贷款申请")
+    @PostMapping("/add")
+    @ResponseBody
+    public Boolean addLoanInfo(
+            HttpSession session,
+
+            @ApiParam(name = "loanInfo",value = "添加的贷款信息",required = true)
+            @RequestBody LoanInfo loanInfo
+
+    ){
+        CompanyInfo user = (CompanyInfo) session.getAttribute("user");
+        loanInfo.setCNo(user.getCNo());
+        return loanInfoService.save(loanInfo);
+    }
 }
 

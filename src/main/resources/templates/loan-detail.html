@@ -71,7 +71,9 @@
                             <td>[[${{loan.bankNumber}}]]</td>
                             <td>[[${{loan.bankType}}]]</td>
                             <td>[[${{loan.amount}}]]</td>
-                            <td>[[${{loan.purpose}}]]</td>
+                            <td>
+                                <span th:text="${loan.purpose}==1?'个人消费贷款':(${loan.purpose}==2?'经营贷款':(${loan.purpose}==3?'按揭贷款':''))";></span>
+                            </td>
                             <td th:text="${#dates.format(loan?.period,'yyyy-MM-dd')}"></td>
                             <td>
                                 <span th:text="${loan.returnMethod}==1?'等额本息':(${loan.returnMethod}==2?'等额本金':(${loan.returnMethod}==3?'每月还息':'一次性还款'))"></span>
