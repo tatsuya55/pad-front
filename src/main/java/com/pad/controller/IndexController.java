@@ -2,11 +2,7 @@ package com.pad.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.entity.*;
-import com.pad.service.AddressService;
-import com.pad.service.CompanyDetailService;
-import com.pad.service.CompanyMaterialService;
-import com.pad.service.MessageService;
-import com.pad.service.LoanInfoService;
+import com.pad.service.*;
 import com.pad.utils.LoanCalculator;
 import com.pad.vo.LoanData;
 import io.swagger.annotations.Api;
