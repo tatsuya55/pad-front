@@ -45,33 +45,23 @@
                                 银行详细地址:[[${bank.address}]]<br />
                                 <abbr title="description">产品说明:</abbr> [[${bank.description}]]
                             </address>
+
+                            <div class="nav-link">
+                                <a th:href="${pageInfo.isFirstPage}?@{/search(cid=${cid},title=${title},pageNum=1)}:@{/search(cid=${cid},title=${title},pageNum=${pageInfo.pageNum-1})}"
+                                   class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
+                                <a th:href="@{/search(cid=${cid},title=${title},pageNum=${i})}"
+                                   th:class="${i==pageInfo.pageNum}?'page-numbers current':'page-numbers'"
+                                   th:each="i:${#numbers.sequence(1,pageInfo.pages)}">[[${i}]]</a>
+
+                                <a th:href="${pageInfo.isLastPage}?@{/search(cid=${cid},title=${title},pageNum=${pageInfo.pageNum})}
+								                                  :@{/search(cid=${cid},title=${title},pageNum=${pageInfo.pageNum+1})}"
+                                   class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <ul class="pagination">
-                    <li>
-                        <a href="#">Prev</a>
-                    </li>
-                    <li>
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">Next</a>
-                    </li>
-                </ul>
+
             </div>
         </section>
         <!-- End FAQ Area -->
