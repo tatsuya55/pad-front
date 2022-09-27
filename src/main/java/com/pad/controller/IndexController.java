@@ -156,7 +156,7 @@ public class IndexController {
         List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
         model.addAttribute("list",list);
         return "loan-detail";
-    }*/
+    }
 
     @ApiOperation("贷款详情分页显示")
     @GetMapping("/loan-detail")
