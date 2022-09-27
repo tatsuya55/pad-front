@@ -35,14 +35,13 @@ public class LoanInfoController {
     @PostMapping("/add")
     @ResponseBody
     public Boolean addLoanInfo(
-            HttpSession session,
-
             @ApiParam(name = "loanInfo",value = "添加的贷款信息",required = true)
-            @RequestBody LoanInfo loanInfo
-
+            LoanInfo loanInfo,
+            HttpSession session
     ){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
         loanInfo.setCNo(user.getCNo());
+        System.out.println(1111111);
         return loanInfoService.save(loanInfo);
     }
 }

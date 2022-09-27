@@ -47,36 +47,20 @@
                                     </select>
                                 </div>
 
-                                <!--<div class="form-group">
-                                    <span id="checKBank" style="color: #ff0000"></span>
-                                </div>-->
-
                                 <div class="form-group">
                                     <label>收款账户</label>
                                     <input name="bankNumber" id="bankNumber" type="text" class="form-control">
                                 </div>
-
-<!--                                <div class="form-group">-->
-<!--                                    <span id="checkBankNumber" style="color: #ff0000"></span>-->
-<!--                                </div>-->
 
                                 <div class="form-group">
                                     <label>开户行</label>
                                     <input name="bankType" id="bankType" type="text" class="form-control">
                                 </div>
 
-                               <!-- <div class="form-group">
-                                    <span id="checkBankType" style="color: #ff0000"></span>
-                                </div>-->
-
                                 <div class="form-group">
                                     <label>贷款金额</label>
                                     <input name="amount" id="amount" type="text" class="form-control">
                                 </div>
-
-<!--                                <div class="form-group">-->
-<!--                                    <span id="checkAmount" style="color: #ff0000"></span>-->
-<!--                                </div>-->
 
                                 <div class="form-group">
                                     <label>贷款用途</label>
@@ -88,18 +72,10 @@
                                     </select>
                                 </div>
 
-                                <!--<div class="form-group">
-                                    <span id="checkPurpose" style="color: #ff0000"></span>
-                                </div>-->
-
                                 <div class="form-group">
                                     <label>借款期限</label>
                                     <input name="period" id="period" type="date" class="form-control">
                                 </div>
-
-                                <!--<div class="form-group">
-                                    <span id="checkPeriod" style="color: #ff0000"></span>
-                                </div>-->
 
                                 <div class="form-group">
                                     <label>还款方式</label>
@@ -278,7 +254,7 @@
                         <p id="ModalContext">内容</p>
                     </div>
                     <div class="modal-footer">
-                        <button onclick="location.href=('/details')" type="button" class="btn btn-primary">确定</button>
+                        <button onclick="location.href=('/')" type="button" class="btn btn-primary">确定</button>
                     </div>
                 </div>
             </div>
@@ -291,34 +267,35 @@
         </div>
         <!-- End Go Top Area -->
 
-        <!-- Jquery Slim JS -->
-        <script src="assets/js/jquery.min.js"></script>
-        <!-- Popper JS -->
-        <script src="assets/js/popper.min.js"></script>
-        <!-- Bootstrap JS -->
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- Meanmenu JS -->
-        <script src="assets/js/jquery.meanmenu.js"></script>
-        <!-- Carousel JS -->
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <!-- Nice Select JS -->
-        <script src="assets/js/jquery.nice-select.min.js"></script>
-        <!-- Magnific Popup JS -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <!-- Odometer JS -->
-        <script src="assets/js/odometer.min.js"></script>
-        <!-- Appear JS -->
-        <script src="assets/js/jquery.appear.js"></script>
-        <!-- Form Ajaxchimp JS -->
-		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
-		<!-- Form Validator JS -->
-		<script src="assets/js/form-validator.min.js"></script>
-		<!-- Contact JS -->
-        <script src="assets/js/contact-form-script.js"></script>
-        <!-- Wow JS -->
-		<script src="assets/js/wow.min.js"></script>
-        <!-- Custom JS -->
-        <script src="assets/js/main.js"></script>
+
+    <!-- Jquery Slim JS -->
+    <script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
+    <!-- Popper JS -->
+    <script src="assets/js/popper.min.js" th:src="@{/assets/js/popper.min.js}"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <!-- Meanmenu JS -->
+    <script src="assets/js/jquery.meanmenu.js" th:src="@{/assets/js/jquery.meanmenu.js}"></script>
+    <!-- Carousel JS -->
+    <script src="assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
+    <!-- Nice Select JS -->
+    <script src="assets/js/jquery.nice-select.min.js" th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+    <!-- Magnific Popup JS -->
+    <script src="assets/js/jquery.magnific-popup.min.js" th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+    <!-- Odometer JS -->
+    <script src="assets/js/odometer.min.js" th:src="@{/assets/js/odometer.min.js}"></script>
+    <!-- Appear JS -->
+    <script src="assets/js/jquery.appear.js" th:src="@{/assets/js/jquery.appear.js}"></script>
+    <!-- Form Ajaxchimp JS -->
+    <script src="assets/js/jquery.ajaxchimp.min.js" th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
+    <!-- Form Validator JS -->
+    <script src="assets/js/form-validator.min.js" th:src="@{/assets/js/form-validator.min.js}"></script>
+    <!-- Contact JS -->
+    <script src="assets/js/contact-form-script.js" th:src="@{/assets/js/contact-form-script.js}"></script>
+    <!-- Wow JS -->
+    <script src="assets/js/wow.min.js" th:src="@{/assets/js/wow.min.js}"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
     </body>
 </html>
 <script>
@@ -335,58 +312,21 @@
             $("#checkSpan").html('以上字段都不能为空');
             return false;
         }
-
-        /*$("#bankSelect").blur(function () {
-            if (bank==""){
-
-                $("#checKBank").html('银行不能为空');
-                return false;
-            }else {
-                $("#checkBank").html('');
-            }
-        })
-
-        if (bankNumber==""){alert(11111111111111)
-            $("#checkBankNumber").html('收款账户不能为空');
-            return false;
-        }
-        if (bankType==""){
-            $("#checkBankType").html('开户行不能为空');
-            return false;
-        }
-        if (amount==""){
-            $("#checkAmount").html('贷款金额不能为空');
-            return false;
-        }
-        if (purpose==""){
-            $("#checkPurpose").html('贷款用途不能为空');
-            return false;
-        }
-        if (period==""){
-            $("#checkPeriod").html('借款期限不能为空');
-            return false;
-        }
-        if (returnMethod==""){
-            $("#checkReturnMethod").html('还款方式不能为空');
-            return false;
-        }*/
-        let formData=new FormData;
-        formData.append("bankNo",bank);
-        formData.append("bankNumber",bankNumber);
-        formData.append("bankType",bankType);
-        formData.append("amount",amount);
-        formData.append("purpose",purpose);
-        formData.append("period",period);
-        formData.append("returnMethod",returnMethod);
         $.ajax({
-            url:"/loan_info/add",
+            url:"/loan-info/add",
             type:'post',
-            data:formData,
-            dataType: "json",
+            data: {
+                "bankNo":bank,
+                "bankNumber":bankNumber,
+                "bankType":bankType,
+                "amount":amount,
+                "purpose":purpose,
+                "period":period,
+                "returnMethod":returnMethod,
+            },
             success:function (res){
                 if(res){
-                    alert(1111)
-                    $("#ModalContext").html('填写成功，请稍后查看成功与否的结果')
+                    $("#ModalContext").html('申请成功，等待审核')
                     $("#MyModal").modal('show')
                 }
             }
