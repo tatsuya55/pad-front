@@ -81,9 +81,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>借款期限</label>
-                                    <input name="period" id="period" type="date" class="form-control"
-                                           th:value="${#dates.format(loanInfo?.period,'yyyy-MM-dd')}">
+                                    <label>贷款期限（月（1-360））</label>
+                                    <input name="period" id="period" type="text" class="form-control"
+                                           th:value="${loanInfo?.period}">
                                 </div>
 
                                 <div class="form-group">

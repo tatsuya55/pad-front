@@ -10,15 +10,18 @@ import com.pad.vo.LoanData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 
@@ -149,12 +152,17 @@ public class IndexController {
         return "message-details";
     }
 
-    @ApiOperation("贷款详情")
+    @ApiOperation("贷款详情分页显示")
     @GetMapping("/loan-detail")
-    public String toLoanDetail(HttpSession session, Model model){
+    public String toLoanDetail(HttpSession session, Model model,
+             @RequestParam(defaultValue = "1")long current,
+             @RequestParam(defaultValue = "2")long size){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
-        List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
-        model.addAttribute("list",list);
+        Page<LoanInfo> loanInfoPage = new Page<>(current,size);
+        loanInfoService.findBy(loanInfoPage,user.getCNo());
+        List<LoanInfo> infoList = loanInfoPage.getRecords();
+        model.addAttribute("infoList",infoList);
+        model.addAttribute("loanInfoPage",loanInfoPage);
         return "loan-detail";
     }
 
@@ -167,13 +175,13 @@ public class IndexController {
     @ApiOperation("利率计结果")
     @GetMapping("/loan-data")
     public String toLoanData(LoanData loanData,Model model){
-        String type = loanData.getType();
+        Integer type = loanData.getType();
         LoanData data = null;
-        if ("de".equals(type)){
+        if (1==type){
             //等额本息还款
             data = LoanCalculator.EqualPrincipalandInterestMethod(loanData);
         }
-        if ("dj".equals(type)){
+        if (2==type){
             //等额本金还款
             data = LoanCalculator.EqualPrincipalMethod(loanData);
         }
@@ -220,9 +228,35 @@ public class IndexController {
         return "loan-calculator";
     }
 
-    @ApiOperation("贷款")
-    @GetMapping("/apply")
-    public String toApply(){
-        return "apply";
+    @ApiOperation("还款")
+    @GetMapping("/repayment/{loanId}")
+    public String toRepayment(
+            @ApiParam(value = "贷款编号",name = "loanId",required = true)
+            @PathVariable String loanId,Model model
+    ){
+        LoanInfo loanInfo = loanInfoService.getById(loanId);
+        Bank bank = bankService.getById(loanInfo.getBankNo());
+        LoanData loanData = new LoanData();
+        //贷款金额
+        loanData.setPrincipal(loanInfo.getAmount());
+        //年利率
+        loanData.setRate(bank.getBorrowYearRate());
+        //贷款总期数
+       loanData.setTerm(loanInfo.getPeriod());
+        //还款方式
+        Integer type = loanInfo.getReturnMethod();
+        //返回数据
+        LoanData data = null;
+        if (1==type){
+            //等额本息还款
+            data = LoanCalculator.EqualPrincipalandInterestMethod(loanData);
+        }
+        if (2==type){
+            //等额本金还款
+            data = LoanCalculator.EqualPrincipalMethod(loanData);
+        }
+        System.out.println(data);
+        model.addAttribute("data",data);
+        return "repayment";
     }
 }

@@ -24,8 +24,7 @@ public class LoanData implements Serializable {
     private double detail[][];  //每月还款详情
 
     @ApiParam(name = "type" ,value = "还款方式")
-    private String type;
-    /* <option value="de">等额本息还款</option>
-       <option value="dj">等额本金还款</option>*/
+    private Integer type;
+    /*  1等额本息，2等额本金*/
 
 }
