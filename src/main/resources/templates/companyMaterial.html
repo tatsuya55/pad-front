@@ -9,8 +9,33 @@
 <!--引入navbar-->
 <div th:include="common/navbar :: navbar"></div>
 
+<!-- 步骤条star -->
+<div class="steps">
+    <div class="step is-sucess">
+        <div class="step-head">
+            <div class="step-line"></div>
+            <div class="step-icon">1</div>
+        </div>
+        <div class="step-main">提交申请</div>
+    </div>
+    <div class="step">
+        <div class="step-head">
+            <div class="step-line"></div>
+            <div class="step-icon">2</div>
+        </div>
+        <div class="step-main">上传材料</div>
+    </div>
+    <div class="step">
+        <div class="step-head">
+            <div class="step-icon">3</div>
+        </div>
+        <div class="step-main">申请结果</div>
+    </div>
+</div>
+<!-- 步骤条end -->
+
 <!-- Start Page Title Area -->
-<div class="page-title-area item-bg-1">
+<!--<div class="page-title-area item-bg-1">
     <div class="d-table">
         <div class="d-table-cell">
             <div class="container">
@@ -24,7 +49,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!-- End Page Title Area -->
 
 <!-- Start Apply Area -->
@@ -38,9 +63,6 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="apply-form">
-
-
-
                         <div class="form-group" >
                             <label >法人姓名</label>
                             <input id="legalName" name="legalName" type="text" class="form-control"
@@ -124,6 +146,8 @@
                 </div>
             </div>
         </form>
+        <button onclick="location.href=('/apply-now')" type="button" class="btn btn-primary">上一步</button>
+        <button onclick="location.href=('/material')" type="button" class="btn btn-primary">下一步</button>
     </div>
 
 </section>
@@ -331,20 +355,28 @@
 </html>
 <script>
     $(function () {
-        //判断用户认证状态
+        //判断材料审核状态
         $.ajax({
             url:'/company-material/status',
             type:'get',
             success:function (res) {
                 console.log(res)
                 switch (res) {
-
+                    case -2:
+                        $("#message").html('请登录后再进行操作');
+                        setTimeout(function() { location.reload(); }, 1000 );
+                        break;
+                    case 2:
+                        disable();
+                        $("#message").html('审核通过');
+                        $("#checkSpan").html('审核通过，不可修改');
+                        break;
                     case 1:
                         disable();
                         $("#message").html('审核通过');
                         $("#checkSpan").html('审核通过，不可修改');
                         break;
-                    case 2:
+                    case 0:
                         disable();
                         $("#message").html('审核中，请耐心等待');
                         $("#checkSpan").html('审核中，不可修改');
@@ -550,8 +582,7 @@
         $("#credit").attr("disabled","disabled");
         $("#collateralPhoto").attr("disabled","disabled");
         $("#records").attr("disabled","disabled");
-
-
+        $("#button").attr("disabled","disabled");
         $("#button").css("background-color","#cfcfcf");
     }
     //!*修改样式 可用*!/
@@ -566,7 +597,6 @@
         $("#collateral").removeAttr("disabled");
         $("#collateralPhoto").removeAttr("disabled");
         $("#records").removeAttr("disabled","disabled");
-
 
         $("#button").css("background-color","#e73c3e");
     }

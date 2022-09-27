@@ -22,4 +22,10 @@ public class LoanInfoServiceImpl extends ServiceImpl<LoanInfoMapper, LoanInfo> i
     public List<LoanInfo> findBy(String cNo) {
         return baseMapper.findBy(cNo);
     }
+
+    /*判断贷款申请是否审核*/
+    @Override
+    public Integer selectStatus(String cNo) {
+        return baseMapper.getStatus(cNo);
+    }
 }

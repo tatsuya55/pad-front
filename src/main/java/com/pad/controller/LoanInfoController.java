@@ -11,9 +11,11 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -41,8 +43,19 @@ public class LoanInfoController {
     ){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
         loanInfo.setCNo(user.getCNo());
-        System.out.println(1111111);
         return loanInfoService.save(loanInfo);
+    }
+
+    @ApiOperation("判断贷款申请是否审核")
+    @GetMapping("/status")
+    @ResponseBody
+    public Integer materialStatus(HttpSession session){
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)){
+            return -2;
+        }
+        String cNo = user.getCNo();
+        return loanInfoService.selectStatus(cNo);
     }
 }
 
