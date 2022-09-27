@@ -149,12 +149,26 @@ public class IndexController {
         return "message-details";
     }
 
-    @ApiOperation("贷款详情")
+    /*@ApiOperation("贷款详情")
     @GetMapping("/loan-detail")
     public String toLoanDetail(HttpSession session, Model model){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
         List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
         model.addAttribute("list",list);
+        return "loan-detail";
+    }*/
+
+    @ApiOperation("贷款详情分页显示")
+    @GetMapping("/loan-detail")
+    public String toLoanDetail(HttpSession session, Model model,
+             @RequestParam(defaultValue = "1")long current,
+             @RequestParam(defaultValue = "2")long size){
+        CompanyInfo user = (CompanyInfo) session.getAttribute("user");
+        Page<LoanInfo> loanInfoPage = new Page<>(current,size);
+        IPage<LoanInfo> page = loanInfoService.page(loanInfoPage,null);
+        List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
+        model.addAttribute("list",list);
+        model.addAttribute("loanInfoPage",page);
         return "loan-detail";
     }
 
@@ -208,4 +222,10 @@ public class IndexController {
     public String detailToLoanCalculator(){
         return "loan-calculator";
     }
+
+    /*@ApiOperation("贷款详情信息")
+    @GetMapping("/detailToLoanData")
+    public String detailToLoanCalculator(){
+        return "loan-data";
+    }*/
 }

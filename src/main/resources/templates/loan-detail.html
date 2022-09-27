@@ -86,10 +86,41 @@
                             </td>
                             <td>
                                 <a th:href="@{/detailToLoanCalculator}">查看详情</a>
+                                <!--<a th:href="@{/detailToLoanData}">查看详情</a>-->
                             </td>
                           </tr>
                         </tbody>
                     </table>
+
+                    <div class="pagination clearfix style2">
+                        <a th:if="not ${loanInfoPage.hasPrevious}"
+                           href="javascript:void(0)"
+                           class="page-numbers">
+                            <
+                        </a>
+                        <a th:if="${loanInfoPage.hasPrevious}"
+                           th:href="@{/loan-detail(current=${bankPage.current-1})}"
+                           class="page-numbers">
+                            <
+                        </a>
+
+                        <a th:href="@{/loan-detail(current=${i})}"
+                           th:class="${i==loanInfoPage.current}?'page-numbers current':'page-numbers'"
+                           th:each="i:${#numbers.sequence(1,loanInfoPage.pages)}">[[${i}]]</a>
+
+                        <a
+                                th:if="${loanInfoPage.hasNext}"
+                                th:href="@{/loan-detail(current=${loanInfoPage.current+1})}"
+                                class="page-numbers">
+                            >
+                        </a>
+                        <a
+                                th:if="not ${loanInfoPage.hasNext}"
+                                href="javascript:void(0)"
+                                class="page-numbers">
+                            >
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
