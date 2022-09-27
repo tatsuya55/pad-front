@@ -59,9 +59,9 @@
                                    th:value="${material?.legalId}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" >
                             <label>身份证件照</label> </br>
-                            <input type="file" class="form-control" id="legalImg" placeholder="添加图片" onchange="showPreview(this)">
+                            <input type="file" class="form-control" id="file" name="legalImg" placeholder="添加图片" multiple="multiple" onchange="showPreview(this)">
                             <img src="" style="" id="addimg"><br>
                             <img th:if="${material}!=null" th:src="@{|/images/legal_img/${material?.legalImg}|}"><br>
                         </div>
@@ -462,6 +462,7 @@
         $("#ModalContext").html('提交成功');
         $("#MyModal").modal('show')
     }
+
     //!*回显身份证图片*!/
     function showPreview(source){
         let file = source.files[0];
