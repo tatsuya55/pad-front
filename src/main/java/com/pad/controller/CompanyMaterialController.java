@@ -41,15 +41,13 @@ public class CompanyMaterialController<file> {
     @ApiOperation("判断材料是否审核")
     @GetMapping("/status")
     @ResponseBody
-    public Serializable materialStatus(HttpSession session){
+    public Integer materialStatus(HttpSession session){
         CompanyInfo user =(CompanyInfo) session.getAttribute("user");
         if (ObjectUtils.isEmpty(user)){
-            return "sign-in";
+            return -2;
         }
         String cNo = user.getCNo();
-
         return service.selectByFk(cNo);
-
     }
 
 
@@ -84,16 +82,14 @@ public class CompanyMaterialController<file> {
         companyMaterial.setCredit(creditImage);
         companyMaterial.setCollateralPhoto(collateralImage);
         companyMaterial.setRecords(recordsImage);
-        companyMaterial.setStatus(2);
+        companyMaterial.setStatus(0);
         boolean save=service.save(companyMaterial);
         if (save){
             return true;
         }else {
             return false;
         }
-
     }
-
 
 }
 

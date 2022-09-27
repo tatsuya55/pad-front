@@ -7,32 +7,36 @@
 <body>
     <!--引入navbar-->
     <div th:include="common/navbar :: navbar"></div>
-
-        <!-- Start Page Title Area -->
-        <div class="page-title-area item-bg-1">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="container">
-                        <div class="page-title-content">
-                            <h2>Apply now</h2>
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Apply now</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+    <br/>
+    <!-- 步骤条star -->
+    <div class="steps">
+        <div class="step last-sucess">
+            <div class="step-head">
+                <div class="step-line"></div>
+                <div class="step-icon">1</div>
             </div>
+            <div class="step-main">提交申请</div>
         </div>
-        <!-- End Page Title Area -->
+        <div class="step">
+            <div class="step-head">
+                <div class="step-line"></div>
+                <div class="step-icon">2</div>
+            </div>
+            <div class="step-main">上传材料</div>
+        </div>
+        <div class="step">
+            <div class="step-head">
+                <div class="step-icon">3</div>
+            </div>
+            <div class="step-main">申请结果</div>
+        </div>
+    </div>
+    <!-- 步骤条end -->
 
         <!-- Start Apply Area -->
         <section class="apply-area ptb-100">
             <div class="container">
-                <div class="apply-title">
-                    <h3>申请贷款</h3>
-                </div>
-
+                <span style="color: #ff0000">请认真填写，提交后不可修改</span>
                 <form onsubmit="return check()" id="formLoanApply">
                     <div class="row">
                         <div class="col-lg-6">
@@ -41,7 +45,8 @@
                                     <label>银行</label>
                                     <select class="form-control" id="bankSelect">
                                         <option value="">--请选择银行--</option>
-                                        <option th:each="bank:${bankList}" th:value="${bank.bankNo}">
+                                        <option th:each="bank:${bankList}" th:value="${bank.bankNo}"
+                                                th:selected="${loanInfo?.bankNo} == ${bank.bankNo}">
                                             [[${bank.bankName}]]
                                         </option>
                                     </select>
@@ -49,42 +54,46 @@
 
                                 <div class="form-group">
                                     <label>收款账户</label>
-                                    <input name="bankNumber" id="bankNumber" type="text" class="form-control">
+                                    <input name="bankNumber" id="bankNumber" type="text" class="form-control"
+                                           th:value="${loanInfo?.bankNumber}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>开户行</label>
-                                    <input name="bankType" id="bankType" type="text" class="form-control">
+                                    <input name="bankType" id="bankType" type="text" class="form-control"
+                                           th:value="${loanInfo?.bankType}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>贷款金额</label>
-                                    <input name="amount" id="amount" type="text" class="form-control">
+                                    <input name="amount" id="amount" type="text" class="form-control"
+                                           th:value="${loanInfo?.amount}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>贷款用途</label>
                                     <select class="form-control" id="purpose">
                                         <option value="">--请选择贷款用途--</option>
-                                        <option th:value="1">个人消费贷款</option>
-                                        <option th:value="2">经营贷款</option>
-                                        <option th:value="3">按揭贷款</option>
+                                        <option th:value="1" th:selected="${loanInfo?.purpose} == 1">个人消费贷款</option>
+                                        <option th:value="2" th:selected="${loanInfo?.purpose} == 2">经营贷款</option>
+                                        <option th:value="3" th:selected="${loanInfo?.purpose} == 3">按揭贷款</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label>借款期限</label>
-                                    <input name="period" id="period" type="date" class="form-control">
+                                    <input name="period" id="period" type="date" class="form-control"
+                                           th:value="${#dates.format(loanInfo?.period,'yyyy-MM-dd')}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>还款方式</label>
                                     <select class="form-control" id="returnMethod">
                                         <option value="">--请选择还款方式--</option>
-                                        <option th:value="1">等额本息</option>
-                                        <option th:value="2">等额本金</option>
-                                        <option th:value="3">每月还息</option>
-                                        <option th:value="4">一次性还</option>
+                                        <option th:value="1" th:selected="${loanInfo?.returnMethod} == 1">等额本息</option>
+                                        <option th:value="2" th:selected="${loanInfo?.returnMethod} == 2">等额本金</option>
+                                        <option th:value="3" th:selected="${loanInfo?.returnMethod} == 3">每月还息</option>
+                                        <option th:value="4" th:selected="${loanInfo?.returnMethod} == 4">一次性还</option>
                                     </select>
                                 </div>
 
@@ -100,6 +109,7 @@
                     </div>
                 </form>
 
+                <button onclick="location.href=('/material')" type="button" class="btn btn-primary">下一步</button>
 
             </div>
         </section>
@@ -254,7 +264,7 @@
                         <p id="ModalContext">内容</p>
                     </div>
                     <div class="modal-footer">
-                        <button onclick="location.href=('/')" type="button" class="btn btn-primary">确定</button>
+                        <button onclick="location.reload()" type="button" class="btn btn-primary">确定</button>
                     </div>
                 </div>
             </div>
@@ -299,6 +309,44 @@
     </body>
 </html>
 <script>
+    $(function () {
+        //判断贷款审核状态
+        $.ajax({
+            url:'/loan-info/status',
+            type:'get',
+            success:function (res) {
+                switch (res) {
+                    case -2:
+                        $("#message").html('请登录后再进行操作');
+                        setTimeout(function() { location.reload(); }, 1000 );
+                        break;
+                    case 2:
+                        disable();
+                        $("#message").html('审核通过');
+                        $("#checkSpan").html('审核通过，不可修改');
+                        break;
+                    case 1:
+                        disable();
+                        $("#message").html('审核通过');
+                        $("#checkSpan").html('审核通过，不可修改');
+                        break;
+                    case 0:
+                        disable();
+                        $("#message").html('审核中，请耐心等待');
+                        $("#checkSpan").html('审核中，不可修改');
+                        break;
+                    case -1:
+                        able();
+                        $("#message").html('审核失败，请重新提交审核');
+                        break;
+                    default:
+                        able();
+                        $("#message").html('请提交材料');
+                        break;
+                }
+            }
+        })
+    })
     function check(){
         let bank = $("#bankSelect").val()
         let bankNumber = $("#bankNumber").val()
@@ -326,12 +374,39 @@
             },
             success:function (res){
                 if(res){
-                    $("#ModalContext").html('申请成功，等待审核')
+                    $("#ModalContext").html('申请成功，等待审核，请继续完善贷款材料')
                     $("#MyModal").modal('show')
                 }
             }
         })
         return false;
     }
-
+    //!*修改样式 禁用*!/
+    function disable() {
+        $("#bankSelect").attr("disabled","disabled");
+        $('#bankSelect').niceSelect('update');
+        $("#bankNumber").attr("disabled","disabled");
+        $("#bankType").attr("disabled","disabled");
+        $("#amount").attr("disabled","disabled");
+        $("#purpose").attr("disabled","disabled");
+        $("#period").attr("disabled","disabled");
+        $("#returnMethod").attr("disabled","disabled");
+        $('#returnMethod').niceSelect('update');
+        $("#button").attr("disabled","disabled");
+        $("#button").css("background-color","#cfcfcf");
+    }
+    //!*修改样式 可用*!/
+    function able() {
+        $("#bankSelect").removeAttr("disabled");
+        $('#bankSelect').niceSelect('update');
+        $("#bankNumber").removeAttr("disabled");
+        $("#bankType").removeAttr("disabled");
+        $("#amount").removeAttr("disabled");
+        $("#purpose").removeAttr("disabled");
+        $("#period").removeAttr("disabled");
+        $("#returnMethod").removeAttr("disabled");
+        $('#returnMethod').niceSelect('update');
+        $("#button").removeAttr("disabled");
+        $("#button").css("background-color","#cfcfcf");
+    }
 </script>
