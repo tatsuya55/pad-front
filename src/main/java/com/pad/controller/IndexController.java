@@ -149,7 +149,7 @@ public class IndexController {
         return "message-details";
     }
 
-    /*@ApiOperation("贷款详情")
+    @ApiOperation("贷款详情")
     @GetMapping("/loan-detail")
     public String toLoanDetail(HttpSession session, Model model){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
@@ -197,10 +197,21 @@ public class IndexController {
 
     @ApiOperation("贷款申请")
     @GetMapping("/apply-now")
-    public String toApplyNow(Model model){
+    public String toApplyNow(HttpSession session,Model model){
         //查询所有银行
         List<Bank> bankList = bankService.list(null);
         model.addAttribute("bankList",bankList);
+
+        //回显贷款
+        CompanyInfo user = (CompanyInfo) session.getAttribute("user");
+        LambdaQueryWrapper<LoanInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(LoanInfo::getCNo,user.getCNo());
+        //不显示已经删除的
+        wrapper.eq(LoanInfo::getIsDeleted,1);
+        LoanInfo loanInfo = loanInfoService.getOne(wrapper);
+        if (!ObjectUtils.isEmpty(loanInfo)){
+            model.addAttribute("loanInfo",loanInfo);
+        }
         return "apply-now";
     }
 
@@ -221,6 +232,12 @@ public class IndexController {
     @GetMapping("/detailToLoanCalculator")
     public String detailToLoanCalculator(){
         return "loan-calculator";
+    }
+
+    @ApiOperation("贷款")
+    @GetMapping("/apply")
+    public String toApply(){
+        return "apply";
     }
 
     /*@ApiOperation("贷款详情信息")

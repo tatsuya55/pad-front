@@ -8,4 +8,10 @@
         left join bank b on l.bank_no = b.bank_no
         where c_no=#{cNo}
     </select>
+
+    <select id="getStatus" resultType="java.lang.Integer">
+        select status
+        from loan_info
+        where c_no=#{cNo,jdbcType=VARCHAR} and is_deleted=1
+    </select>
 </mapper>
