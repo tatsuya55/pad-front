@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/head :: common_header(~{::title},~{::links},~{})">
-    <title>贷款计算器</title>
+    <title>贷款详情</title>
 </head>
 
     <body>
-
     <!--引入navbar-->
     <div th:include="common/navbar :: navbar"></div>
 
@@ -15,10 +14,10 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>贷款计算器</h2>
+                            <h2>还款</h2>
                             <ul>
                                 <li><a th:href="@{/}">首页</a></li>
-                                <li>贷款计算器</li>
+                                <li>还款</li>
                             </ul>
                         </div>
                     </div>
@@ -27,45 +26,71 @@
         </div>
         <!-- End Page Title Area -->
 
-        <!-- Start Loan Calculator Area -->
-        <section class="loan-calculator ptb-100">
-            <form onsubmit="return check()">
+        <!-- End Table Area -->
+        <section class="table-area pb-100">
             <div class="container">
-                <div class="calculator-form">
-                    <div class="text">
-                        <span>贷款计算器</span>
-                        <h3>计算贷款明细</h3>
-                    </div>
-                    <div class="form-group">
-                        <label>贷款金额（元）</label>
-                        <input id="principal" name="principal" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>贷款期限（月（1-360））</label>
-                        <input id="term" name="term" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>贷款年利率（%）</label>
-                        <input id="rate" name="rate" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>还款方式</label>
-                        <div class="form-control">
-                            <select style="width: 100%" id="type" name="type">
-                                <option th:value="1">等额本息还款</option>
-                                <option th:value="2">等额本金还款</option>
-                            </select>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th class="text-left">
+                                期数
+                            </th>
+                            <th class="text-left">
+                                月供
+                            </th>
+                            <th class="text-left">
+                                月供本金
+                            </th>
+                            <th class="text-left">
+                                月供利息
+                            </th>
+                            <th class="text-left">
+                                还款时间
+                            </th>
+                            <th class="text-left">
+                                 逾期还款时间
+                            </th>
+                            <th class="text-left">
+                                逾期利率
+                            </th>
+                            <th class="text-left">
+                                 还款
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item,index:${data.detail}">
+                            <td >
+                                [[${index.count}]]
+                            </td>
+                            <td>
+                                [[${item[2]}]]
+                            </td>
+                            <td>
+                                [[${item[0]}]]
+                            </td>
+                            <td>
+                                [[${item[1]}]]
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row clearfix">
+                        <div class="col-md-4 column">
+                            <span>还款方式: </span><span th:text="${data.type}=='de'?'等额本息还款':'等额本金还款'">等额本息还款</span>
                         </div>
-                    </div>
-
-                    <div class="calculator-btn">
-                        <input id="button" type="submit" class="btn-one" value="提 交">
+                        <div class="col-md-4 column">
+                            <span>还款总额: </span><span th:text="${data.totalMoney}">111</span>
+                        </div>
+                        <div class="col-md-4 column">
+                            <span>利息总额: </span><span th:text="${data.totalInterests}">111</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            </form>
         </section>
-        <!-- End Loan Calculator Area -->
+        <!-- End Table Area -->
 
         <!-- Start Footer Area -->
         <section class="footer-area pt-100 pb-70">
@@ -78,10 +103,10 @@
                                     <img src="assets/img/logo2.png" alt="image">
                                 </a>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>我今天做核酸了,什么酸,得不到你的心酸.</p>
                             <ul class="social">
                                 <li>
-                                    <b>Follow us:</b>
+                                    <b>联系我们:</b>
                                 </li>
 
                                 <li>
@@ -161,30 +186,27 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="single-footer-widget">
-                            <h3>Contact Us</h3>
+                            <h3>联系我们</h3>
 
                             <div class="info-contact">
                                 <i class="flaticon-pin"></i>
-                                <span>6890 Blvd, The Bronx, NY 1058 New York, USA</span>
+                                <span>苍盐海大街250号</span>
                             </div>
 
                             <div class="info-contact">
                                 <i class="flaticon-mail"></i>
                                 <span>
-                                    <a href="mailto:hello@finix.com">hello@finix.com</a>
-                                </span>
-                                <span>
-                                    <a href="#">Skype: example</a>
+                                    <a href="mailto:Cyh@finix.com">Cyh@finix.com</a>
                                 </span>
                             </div>
 
                             <div class="info-contact">
                                 <i class="flaticon-telephone"></i>
                                 <span>
-                                    <a href="tel:1514312-6688">+1 (514) 312-5678</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-5678</a>
                                 </span>
                                 <span>
-                                    <a href="tel:1514312-6688">+1 (514) 312-6688</a>
+                                    <a href="tel:2504312-6688">+1 (250) 312-6688</a>
                                 </span>
                             </div>
                         </div>
@@ -199,7 +221,7 @@
             <div class="container">
                 <div class="copy-right-content">
                     <p>
-                        Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                        &copy;版权和副本:2022苍盐海 版权所有.
                     </p>
                 </div>
             </div>
@@ -211,26 +233,6 @@
             <i class='bx bx-chevron-up'></i>
         </div>
         <!-- End Go Top Area -->
-
-        <!--弹框start-->
-        <div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-             data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">提示</h4>
-                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
-                    </div>
-                    <div class="modal-body">
-                        <p id="ModalContext">内容</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">确定</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--弹框end-->
 
         <!-- Jquery Slim JS -->
         <script src="assets/js/jquery.min.js"></script>
@@ -262,38 +264,53 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
-<script>
-    function check() {
-        let principal = $("#principal").val()
-        if(principal == "" || isNaN(principal) || principal <= 0)
-        {
-            $("#ModalContext").html('请输入正确的贷款金额');
-            $("#MyModal").modal('show')
-            return false;
-        }
-        let term =$("#term").val()
-        if(term == "" || isNaN(term) || term <= 0 || term > 360)
-        {
-            $("#ModalContext").html('请输入正确的贷款总期数');
-            $("#MyModal").modal('show')
-            return false;
-        }
-        let rate = $("#rate").val()
-        if(rate == "" || isNaN(rate) || rate <= 0)
-        {
-            $("#ModalContext").html('请输入正确的贷款年利率');
-            $("#MyModal").modal('show')
-            return false;
-        }
-        let type = $("#type").val()
-        let url = `/loan-data?principal=${principal}&term=${term}&rate=${rate}&type=${type}`
-        let open = null
-        let left = (screen.width-585)/2
-        let top = (screen.height-400)/2
-        if (open !=null){
-            open.close()
-        }
-        open = window.open(url,'open','scrollbars=yes,resizable=yes,status=yes,width=580,height=400,left='+left+',top='+top)
-        return false;
+<style>
+    .pagination {
+        display: block;
+        margin: 50px 0 0;
+        padding: 0;
     }
-</script>
+    .pagination.grid {
+        margin-top: 20px;
+    }
+    .pagination .page-numbers {
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        line-height: 39px;
+        text-align: center;
+        border: 1px solid #F1F1F1;
+        font-size: 16px;
+        color: #888;
+        font-weight: 500;
+        margin-left: 5px;
+        border-radius: 0;
+    }
+    .pagination .page-numbers:first-child {
+        margin-left: 0;
+    }
+    .pagination .page-numbers.current, .pagination .page-numbers:hover {
+        color: #fff;
+        border-color: transparent;
+        background-color: #65a15a;
+    }
+    .pagination .page-numbers .icon {
+        font-weight: 700;
+    }
+    .pagination.style1 {
+        text-align: right;
+    }
+    .pagination.style2 {
+        text-align: center;
+    }
+    .shop-grid-content .pagination {
+        margin-top: 10px;
+    }
+    .content-inlookbook .pagination {
+        margin-top: 10px;
+        margin-bottom: 60px
+    }
+    .main-content-blog.mansory .pagination {
+        margin-top: 10px;
+    }
+</style>

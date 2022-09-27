@@ -6,7 +6,7 @@
     <select id="findBy" parameterType="String" resultType="loanInfo">
         select l.*,b.bank_name from loan_info l
         left join bank b on l.bank_no = b.bank_no
-        where c_no=#{cNo}
+        where c_no=#{param2}
     </select>
 
     <select id="getStatus" resultType="java.lang.Integer">
