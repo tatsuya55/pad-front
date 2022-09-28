@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/head :: common_header(~{::title},~{::links},~{})">
-    <title>贷款详情</title>
+    <title>还款</title>
 </head>
 
     <body>
@@ -49,42 +49,51 @@
                                 还款时间
                             </th>
                             <th class="text-left">
-                                 逾期还款时间
+                                实际还款时间
                             </th>
                             <th class="text-left">
-                                逾期利率
-                            </th>
-                            <th class="text-left">
-                                 还款
+                                状态
                             </th>
                           </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="item,index:${data.detail}">
+                        <tr th:each="item,index:${periodizationList}">
                             <td >
-                                [[${index.count}]]
+                                [[${item.periods}]]
                             </td>
                             <td>
-                                [[${item[2]}]]
+                                [[${item.ci}]]
                             </td>
                             <td>
-                                [[${item[0]}]]
+                                [[${item.capital}]]
                             </td>
                             <td>
-                                [[${item[1]}]]
+                                [[${item.interest}]]
+                            </td>
+                            <td>
+                                [[${item.originallyTime}]]
+                            </td>
+                            <td>
+                                [[${item.repaymentTime}]]
+                            </td>
+                            <td>
+                                <!--还款状态  0待还款 1已还款 2逾期-->
+                                <span th:if="${item.status}==0">待还款</span>
+                                <span th:if="${item.status}==1">已还款</span>
+                                <span th:if="${item.status}==2">逾期</span>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="row clearfix">
                         <div class="col-md-4 column">
-                            <span>还款方式: </span><span th:text="${data.type}=='de'?'等额本息还款':'等额本金还款'">等额本息还款</span>
+                            <span>还款方式: </span><span th:text="${loanInfo.returnMethod}==1?'等额本息还款':'等额本金还款'">等额本息还款</span>
                         </div>
                         <div class="col-md-4 column">
-                            <span>还款总额: </span><span th:text="${data.totalMoney}">111</span>
+                            <span>还款总额: </span><span th:text="${totalMoney}">111</span>
                         </div>
                         <div class="col-md-4 column">
-                            <span>利息总额: </span><span th:text="${data.totalInterests}">111</span>
+                            <span>利息总额: </span><span th:text="${totalInterests}">111</span>
                         </div>
                     </div>
                 </div>
@@ -234,34 +243,35 @@
         </div>
         <!-- End Go Top Area -->
 
-        <!-- Jquery Slim JS -->
-        <script src="assets/js/jquery.min.js"></script>
-        <!-- Popper JS -->
-        <script src="assets/js/popper.min.js"></script>
-        <!-- Bootstrap JS -->
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- Meanmenu JS -->
-        <script src="assets/js/jquery.meanmenu.js"></script>
-        <!-- Carousel JS -->
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <!-- Nice Select JS -->
-        <script src="assets/js/jquery.nice-select.min.js"></script>
-        <!-- Magnific Popup JS -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <!-- Odometer JS -->
-        <script src="assets/js/odometer.min.js"></script>
-        <!-- Appear JS -->
-        <script src="assets/js/jquery.appear.js"></script>
-        <!-- Form Ajaxchimp JS -->
-		<script src="assets/js/jquery.ajaxchimp.min.js"></script>
-		<!-- Form Validator JS -->
-		<script src="assets/js/form-validator.min.js"></script>
-		<!-- Contact JS -->
-        <script src="assets/js/contact-form-script.js"></script>
-        <!-- Wow JS -->
-		<script src="assets/js/wow.min.js"></script>
-        <!-- Custom JS -->
-        <script src="assets/js/main.js"></script>
+
+    <!-- Jquery Slim JS -->
+    <script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
+    <!-- Popper JS -->
+    <script src="assets/js/popper.min.js" th:src="@{/assets/js/popper.min.js}"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <!-- Meanmenu JS -->
+    <script src="assets/js/jquery.meanmenu.js" th:src="@{/assets/js/jquery.meanmenu.js}"></script>
+    <!-- Carousel JS -->
+    <script src="assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
+    <!-- Nice Select JS -->
+    <script src="assets/js/jquery.nice-select.min.js" th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+    <!-- Magnific Popup JS -->
+    <script src="assets/js/jquery.magnific-popup.min.js" th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+    <!-- Odometer JS -->
+    <script src="assets/js/odometer.min.js" th:src="@{/assets/js/odometer.min.js}"></script>
+    <!-- Appear JS -->
+    <script src="assets/js/jquery.appear.js" th:src="@{/assets/js/jquery.appear.js}"></script>
+    <!-- Form Ajaxchimp JS -->
+    <script src="assets/js/jquery.ajaxchimp.min.js" th:src="@{/assets/js/jquery.ajaxchimp.min.js}"></script>
+    <!-- Form Validator JS -->
+    <script src="assets/js/form-validator.min.js" th:src="@{/assets/js/form-validator.min.js}"></script>
+    <!-- Contact JS -->
+    <script src="assets/js/contact-form-script.js" th:src="@{/assets/js/contact-form-script.js}"></script>
+    <!-- Wow JS -->
+    <script src="assets/js/wow.min.js" th:src="@{/assets/js/wow.min.js}"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
     </body>
 </html>
 <style>

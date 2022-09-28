@@ -49,8 +49,10 @@ public class loanCalculator {
         detail = temp;
         System.out.println(Arrays.deepToString(detail));
 
-        /*for (int i = 0; i < detail.length; i++) {
-
-        }*/
+        for (int i = 0; i < detail.length; i++) {
+            for (int j = 0; j < detail[i].length; j++) {
+                System.out.println(detail[i][j]);
+            }
+        }
     }
 }
