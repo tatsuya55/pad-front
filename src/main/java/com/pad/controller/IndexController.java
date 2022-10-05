@@ -65,11 +65,11 @@ public class IndexController {
         return "sign-up";
     }
 
-    @ApiOperation("人脸注册页")
+  /*  @ApiOperation("人脸注册页")
     @GetMapping("/face")
     private String face(){
         return "face";
-    }
+    }*/
 
     @ApiOperation("人脸识别页")
     @GetMapping("/spot")
