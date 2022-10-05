@@ -6,8 +6,12 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pad.alipay.AliPay;
 import com.pad.alipay.AliPayConfig;
+import com.pad.entity.Periodization;
+import com.pad.mapper.PeriodizationMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +35,9 @@ public class AliPayController {
 
     @Resource
     private AliPayConfig aliPayConfig;
+
+    @Autowired
+    private PeriodizationMapper periodizationMapper;
     
 
     @GetMapping("/pay") // &subject=xxx&traceNo=xxx&totalAmount=xxx
@@ -91,6 +99,17 @@ public class AliPayController {
                 System.out.println("买家在支付宝唯一id: " + params.get("buyer_id"));
                 System.out.println("买家付款时间: " + params.get("gmt_payment"));
                 System.out.println("买家付款金额: " + params.get("buyer_pay_amount"));
+
+                // 查询订单
+                QueryWrapper<Periodization> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("id", outTradeNo);
+                Periodization periodization = periodizationMapper.selectOne(queryWrapper);
+
+                if (periodization != null) {
+                    periodization.setRepaymentTime(new Date());
+                    periodization.setStatus(1);
+                    periodizationMapper.updateById(periodization);
+                }
             }
         }
         return "success";
