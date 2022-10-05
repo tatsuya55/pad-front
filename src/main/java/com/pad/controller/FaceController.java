@@ -62,7 +62,6 @@ public class FaceController {
         CompanyInfo user= (CompanyInfo) session.getAttribute("user");
         String cNo=user.getCNo();
 
-
         try {
             if (file == null) {
                 return Results.newFailedResult("file is null");
