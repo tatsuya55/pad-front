@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-09-12
  */
 public interface ApprovalRecordService extends IService<ApprovalRecord> {
-
+    //获得审批留言
+    String getMessage(String id);
 }

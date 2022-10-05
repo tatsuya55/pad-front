@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-09-12
  */
 public interface ApprovalRecordMapper extends BaseMapper<ApprovalRecord> {
-
+    //获得审批留言
+    String selectMessage(String id);
 }

@@ -16,5 +16,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ApprovalRecordServiceImpl extends ServiceImpl<ApprovalRecordMapper, ApprovalRecord> implements ApprovalRecordService {
-
+    //获得审批留言
+    @Override
+    public String getMessage(String id) {
+        return baseMapper.selectMessage(id);
+    }
 }

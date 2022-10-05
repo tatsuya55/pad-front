@@ -10,7 +10,6 @@ import com.pad.vo.LoanData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.List;
 
 
@@ -45,6 +43,9 @@ public class IndexController {
 
     @Autowired
     private BankService bankService;
+
+    @Autowired
+    private PeriodizationService periodizationService;
 
     @ApiOperation("首页跳转")
     @RequestMapping({"/","/index","/index.html"})
@@ -235,28 +236,28 @@ public class IndexController {
             @PathVariable String loanId,Model model
     ){
         LoanInfo loanInfo = loanInfoService.getById(loanId);
-        Bank bank = bankService.getById(loanInfo.getBankNo());
-        LoanData loanData = new LoanData();
-        //贷款金额
-        loanData.setPrincipal(loanInfo.getAmount());
-        //年利率
-        loanData.setRate(bank.getBorrowYearRate());
-        //贷款总期数
-       loanData.setTerm(loanInfo.getPeriod());
-        //还款方式
-        Integer type = loanInfo.getReturnMethod();
-        //返回数据
-        LoanData data = null;
-        if (1==type){
-            //等额本息还款
-            data = LoanCalculator.EqualPrincipalandInterestMethod(loanData);
+        //根据贷款编号查询分期表 有信息 则返回查询到的分期列表
+        LambdaQueryWrapper<Periodization> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Periodization::getLId,loanId);
+        List<Periodization> periodizationList = periodizationService.list(wrapper);
+        model.addAttribute("periodizationList",periodizationList);
+        model.addAttribute("loanInfo",loanInfo);
+        //计算还款总额
+        double totalMoney = 0.0;
+        //计算利息总额
+        double totalInterests = 0.0;
+        for (Periodization periodization : periodizationList) {
+            totalMoney+=periodization.getCi();
+            totalInterests+=periodization.getInterest();
         }
-        if (2==type){
-            //等额本金还款
-            data = LoanCalculator.EqualPrincipalMethod(loanData);
-        }
-        System.out.println(data);
-        model.addAttribute("data",data);
+        model.addAttribute("totalMoney",Math.floor(totalMoney));
+        model.addAttribute("totalInterests",Math.floor(totalInterests));
         return "repayment";
+    }
+
+    @ApiOperation("审核结果")
+    @GetMapping("/result")
+    public String toResult(){
+        return "result";
     }
 }
