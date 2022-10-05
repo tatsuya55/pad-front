@@ -71,10 +71,10 @@
                                 [[${item.interest}]]
                             </td>
                             <td>
-                                [[${item.originallyTime}]]
+                                <span th:text="${#dates.format(item.originallyTime, 'yyyy-MM-dd HH:mm')}"></span>
                             </td>
                             <td>
-                                [[${item.repaymentTime}]]
+                                <span th:text="${#dates.format(item.repaymentTime, 'yyyy-MM-dd HH:mm')}"></span>
                             </td>
                             <td>
                                 <!--还款状态  0待还款 1已还款 2逾期-->
