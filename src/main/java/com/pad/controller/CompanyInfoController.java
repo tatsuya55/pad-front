@@ -129,17 +129,5 @@ public class CompanyInfoController {
         return companyInfoService.checkEmail(email);
     }
 
-    @ApiOperation("企业用户注册")
-    @PostMapping("/register")
-    @ResponseBody
-    public boolean register(
-            @ApiParam(name = "companyInfo",value = "企业用户注册",required = true)
-            CompanyInfo companyInfo
-    ){
-        //加密密码存入数据库
-        String encrypt = MD5.encrypt(companyInfo.getPassword());
-        companyInfo.setPassword(encrypt);
-        return companyInfoService.save(companyInfo);
-    }
 }
 
