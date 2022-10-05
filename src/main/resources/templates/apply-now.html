@@ -36,7 +36,7 @@
         <!-- Start Apply Area -->
         <section class="apply-area ptb-100">
             <div class="container">
-                <span style="color: #ff0000">请认真填写，提交后不可修改</span>
+                <span id="message" style="color: #ff0000">请认真填写，提交后不可修改</span>
                 <form onsubmit="return check()" id="formLoanApply">
                     <div class="row">
                         <div class="col-lg-6">
@@ -81,9 +81,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>借款期限</label>
-                                    <input name="period" id="period" type="date" class="form-control"
-                                           th:value="${#dates.format(loanInfo?.period,'yyyy-MM-dd')}">
+                                    <label>贷款期限（月（1-360））</label>
+                                    <input name="period" id="period" type="text" class="form-control"
+                                           th:value="${loanInfo?.period}">
                                 </div>
 
                                 <div class="form-group">
@@ -320,28 +320,30 @@
                         $("#message").html('请登录后再进行操作');
                         setTimeout(function() { location.reload(); }, 1000 );
                         break;
+                    case -3:
+                        //返回-3 对应用户无未完成贷款 提交材料
+                        able();
+                        $("#message").html('请提交材料');
+                        break;
                     case 2:
                         disable();
-                        $("#message").html('审核通过');
+                        $("#message").html('审核通过，等待放款');
                         $("#checkSpan").html('审核通过，不可修改');
                         break;
-                    case 1:
+                    case 5:
                         disable();
-                        $("#message").html('审核通过');
-                        $("#checkSpan").html('审核通过，不可修改');
-                        break;
-                    case 0:
-                        disable();
-                        $("#message").html('审核中，请耐心等待');
-                        $("#checkSpan").html('审核中，不可修改');
+                        $("#message").html('已放款');
+                        $("#checkSpan").html('已放款，不可修改');
                         break;
                     case -1:
                         able();
-                        $("#message").html('审核失败，请重新提交审核');
+                        $("#message").html('审核未通过，请重新提交审核');
                         break;
                     default:
-                        able();
-                        $("#message").html('请提交材料');
+                        //0 1 3 4 均为审核中
+                        disable();
+                        $("#message").html('审核中，请耐心等待');
+                        $("#checkSpan").html('审核中，不可修改');
                         break;
                 }
             }
@@ -356,29 +358,57 @@
         let period = $("#period").val()
         let returnMethod = $("#returnMethod").val()
 
+        let message = $("#message").text()
+
         if(bank=='' || bankNumber=='' || bankType=='' || amount=='' || purpose=='' || period=='' || returnMethod==''){
             $("#checkSpan").html('以上字段都不能为空');
             return false;
+        }else {
+            $("#checkSpan").html('');
         }
-        $.ajax({
-            url:"/loan-info/add",
-            type:'post',
-            data: {
-                "bankNo":bank,
-                "bankNumber":bankNumber,
-                "bankType":bankType,
-                "amount":amount,
-                "purpose":purpose,
-                "period":period,
-                "returnMethod":returnMethod,
-            },
-            success:function (res){
-                if(res){
-                    $("#ModalContext").html('申请成功，等待审核，请继续完善贷款材料')
-                    $("#MyModal").modal('show')
+
+        if (message == '请提交材料'){
+            $.ajax({
+                url:"/loan-info/add",
+                type:'post',
+                data: {
+                    "bankNo":bank,
+                    "bankNumber":bankNumber,
+                    "bankType":bankType,
+                    "amount":amount,
+                    "purpose":purpose,
+                    "period":period,
+                    "returnMethod":returnMethod
+                },
+                success:function (res){
+                    if(res){
+                        $("#ModalContext").html('申请成功，等待审核，请继续完善贷款材料')
+                        $("#MyModal").modal('show')
+                    }
                 }
-            }
-        })
+            })
+        }
+        if (message == '审核未通过，请重新提交审核'){
+            $.ajax({
+                url:"/loan-info/modify",
+                type:'post',
+                data: {
+                    "bankNo":bank,
+                    "bankNumber":bankNumber,
+                    "bankType":bankType,
+                    "amount":amount,
+                    "purpose":purpose,
+                    "period":period,
+                    "returnMethod":returnMethod
+                },
+                success:function (res){
+                    if(res){
+                        $("#ModalContext").html('修改成功，等待审核，请继续完善贷款材料')
+                        $("#MyModal").modal('show')
+                    }
+                }
+            })
+        }
         return false;
     }
     //!*修改样式 禁用*!/
@@ -407,6 +437,6 @@
         $("#returnMethod").removeAttr("disabled");
         $('#returnMethod').niceSelect('update');
         $("#button").removeAttr("disabled");
-        $("#button").css("background-color","#cfcfcf");
+        $("#button").css("background-color","red");
     }
 </script>

@@ -1,5 +1,6 @@
 package com.pad.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pad.entity.LoanInfo;
 import com.pad.mapper.LoanInfoMapper;
 import com.pad.service.LoanInfoService;
@@ -19,8 +20,8 @@ import java.util.List;
 @Service
 public class LoanInfoServiceImpl extends ServiceImpl<LoanInfoMapper, LoanInfo> implements LoanInfoService {
     @Override
-    public List<LoanInfo> findBy(String cNo) {
-        return baseMapper.findBy(cNo);
+    public void findBy(Page<LoanInfo> page, String cNo) {
+        baseMapper.findBy(page,cNo);
     }
 
     /*判断贷款申请是否审核*/

@@ -59,16 +59,16 @@
                                 还款方式
                             </th>
                             <th class="text-left">
-                                审核状态
+                                贷款状态
                             </th>
                             <th class="text-left">
-                                查看详情
+                                操作
                             </th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          <tr th:each="loan:${list}">
+                          <tr th:each="loan:${infoList}">
                             <th class="text-nowrap" scope="row">[[${{loan.id}}]]</th>
                             <td>[[${{loan.bankName}}]]</td>
                             <td>[[${{loan.bankNumber}}]]</td>
@@ -77,19 +77,56 @@
                             <td>
                                 <span th:text="${loan.purpose}==1?'个人消费贷款':(${loan.purpose}==2?'经营贷款':(${loan.purpose}==3?'按揭贷款':''))";></span>
                             </td>
-                            <td th:text="${#dates.format(loan?.period,'yyyy-MM-dd')}"></td>
+                            <!--<td th:text="${#dates.format(loan?.period,'yyyy-MM-dd')}"></td>-->
+                              <td th:text="${loan?.period}"></td>
                             <td>
                                 <span th:text="${loan.returnMethod}==1?'等额本息':(${loan.returnMethod}==2?'等额本金':(${loan.returnMethod}==3?'每月还息':'一次性还款'))"></span>
                             </td>
                             <td>
-                                <span th:text="${loan.status}==0?'未审核':(${loan.status}==1?'审核通过':(${loan.status}==-1?'审核失败':''))";></span>
+                                <span th:if="${loan.isDeleted}==0"
+                                      th:text="已完成"></span>
+                                <span th:if="${loan.isDeleted}==1"
+                                      th:text="${loan.status}==-1?'审核失败':(${loan.status}==0?'未审核':(${loan.status}==5?'已放款':'审核中'))"></span>
                             </td>
                             <td>
-                                <a th:href="@{/detailToLoanCalculator}">查看详情</a>
+                                <span th:if="${loan.isDeleted}==0"></span>
+                                <a th:if="${loan.isDeleted}==1"
+                                   th:text="${loan.status}==5?'前往还款':'查看详情'"
+                                   th:href="${loan.status}==5?'/repayment/'+${{loan.id}}:'/apply-now'"></a>
                             </td>
                           </tr>
                         </tbody>
                     </table>
+
+                    <div class="pagination clearfix style2">
+                        <a th:if="not ${loanInfoPage.hasPrevious}"
+                           href="javascript:void(0)"
+                           class="page-numbers">
+                            <
+                        </a>
+                        <a th:if="${loanInfoPage.hasPrevious}"
+                           th:href="@{/loan-detail(current=${loanInfoPage.current-1})}"
+                           class="page-numbers">
+                            <
+                        </a>
+
+                        <a th:href="@{/loan-detail(current=${i})}"
+                           th:class="${i==loanInfoPage.current}?'page-numbers current':'page-numbers'"
+                           th:each="i:${#numbers.sequence(1,loanInfoPage.pages)}">[[${i}]]</a>
+
+                        <a
+                                th:if="${loanInfoPage.hasNext}"
+                                th:href="@{/loan-detail(current=${loanInfoPage.current+1})}"
+                                class="page-numbers">
+                            >
+                        </a>
+                        <a
+                                th:if="not ${loanInfoPage.hasNext}"
+                                href="javascript:void(0)"
+                                class="page-numbers">
+                            >
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -267,3 +304,53 @@
         <script src="assets/js/main.js"></script>
     </body>
 </html>
+<style>
+    .pagination {
+        display: block;
+        margin: 50px 0 0;
+        padding: 0;
+    }
+    .pagination.grid {
+        margin-top: 20px;
+    }
+    .pagination .page-numbers {
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        line-height: 39px;
+        text-align: center;
+        border: 1px solid #F1F1F1;
+        font-size: 16px;
+        color: #888;
+        font-weight: 500;
+        margin-left: 5px;
+        border-radius: 0;
+    }
+    .pagination .page-numbers:first-child {
+        margin-left: 0;
+    }
+    .pagination .page-numbers.current, .pagination .page-numbers:hover {
+        color: #fff;
+        border-color: transparent;
+        background-color: #65a15a;
+    }
+    .pagination .page-numbers .icon {
+        font-weight: 700;
+    }
+    .pagination.style1 {
+        text-align: right;
+    }
+    .pagination.style2 {
+        text-align: center;
+    }
+    .shop-grid-content .pagination {
+        margin-top: 10px;
+    }
+    .content-inlookbook .pagination {
+        margin-top: 10px;
+        margin-bottom: 60px
+    }
+    .main-content-blog.mansory .pagination {
+        margin-top: 10px;
+    }
+</style>

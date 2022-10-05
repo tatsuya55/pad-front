@@ -39,25 +39,11 @@
                         [[${item[1]}]]
                     </td>
                 </tr>
-              <!--  <tr class="info">
-                    <td>
-                       总计
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>-->
                 </tbody>
             </table>
             <div class="row clearfix">
                 <div class="col-md-4 column">
-                    <span>还款方式: </span><span th:text="${data.type}=='de'?'等额本息还款':'等额本金还款'">等额本息还款</span>
+                    <span>还款方式: </span><span th:text="${data.type}==1?'等额本息还款':'等额本金还款'">等额本息还款</span>
                 </div>
                 <div class="col-md-4 column">
                     <span>还款总额: </span><span th:text="${data.totalMoney}">111</span>

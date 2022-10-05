@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +43,9 @@ public class IndexController {
 
     @Autowired
     private BankService bankService;
+
+    @Autowired
+    private PeriodizationService periodizationService;
 
     @ApiOperation("首页跳转")
     @RequestMapping({"/","/index","/index.html"})
@@ -149,12 +153,17 @@ public class IndexController {
         return "message-details";
     }
 
-    @ApiOperation("贷款详情")
+    @ApiOperation("贷款详情分页显示")
     @GetMapping("/loan-detail")
-    public String toLoanDetail(HttpSession session, Model model){
+    public String toLoanDetail(HttpSession session, Model model,
+             @RequestParam(defaultValue = "1")long current,
+             @RequestParam(defaultValue = "2")long size){
         CompanyInfo user = (CompanyInfo) session.getAttribute("user");
-        List<LoanInfo> list = loanInfoService.findBy(user.getCNo());
-        model.addAttribute("list",list);
+        Page<LoanInfo> loanInfoPage = new Page<>(current,size);
+        loanInfoService.findBy(loanInfoPage,user.getCNo());
+        List<LoanInfo> infoList = loanInfoPage.getRecords();
+        model.addAttribute("infoList",infoList);
+        model.addAttribute("loanInfoPage",loanInfoPage);
         return "loan-detail";
     }
 
@@ -167,13 +176,13 @@ public class IndexController {
     @ApiOperation("利率计结果")
     @GetMapping("/loan-data")
     public String toLoanData(LoanData loanData,Model model){
-        String type = loanData.getType();
+        Integer type = loanData.getType();
         LoanData data = null;
-        if ("de".equals(type)){
+        if (1==type){
             //等额本息还款
             data = LoanCalculator.EqualPrincipalandInterestMethod(loanData);
         }
-        if ("dj".equals(type)){
+        if (2==type){
             //等额本金还款
             data = LoanCalculator.EqualPrincipalMethod(loanData);
         }
@@ -220,9 +229,35 @@ public class IndexController {
         return "loan-calculator";
     }
 
-    @ApiOperation("贷款")
-    @GetMapping("/apply")
-    public String toApply(){
-        return "apply";
+    @ApiOperation("还款")
+    @GetMapping("/repayment/{loanId}")
+    public String toRepayment(
+            @ApiParam(value = "贷款编号",name = "loanId",required = true)
+            @PathVariable String loanId,Model model
+    ){
+        LoanInfo loanInfo = loanInfoService.getById(loanId);
+        //根据贷款编号查询分期表 有信息 则返回查询到的分期列表
+        LambdaQueryWrapper<Periodization> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Periodization::getLId,loanId);
+        List<Periodization> periodizationList = periodizationService.list(wrapper);
+        model.addAttribute("periodizationList",periodizationList);
+        model.addAttribute("loanInfo",loanInfo);
+        //计算还款总额
+        double totalMoney = 0.0;
+        //计算利息总额
+        double totalInterests = 0.0;
+        for (Periodization periodization : periodizationList) {
+            totalMoney+=periodization.getCi();
+            totalInterests+=periodization.getInterest();
+        }
+        model.addAttribute("totalMoney",Math.floor(totalMoney));
+        model.addAttribute("totalInterests",Math.floor(totalInterests));
+        return "repayment";
+    }
+
+    @ApiOperation("审核结果")
+    @GetMapping("/result")
+    public String toResult(){
+        return "result";
     }
 }

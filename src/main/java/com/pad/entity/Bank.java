@@ -1,6 +1,7 @@
 package com.pad.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -58,6 +59,18 @@ public class Bank implements Serializable {
 
     @ApiModelProperty(value = "逻辑删除   0已删除，1未删除   默认是1未删除")
     private Integer isDeleted;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "注册省")
+    private String provinceName;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "注册市")
+    private String cityName;
+
+    @TableField(exist = false)
+    @ApiModelProperty(value = "注册区")
+    private String areaName;
 
 
 }

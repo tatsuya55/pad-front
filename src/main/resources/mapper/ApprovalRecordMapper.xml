@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pad.mapper.ApprovalRecordMapper">
 
+    <select id="selectMessage" resultType="java.lang.String">
+         SELECT message FROM `approval_record`
+         where l_id=#{id} ORDER BY create_time DESC limit 1
+    </select>
 </mapper>

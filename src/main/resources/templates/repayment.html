@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/head :: common_header(~{::title},~{::links},~{})">
-    <title>银行列表</title>
+    <title>还款</title>
 </head>
 
     <body>
@@ -14,10 +14,10 @@
                 <div class="d-table-cell">
                     <div class="container">
                         <div class="page-title-content">
-                            <h2>银行列表</h2>
+                            <h2>还款</h2>
                             <ul>
                                 <li><a th:href="@{/}">首页</a></li>
-                                <li>银行列表</li>
+                                <li>还款</li>
                             </ul>
                         </div>
                     </div>
@@ -26,62 +26,80 @@
         </div>
         <!-- End Page Title Area -->
 
-        <!-- Start FAQ Area -->
-        <section class="faq-area ptb-100">
+        <!-- End Table Area -->
+        <section class="table-area pb-100">
             <div class="container">
-                <div class="section-title">
-                    <h2>银行信息</h2>
-                    <!--<b>Just find your answers below</b>-->
-                </div>
-
-                <div class="container">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th class="text-left">
+                                期数
+                            </th>
+                            <th class="text-left">
+                                月供
+                            </th>
+                            <th class="text-left">
+                                月供本金
+                            </th>
+                            <th class="text-left">
+                                月供利息
+                            </th>
+                            <th class="text-left">
+                                还款时间
+                            </th>
+                            <th class="text-left">
+                                实际还款时间
+                            </th>
+                            <th class="text-left">
+                                状态
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item,index:${periodizationList}">
+                            <td >
+                                [[${item.periods}]]
+                            </td>
+                            <td>
+                                [[${item.ci}]]
+                            </td>
+                            <td>
+                                [[${item.capital}]]
+                            </td>
+                            <td>
+                                [[${item.interest}]]
+                            </td>
+                            <td>
+                                <span th:text="${#dates.format(item.originallyTime, 'yyyy-MM-dd HH:mm')}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${#dates.format(item.repaymentTime, 'yyyy-MM-dd HH:mm')}"></span>
+                            </td>
+                            <td>
+                                <!--还款状态  0待还款 1已还款 2逾期-->
+                                <span th:if="${item.status}==0">待还款</span>
+                                <span th:if="${item.status}==1">已还款</span>
+                                <span th:if="${item.status}==2">逾期</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <div class="row clearfix">
-                        <div class="col-md-12 column">
-                            <address th:each="bank:${bankPage.records}">
-                                <strong >银行名称: [[${bank.bankName}]]</strong><br />
-                                银行电话: [[${bank.phone}]]<br />
-                                年化利率: [[${bank.borrowYearRate}]]<br />
-                                逾期利率: [[${bank.overdueRate}]]<br />
-                                银行详细地址: [[${bank.province}]][[${bank.city}]][[${bank.area}]][[${bank.address}]]<br />
-                                <p title="description">产品说明: [[${bank.description}]]</p>
-                            </address>
-                            <div class="pagination clearfix style2">
-                                <a th:if="not ${bankPage.hasPrevious}"
-                                   href="javascript:void(0)"
-                                   class="page-numbers">
-                                    <
-                                </a>
-                                <a th:if="${bankPage.hasPrevious}"
-                                   th:href="@{/faq(current=${bankPage.current-1})}"
-                                   class="page-numbers">
-                                    <
-                                </a>
-
-                                <a th:href="@{/faq(current=${i})}"
-                                   th:class="${i==bankPage.current}?'page-numbers current':'page-numbers'"
-                                   th:each="i:${#numbers.sequence(1,bankPage.pages)}">[[${i}]]</a>
-
-                                <a
-                                        th:if="${bankPage.hasNext}"
-                                        th:href="@{/faq(current=${bankPage.current+1})}"
-                                        class="page-numbers">
-                                    >
-                                </a>
-                                <a
-                                        th:if="not ${bankPage.hasNext}"
-                                        href="javascript:void(0)"
-                                        class="page-numbers">
-                                    >
-                                </a>
-                            </div>
+                        <div class="col-md-4 column">
+                            <span>还款方式: </span><span th:text="${loanInfo.returnMethod}==1?'等额本息还款':'等额本金还款'">等额本息还款</span>
+                        </div>
+                        <div class="col-md-4 column">
+                            <span>还款总额: </span><span th:text="${totalMoney}">111</span>
+                        </div>
+                        <div class="col-md-4 column">
+                            <span>利息总额: </span><span th:text="${totalInterests}">111</span>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </section>
-        <!-- End FAQ Area -->
+        <!-- End Table Area -->
 
         <!-- Start Footer Area -->
         <section class="footer-area pt-100 pb-70">

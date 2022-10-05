@@ -85,7 +85,7 @@
                             <label>身份证件照</label> </br>
                             <input type="file" class="form-control" id="file" name="legalImg" placeholder="添加图片" multiple="multiple" onchange="showPreview(this)">
                             <img src="" style="" id="addimg"><br>
-                            <img th:if="${material}!=null" th:src="@{|/images/legal_img/${material?.legalImg}|}"><br>
+                            <img id="showimg" th:if="${material}!=null" th:src="@{|/images/legal_img/${material?.legalImg}|}"><br>
                         </div>
 
                         <div class="form-group">
@@ -98,21 +98,21 @@
                             <label>财务报表</label> </br>
                             <input type="file" class="form-control" id="turnover" placeholder="添加图片" onchange="showPreview1(this)">
                             <img src="" style="" id="addimg1"><br>
-                            <img th:if="${material}!=null" th:src="@{|/images/turnover/${material?.turnover}|}"><br>
+                            <img id="showimg1" th:if="${material}!=null" th:src="@{|/images/turnover/${material?.turnover}|}"><br>
                         </div>
 
                         <div class="form-group">
                             <label>企业征信</label> </br>
                             <input type="file" class="form-control" id="credit" placeholder="添加图片" onchange="showPreview2(this)">
                             <img src="" style="" id="addimg2"><br>
-                            <img th:if="${material}!=null" th:src="@{|/images/credit/${material?.credit}|}"><br>
+                            <img id="showimg2" th:if="${material}!=null" th:src="@{|/images/credit/${material?.credit}|}"><br>
                         </div>
 
                         <div class="form-group">
                             <label>纳税记录</label> </br>
                             <input type="file" class="form-control" id="records" placeholder="添加图片" onchange="showPreview3(this)">
                             <img src="" style="" id="addimg3"><br>
-                            <img th:if="${material}!=null" th:src="@{|/images/records/${material?.records}|}"><br>
+                            <img id="showimg3" th:if="${material}!=null" th:src="@{|/images/records/${material?.records}|}"><br>
                         </div>
 
 
@@ -127,10 +127,8 @@
                             <label>抵押物照片</label> </br>
                             <input type="file" class="form-control" id="collateralPhoto" placeholder="添加图片" onchange="showPreview4(this)">
                             <img src="" style="" id="addimg4"><br>
-                            <img th:if="${material}!=null" th:src="@{|/images/collateral_photo/${material?.collateralPhoto}|}"><br>
+                            <img id="showimg4" th:if="${material}!=null" th:src="@{|/images/collateral_photo/${material?.collateralPhoto}|}"><br>
                         </div>
-
-
 
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -147,7 +145,7 @@
             </div>
         </form>
         <button onclick="location.href=('/apply-now')" type="button" class="btn btn-primary">上一步</button>
-        <button onclick="location.href=('/material')" type="button" class="btn btn-primary">下一步</button>
+        <button onclick="location.href=('/result')" type="button" class="btn btn-primary">下一步</button>
     </div>
 
 </section>
@@ -315,7 +313,7 @@
                 <p id="ModalContext">内容</p>
             </div>
             <div class="modal-footer">
-                <button onclick="location.href=('/index')" type="button" class="btn btn-primary">确定</button>
+                <button onclick="location.reload()" type="button" class="btn btn-primary">确定</button>
             </div>
         </div>
     </div>
@@ -371,23 +369,19 @@
                         $("#message").html('审核通过');
                         $("#checkSpan").html('审核通过，不可修改');
                         break;
-                    case 1:
-                        disable();
-                        $("#message").html('审核通过');
-                        $("#checkSpan").html('审核通过，不可修改');
-                        break;
-                    case 0:
-                        disable();
-                        $("#message").html('审核中，请耐心等待');
-                        $("#checkSpan").html('审核中，不可修改');
+                    case -3:
+                        able();
+                        $("#message").html('请提交材料');
                         break;
                     case -1:
                         able();
                         $("#message").html('审核失败，请重新提交审核');
                         break;
                     default:
-                        able();
-                        $("#message").html('请提交材料');
+                        //0 1 审核中
+                        disable();
+                        $("#message").html('审核中，请耐心等待');
+                        $("#checkSpan").html('审核中，不可修改');
                         break;
                 }
             }
@@ -395,6 +389,8 @@
     })
     /*非空判断 提交表单*/
     function check() {
+        let message = $("#message").text()
+
         let formData=new FormData;
         let legalPhone = $("#legalPhone").val()
         let legalName = $("#legalName").val()
@@ -407,11 +403,28 @@
         let records = $("#records").val()
         let collateralPhoto = $("#collateralPhoto").val()
         let expression = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
-        let legalImgFile = $("#legalImg")[0].files[0];
-        let turnoverFile = $("#turnover")[0].files[0];
-        let creditFile = $("#credit")[0].files[0];
-        let collateralPhotoFile = $("#collateralPhoto")[0].files[0];
-        let recordsFile = $("#records")[0].files[0];
+
+        /* && $("#showimg").is(':hidden')*/
+        let legalImgFile = null;
+        if (legalImg!=""){
+            legalImgFile = $("#legalImg")[0].files[0];
+        }
+        let turnoverFile = null;
+        if (turnover!=""){
+            turnoverFile = $("#turnover")[0].files[0];
+        }
+        let creditFile = null;
+        if (credit!=""){
+            creditFile = $("#credit")[0].files[0];
+        }
+        let collateralPhotoFile = null;
+        if (collateralPhoto!=""){
+            collateralPhotoFile = $("#collateralPhoto")[0].files[0];
+        }
+        let recordsFile = null;
+        if (records!=""){
+            recordsFile = $("#records")[0].files[0];
+        }
 
         if (legalName==""){
             $("#checkSpan").html('法人姓名不能为空');
@@ -429,34 +442,35 @@
             $("#checkSpan").html('请输入正确的身份证号');
             return false;
         }
-        if (legalImg==""){
-            $("#checkSpan").html('证件照片不能为空');
-            return false;
-        }
-
         if (value==""){
             $("#checkSpan").html('市值不能为空');
-            return false;
-        }
-        if (turnover==""){
-            $("#checkSpan").html('财务报表不能为空');
-            return false;
-        }
-        if (credit==""){
-            $("#checkSpan").html('征信报告不能为空');
-            return false;
-        }
-        if (records==""){
-            $("#checkSpan").html('纳税记录不能为空');
             return false;
         }
         if (collateral==""){
             $("#checkSpan").html('抵押物不能为空');
             return false;
         }
-        if (collateralPhoto==""){
-            $("#checkSpan").html('抵押物照片不能为空');
-            return false;
+        if (message == "请提交材料"){
+            if (legalImg==""){
+                $("#checkSpan").html('证件照片不能为空');
+                return false;
+            }
+            if (turnover==""){
+                $("#checkSpan").html('财务报表不能为空');
+                return false;
+            }
+            if (credit==""){
+                $("#checkSpan").html('征信报告不能为空');
+                return false;
+            }
+            if (records==""){
+                $("#checkSpan").html('纳税记录不能为空');
+                return false;
+            }
+            if (collateralPhoto==""){
+                $("#checkSpan").html('抵押物照片不能为空');
+                return false;
+            }
         }
 
         formData.append("legalPhone",legalPhone);
@@ -469,24 +483,45 @@
         formData.append("creditFile",creditFile);
         formData.append("collateralPhotoFile",collateralPhotoFile);
         formData.append("recordsFile",recordsFile);
-        $.ajax({
-            url:'/company-material/save',
-            type:'post',
-            data:formData,
-            ache: false,//不缓存数据
-            processData: false,//不转换数据
-            contentType: false,
-            dataType: "json",
-            success:function (res) {
-                if(res){
-                    $("#checkSpan").html('提交成功');
-                    checkAuthStatus();
-                }else {
-                    $("#checkSpan").html('提交失败');
-                }
-            }
-        })
 
+        if (message == "请提交材料"){
+            $.ajax({
+                url:'/company-material/save',
+                type:'post',
+                data:formData,
+                ache: false,//不缓存数据
+                processData: false,//不转换数据
+                contentType: false,
+                dataType: "json",
+                success:function (res) {
+                    if(res){
+                        $("#checkSpan").html('提交成功');
+                        checkAuthStatus();
+                    }else {
+                        $("#checkSpan").html('提交失败');
+                    }
+                }
+            })
+        }
+        if (message == "审核失败，请重新提交审核"){
+            $.ajax({
+                url:'/company-material/modify',
+                type:'post',
+                data:formData,
+                ache: false,//不缓存数据
+                processData: false,//不转换数据
+                contentType: false,
+                dataType: "json",
+                success:function (res) {
+                    if(res){
+                        $("#checkSpan").html('提交成功');
+                        checkAuthStatus();
+                    }else {
+                        $("#checkSpan").html('提交失败');
+                    }
+                }
+            })
+        }
         return false;
     }
 
@@ -497,6 +532,7 @@
 
     //!*回显身份证图片*!/
     function showPreview(source){
+        $("#showimg").hide()
         let file = source.files[0];
        //!*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*!/
         if(window.FileReader){
@@ -513,6 +549,7 @@
 
     //!*回显财务报表图片*!/
     function showPreview1(source){
+        $("#showimg1").hide()
         let file = source.files[0];
         //!*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*!/
         if(window.FileReader){
@@ -528,6 +565,7 @@
     }
     //!*回显企业征信图片*!/
     function showPreview2(source){
+        $("#showimg2").hide()
         let file = source.files[0];
         //!*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*!/
         if(window.FileReader){
@@ -543,6 +581,7 @@
     }
     //!*回显纳税记录图片*!/
     function showPreview3(source){
+        $("#showimg3").hide()
         let file = source.files[0];
         //!*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*!/
         if(window.FileReader){
@@ -558,6 +597,9 @@
     }
     //!*回显抵押物图片*!/
     function showPreview4(source){
+      /*  $("#showimg4").attr('src','');*/
+      /*  console.log($("#showimg4")[0].src)*/
+        $("#showimg4").hide()
         let file = source.files[0];
         //!*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*!/
         if(window.FileReader){
@@ -598,7 +640,6 @@
         $("#collateral").removeAttr("disabled");
         $("#collateralPhoto").removeAttr("disabled");
         $("#records").removeAttr("disabled","disabled");
-
         $("#button").css("background-color","#e73c3e");
     }
 </script>
