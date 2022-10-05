@@ -31,7 +31,7 @@
             <div class="container">
                 <div class="signup-form">
                     <h3>创建您的账户</h3>
-                    <form onsubmit="return check()" id="formRegister">
+                    <form onsubmit="return check()" id="formRegister" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -63,6 +63,18 @@
                                 </div>
                             </div>
 
+                            <div class="col-lg-12">
+                                <div class="send-btn">
+                                    <button type="button" class="default-btn" title="摄像头注册" value="摄像头注册" onclick="getMedia()">
+                                        摄像头注册
+                                        <span></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!--图像显示区域-->
+                            <div id="mainDiv">
+                            </div>
 
                             <div class="col-lg-12">
                                 <div class="form-check">
@@ -395,15 +407,54 @@
         }
         $("#checkSpan").html('');
         //将表单转化为json字符串传递
-        let form = $("#formRegister").serializeArray();
+        /*let form = $("#formRegister").serializeArray();
         let obj = {};//分配内存空间
         for (let i = 0; i < form.length; i++) {
             obj[form[i].name] = form[i].value;
+        }*/
+        let mainComp = $("#mainDiv");
+        if (mainComp.has('video').length) {
+            //获得Canvas对象
+            let video = document.getElementById("video");
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, 500, 500);
+            var formData = new FormData();
+            var base64File = canvas.toDataURL();
+            formData.append("file", base64File);
+            formData.append("groupId", "101");
+
+            formData.append("cNo",cno);
+            formData.append("name",name);
+            formData.append("password",password);
+            formData.append("email",email);
+            formData.append("phone",phone);
+            console.log(formData)
+            $.ajax({
+                type: "post",
+                url: "/register",
+                data: formData,
+                contentType: false,
+                processData: false,
+                async: false,
+                dataType: "json",
+                success: function (text) {
+                    var res = JSON.stringify(text)
+                    if (text.code == 0) {
+                        alert("注册成功")
+                    } else {
+                        alert(text.message)
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                    alert(JSON.stringify(error))
+                }
+            });
+        } else {
+            $("#checkSpan").html('请进行摄像头注册');
         }
-     /*   console.log(JSON.stringify(obj))
-        console.log('-------------------')
-        console.log(obj)*/
-        $.ajax({
+      /*  $.ajax({
             url:'/company/register',
             type:'post',
             data:obj,
@@ -416,12 +467,11 @@
                     $("#formRegister")[0].reset()
                 }
             }
-
-        })
+        })*/
         return false;
     }
 
-
+    /*获得图像*/
     function getMedia() {
         $("#mainDiv").empty();
         let videoComp = " <video id='video' width='500px' height='500px' autoplay='autoplay' style='margin-top: 20px'></video><canvas id='canvas' width='500px' height='500px' style='display: none'></canvas>";
@@ -447,82 +497,5 @@
         // var t1 = window.setTimeout(function() {
         //     takePhoto();
         // },2000)
-    }
-    //拍照事件
-    function takePhoto() {
-        let mainComp = $("#mainDiv");
-        if(mainComp.has('video').length)
-        {
-            let userNameInput = $("#userName").val();
-            if(userNameInput == "")
-            {
-                alert("姓名不能为空!");
-                return false;
-            }
-            //获得Canvas对象
-            let video = document.getElementById("video");
-            let canvas = document.getElementById("canvas");
-            let ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0, 500, 500);
-            var formData = new FormData();
-            var base64File = canvas.toDataURL();
-            var userName = $("#userName").val();
-            formData.append("file", base64File);
-            formData.append("name", userName);
-            formData.append("groupId", "101");
-            $.ajax({
-                type: "post",
-                url: "/faceAdd",
-                data: formData,
-                contentType: false,
-                processData: false,
-                async: false,
-                success: function (text) {
-                    var res = JSON.stringify(text)
-                    if (text.code == 0) {
-                        alert("注册成功")
-                    } else {
-                        alert(text.message)
-                    }
-                },
-                error: function (error) {
-                    alert(JSON.stringify(error))
-                }
-            });
-        }
-        else{
-            var formData = new FormData();
-            let userName = $("#userName").val();
-            formData.append("groupId", "101");
-            var file = $("#file0")[0].files[0];
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function () {
-                var base64 = reader.result;
-                formData.append("file", base64);
-                formData.append("name",userName);
-                $.ajax({
-                    type: "post",
-                    url: "/faceAdd",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    async: false,
-                    success: function (text) {
-                        var res = JSON.stringify(text)
-                        if (text.code == 0) {
-                            alert("注册成功")
-                        } else {
-                            alert(text.message)
-                        }
-                    },
-                    error: function (error) {
-                        alert(JSON.stringify(error))
-                    }
-                });
-                location.reload();
-            }
-        }
-
     }
 </script>

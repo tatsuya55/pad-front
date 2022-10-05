@@ -46,13 +46,16 @@
                                 月供利息
                             </th>
                             <th class="text-left">
-                                还款时间
+                                还款截止时间
                             </th>
                             <th class="text-left">
                                 实际还款时间
                             </th>
                             <th class="text-left">
                                 状态
+                            </th>
+                            <th class="text-left">
+                                操作
                             </th>
                           </tr>
                         </thead>
@@ -81,6 +84,9 @@
                                 <span th:if="${item.status}==0">待还款</span>
                                 <span th:if="${item.status}==1">已还款</span>
                                 <span th:if="${item.status}==2">逾期</span>
+                            </td>
+                            <td>
+                                <button type="button" th:onclick="checkTime([[${item.id}]])">还款</button>
                             </td>
                         </tr>
                         </tbody>
@@ -244,6 +250,26 @@
         <!-- End Go Top Area -->
 
 
+    <!--弹框start-->
+    <div class="modal fade" id="MyModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+         data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">提示</h4>
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                </div>
+                <div class="modal-body">
+                    <p id="ModalContext">内容</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="location.reload()" type="button" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹框end-->
+
     <!-- Jquery Slim JS -->
     <script src="assets/js/jquery.min.js" th:src="@{/assets/js/jquery.min.js}"></script>
     <!-- Popper JS -->
@@ -324,3 +350,21 @@
         margin-top: 10px;
     }
 </style>
+<script>
+    /*判断是否在还款时间内*/
+    function checkTime(pId){
+        $.ajax({
+            url:`/periodization/isBetween/${pId}`,
+            type:'get',
+            success:function (res){
+                if(res){
+                    //在还款时间内 跳转到还款页面
+                    alert('快还钱！！！！')
+                }else {
+                    $("#ModalContext").html('还未到还款时间，还款截止时间前三天可以开始还款')
+                    $("#MyModal").modal('show')
+                }
+            }
+        })
+    }
+</script>

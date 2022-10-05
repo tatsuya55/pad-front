@@ -303,6 +303,7 @@
     function takePhoto() {
         let mainComp = $("#mainDiv");
         if (mainComp.has('video').length) {
+            alert(111)
             let userNameInput = $("#userName").val();
             if (userNameInput == "") {
                 alert("姓名不能为空!");
@@ -327,6 +328,7 @@
                 processData: false,
                 async: false,
                 success: function (text) {
+                    alert(222)
                     var res = JSON.stringify(text)
                     if (text.code == 0) {
                         alert("注册成功")
@@ -339,6 +341,7 @@
                 }
             });
         } else {
+            alert(333)
             var formData = new FormData();
             let userName = $("#userName").val();
             formData.append("groupId", "101");
@@ -357,6 +360,7 @@
                     processData: false,
                     async: false,
                     success: function (text) {
+                        alert(444)
                         var res = JSON.stringify(text)
                         if (text.code == 0) {
                             alert("注册成功")

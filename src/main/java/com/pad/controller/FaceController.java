@@ -16,8 +16,12 @@ import com.pad.dto.ProcessInfo;
 import com.pad.entity.CompanyInfo;
 import com.pad.entity.UserFaceInfo;
 import com.pad.enums.ErrorCodeEnum;
+import com.pad.service.CompanyInfoService;
 import com.pad.service.FaceEngineService;
 import com.pad.service.UserFaceInfoService;
+import com.pad.utils.MD5;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +53,66 @@ public class FaceController {
     @Autowired
     UserFaceInfoService userFaceInfoService;
 
+    @Autowired
+    private CompanyInfoService companyInfoService;
+
+    @ApiOperation("企业用户注册")
+    @PostMapping("/register")
+    @ResponseBody
+    public Result<Object> register(
+            @ApiParam(name = "companyInfo",value = "企业用户注册",required = true)
+                    CompanyInfo companyInfo,
+            @RequestParam("file") String file,
+            @RequestParam("groupId") Integer groupId
+    ){
+        System.out.println(companyInfo);
+        //加密密码存入数据库
+        String encrypt = MD5.encrypt(companyInfo.getPassword());
+        companyInfo.setPassword(encrypt);
+        companyInfoService.save(companyInfo);
+        String cNo = companyInfo.getCNo();
+        String name = companyInfo.getName();
+
+        //人脸添加
+        try {
+            if (file == null) {
+                return Results.newFailedResult("file is null");
+            }
+            if (groupId == null) {
+                return Results.newFailedResult("groupId is null");
+            }
+
+            byte[] decode = Base64.decode(base64Process(file));
+            ImageInfo imageInfo = ImageFactory.getRGBData(decode);
+
+            //人脸特征获取
+            byte[] bytes = faceEngineService.extractFaceFeature(imageInfo);
+            if (bytes == null) {
+                return Results.newFailedResult(ErrorCodeEnum.NO_FACE_DETECTED);
+            }
+
+            UserFaceInfo userFaceInfo = new UserFaceInfo();
+            userFaceInfo.setCNo(cNo);
+            userFaceInfo.setName(name);
+            userFaceInfo.setGroupId(groupId);
+            userFaceInfo.setFaceFeature(bytes);
+            userFaceInfo.setFaceId(RandomUtil.randomString(10));
+
+            //人脸特征插入到数据库
+            userFaceInfoService.insertSelective(userFaceInfo);
+
+            logger.info("faceAdd:" + name);
+            return Results.newSuccessResult("");
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        return Results.newFailedResult(ErrorCodeEnum.UNKNOWN);
+    }
 
     /*
     人脸添加
      */
-    @RequestMapping(value = "/faceAdd", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/faceAdd", method = RequestMethod.POST)
     @ResponseBody
     public Result<Object> faceAdd(@RequestParam("file") String file,
                                   @RequestParam("groupId") Integer groupId,
@@ -61,7 +120,6 @@ public class FaceController {
                                   HttpSession session) {
         CompanyInfo user= (CompanyInfo) session.getAttribute("user");
         String cNo=user.getCNo();
-
 
         try {
             if (file == null) {
@@ -99,7 +157,7 @@ public class FaceController {
             logger.error("", e);
         }
         return Results.newFailedResult(ErrorCodeEnum.UNKNOWN);
-    }
+    }*/
 
     /*
     人脸识别
