@@ -301,7 +301,7 @@
                 <p id="ModalContext">内容</p>
             </div>
             <div class="modal-footer">
-                <button onclick="location.href=('/index')" type="button" class="btn btn-primary">确定</button>
+                <button onclick="location.reload()" type="button" class="btn btn-primary">确定</button>
             </div>
         </div>
     </div>
@@ -374,6 +374,9 @@
     })
     /*非空判断 提交表单*/
     function check() {
+        $("#checkSpan").html('');
+        let message = $("#message").text()
+
         let formData=new FormData;
         let type = $("#type").val()
         let legalName = $("#legalName").val()
@@ -385,8 +388,13 @@
         let scope = $("#scope").val()
         let credit = $("#credit").val()
         let licTime = $("#licTime").val()
-        let file = $("#license")[0].files[0]
         let expression = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+        let license = $("#license").val()
+        let file = null;
+        if (license!=""){
+            file = $("#license")[0].files[0];
+        }
+
         if (type==""){
             $("#checkSpan").html('企业类型不能为空');
             return false;
@@ -403,6 +411,37 @@
             $("#checkSpan").html('请输入正确的身份证号');
             return false;
         }
+        if (province==""){
+            $("#checkSpan").html('省份不能为空');
+            return false;
+        }
+        if (city==""){
+            $("#checkSpan").html('市不能为空');
+            return false;
+        }
+        if (area==""){
+            $("#checkSpan").html('区不能为空');
+            return false;
+        }
+        if (address==""){
+            $("#checkSpan").html('详细地址不能为空');
+            return false;
+        }
+        if (scope==""){
+            $("#checkSpan").html('经营范围不能为空');
+            return false;
+        }
+        if (credit==""){
+            $("#checkSpan").html('企业信誉度不能为空');
+            return false;
+        }
+        if (message == "请认证身份"){
+            if (license==""){
+                $("#checkSpan").html('营业执照不能为空');
+                return false;
+            }
+        }
+
         formData.append("type",type);
         formData.append("legalName",legalName);
         formData.append("legalId",legalId);
@@ -414,28 +453,49 @@
         formData.append("credit",credit);
         formData.append("licTime",licTime);
         formData.append("file",file);
-        $.ajax({
-            url:'/company-detail/save',
-            type:'post',
-            data:formData,
-            ache: false,//不缓存数据
-            processData: false,//不转换数据
-            contentType: false,
-            dataType: "json",
-            success:function (res) {
-                if(res){
-                    $("#checkSpan").html('提交成功');
-                    checkAuthStatus();
-                }else {
-                    $("#checkSpan").html('提交失败');
+
+        if (message == "请认证身份"){
+            $.ajax({
+                url:'/company-detail/save',
+                type:'post',
+                data:formData,
+                ache: false,//不缓存数据
+                processData: false,//不转换数据
+                contentType: false,
+                dataType: "json",
+                success:function (res) {
+                    if(res){
+                        $("#ModalContext").html('提交成功');
+                        $("#MyModal").modal('show')
+                    }else {
+                        $("#ModalContext").html('提交失败');
+                        $("#MyModal").modal('show')
+                    }
                 }
-            }
-        })
+            })
+        }
+
+        if (message == "认证失败，请重新认证"){
+            $.ajax({
+                url:'/company-detail/modify',
+                type:'post',
+                data:formData,
+                ache: false,//不缓存数据
+                processData: false,//不转换数据
+                contentType: false,
+                dataType: "json",
+                success:function (res) {
+                    if(res){
+                        $("#ModalContext").html('修改成功');
+                        $("#MyModal").modal('show')
+                    }else {
+                        $("#ModalContext").html('修改失败');
+                        $("#MyModal").modal('show')
+                    }
+                }
+            })
+        }
         return false;
-    }
-    function checkAuthStatus() {
-        $("#ModalContext").html('提交成功');
-        $("#MyModal").modal('show')
     }
     /*回显图片*/
     function showPreview(source){

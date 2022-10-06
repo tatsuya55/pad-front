@@ -17,7 +17,7 @@ public class UploadTool {
             ///C:/Users/1/Desktop/pad-front/target/
             /*String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();*/
 
-            String realPath = "D:\\QQPCmgr\\Desktop\\12shixun\\images" + type;
+            String realPath = "D:\\QQPCmgr\\Desktop\\12shixun\\pad-front\\src\\main\\resources\\static\\images\\" + type;
             //获取图片扩展名
             String extension = FilenameUtils.getExtension(imageFile.getOriginalFilename());
             //对图片重命名
