@@ -86,14 +86,14 @@
                                 <span th:if="${item.status}==2">逾期</span>
                             </td>
                             <td>
-                                <button type="button" th:onclick="checkTime([[${item.id}]])">还款</button>
+                                <button type="button" th:onclick="checkTime([[${item.id}]],[[${item.ci}]])">还款</button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="row clearfix">
                         <div class="col-md-4 column">
-                            <span>还款方式: </span><span th:text="${loanInfo.returnMethod}==1?'等额本息还款':'等额本金还款'">等额本息还款</span>
+                            <span>还款方式: </span><span th:text="${loanInfo?.returnMethod}==1?'等额本息还款':'等额本金还款'">11</span>
                         </div>
                         <div class="col-md-4 column">
                             <span>还款总额: </span><span th:text="${totalMoney}">111</span>
@@ -352,14 +352,14 @@
 </style>
 <script>
     /*判断是否在还款时间内*/
-    function checkTime(pId){
+    function checkTime(pId,ci){
         $.ajax({
             url:`/periodization/isBetween/${pId}`,
             type:'get',
             success:function (res){
                 if(res){
                     //在还款时间内 跳转到还款页面
-                    alert('快还钱！！！！')
+                    location.href=`/alipay/pay?subject=${pId}&traceNo=${pId}&totalAmount=${ci}`
                 }else {
                     $("#ModalContext").html('还未到还款时间，还款截止时间前三天可以开始还款')
                     $("#MyModal").modal('show')
