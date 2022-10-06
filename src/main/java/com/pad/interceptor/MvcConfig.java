@@ -16,6 +16,7 @@ public class MvcConfig implements WebMvcConfigurer {
                 "/assets/**","/bootstrap-3.3.7-dist/**","/images/**","/jquery/**","/layui/**",
                 "/signIn","/signUp",
                 "/company/**",
-                "/register");
+                "/register",
+                "/alipay/notify");
     }
 }

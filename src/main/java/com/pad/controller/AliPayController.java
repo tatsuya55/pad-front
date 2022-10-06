@@ -9,6 +9,9 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 
 import com.pad.alipay.AliPay;
 import com.pad.alipay.AliPayConfig;
+import com.pad.entity.Periodization;
+import com.pad.service.PeriodizationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +39,9 @@ public class AliPayController {
 
     @Resource
     private AliPayConfig aliPayConfig;
+
+    @Autowired
+    private PeriodizationService periodizationService;
 
 
     @GetMapping("/pay") // &subject=xxx&traceNo=xxx&totalAmount=xxx
@@ -79,9 +86,20 @@ public class AliPayController {
                 // System.out.println(name + " = " + request.getParameter(name));
             }
 
+            //更新分期还款表
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //商户订单号 分期还款编号
             String outTradeNo = params.get("out_trade_no");
+            //买家付款时间
             String gmtPayment = params.get("gmt_payment");
-            String alipayTradeNo = params.get("trade_no");
+            //买家付款金额
+            String amount = params.get("buyer_pay_amount");
+            Periodization periodization = new Periodization();
+            periodization.setId(outTradeNo);
+            periodization.setRepaymentTime(sf.parse(gmtPayment));
+            periodization.setMoney(Double.parseDouble(amount));
+            periodization.setStatus(1);
+            periodizationService.updateById(periodization);
 
             String sign = params.get("sign");
             String content = AlipaySignature.getSignCheckContentV1(params);
@@ -97,7 +115,6 @@ public class AliPayController {
                 System.out.println("买家在支付宝唯一id: " + params.get("buyer_id"));
                 System.out.println("买家付款时间: " + params.get("gmt_payment"));
                 System.out.println("买家付款金额: " + params.get("buyer_pay_amount"));
-
             }
         }
         return "success";

@@ -44,14 +44,6 @@
 
                             <form id="contactForm" onsubmit="return check()">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <label>企业编号</label>
-                                            <input type="text" id="cNo"  name="cNo" class="form-control" required data-error="请输入你的企业编号">
-                                            <div class="help-block with-errors"></div>
-                                        </div>
-                                    </div>
-
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
                                             <label>留言内容</label>
@@ -321,23 +313,21 @@
 </html>
 <script>
     function check(){
-        let cNo = $("#cNo").val();
         let context =$("#context").val();
-        if (cNo=="" || context==""){
-            $("#checkSpan").html('企业编号和留言不能为空');
+        if (context==""){
+            $("#checkSpan").html('留言不能为空');
             return false;
         }
         $.ajax({
             url:"/message/add",
             type:'post',
             data:{
-                "cNo":cNo,
                 "context":context
             },
             success:function (res) {
                 if(res){
                     $("#checkSpan").html('留言成功');
-                    setTimeout(function() { window.location.href = "/"; }, 1000 );
+                    setTimeout(function() { location.href="/message-details" }, 1000 );
                 }else {
                     $("#checkSpan").html('留言失败');
                 }

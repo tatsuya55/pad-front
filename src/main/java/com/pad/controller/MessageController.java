@@ -32,14 +32,14 @@ public class MessageController {
     @ApiOperation("添加留言")
     @PostMapping("/add")
     @ResponseBody
-    public boolean addBank(
-            @ApiParam(name = "message",value = "添加留言",required = true)String cNo,
-            @ApiParam(name = "password",value = "密码",required = true)String context
-
+    public boolean addMessage(
+            @ApiParam(name = "context",value = "留言内容",required = true)String context,
+            HttpSession session
     ){
-        //添加用户
+        //添加留言
+        CompanyInfo user =(CompanyInfo) session.getAttribute("user");
         Message message = new Message();
-        message.setCNo(cNo);
+        message.setCNo(user.getCNo());
         message.setContext(context);
         return messageService.save(message);
     }
