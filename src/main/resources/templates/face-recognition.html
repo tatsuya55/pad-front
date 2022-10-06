@@ -16,8 +16,8 @@
                 <div class="page-title-content">
                     <h2>人脸验证</h2>
                     <ul>
-                        <li><a th:href="@{/index.html}" href="index.html">首页</a></li>
-                        <li>Sign Up</li>
+                        <li><a th:href="@{/}" href="index.html">首页</a></li>
+                        <li>人脸验证</li>
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
 <div class="signup-area ptb-100">
     <div class="container">
         <div class="signup-form">
-            <h3>人脸识别</h3>
+            <h3>在进行贷款操作前，请先人脸验证</h3>
             <div class="row">
 
 
@@ -232,7 +232,7 @@
                 <p id="ModalContext">内容</p>
             </div>
             <div class="modal-footer">
-                <button onclick="location.href=('/index')" type="button" class="btn btn-primary">确定</button>
+                <button id="confirm" type="button" class="btn btn-primary">确定</button>
             </div>
         </div>
     </div>
@@ -348,30 +348,26 @@
                     var res = JSON.stringify(text)
                     if (text.code == 0) {
                         var name = text.data.name;
-                        $("#nameDiv").html("姓名：" + name);
                         var similar = text.data.similarValue;
-                        $("#similarDiv").html("相似度：" + similar + "%");
                         var age = text.data.age;
-                        $("#ageDiv").html("年龄：" + age);
                         var gender = text.data.gender;
-                        $("#genderDiv").html("性别：" + gender);
                         // img.css("background-image", 'url(' + text.data.image + ')');
-                        alert("姓名：" + name + "\n相似度：" + similar + "%" + "\n年龄：" + age + "\n性别：" + gender);
-                        /*window.location.href="test.html"*/
+                        $("#ModalContext").html("姓名：" + name + "\n相似度：" + similar + "%" + "\n年龄：" + age + "\n性别：" + gender)
+                        $("#confirm").click(function () {
+                            window.location.href="/apply-now"
+                        })
+                        $("#MyModal").modal('show')
+                        /*alert("姓名：" + name + "\n相似度：" + similar + "%" + "\n年龄：" + age + "\n性别：" + gender);*/
                     } else {
-                        $("#nameDiv").html("");
-                        $("#similarDiv").html("");
-                        $("#ageDiv").html("");
-                        $("#genderDiv").html("");
-                        alert("人脸不匹配")
+                        $("#ModalContext").html("人脸不匹配,请重试")
+                        $("#confirm").click(function () {
+                           location.reload()
+                        })
+                        $("#MyModal").modal('show')
                     }
 
                 },
                 error: function (error) {
-                    $("#nameDiv").html("");
-                    $("#similarDiv").html("");
-                    $("#ageDiv").html("");
-                    $("#genderDiv").html("");
                     alert(JSON.stringify(error))
                 }
             });
