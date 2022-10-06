@@ -65,7 +65,6 @@ public class FaceController {
             @RequestParam("file") String file,
             @RequestParam("groupId") Integer groupId
     ){
-        System.out.println(companyInfo);
         //加密密码存入数据库
         String encrypt = MD5.encrypt(companyInfo.getPassword());
         companyInfo.setPassword(encrypt);

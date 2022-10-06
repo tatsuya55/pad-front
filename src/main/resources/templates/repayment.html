@@ -359,6 +359,7 @@
             success:function (res){
                 if(res){
                     //在还款时间内 跳转到还款页面
+                    location.href=`jjj/${pId}`
                     alert('快还钱！！！！')
                 }else {
                     $("#ModalContext").html('还未到还款时间，还款截止时间前三天可以开始还款')
