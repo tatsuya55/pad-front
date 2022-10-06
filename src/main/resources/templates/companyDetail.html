@@ -113,7 +113,7 @@
                             <label>营业执照</label> </br>
                             <input type="file" class="form-control" id="license" placeholder="添加图片" onchange="showPreview(this)">
                             <img src="" style="" id="addimg"><br>
-                            <img th:if="${detail}!=null" th:src="@{|/images/license/${detail?.license}|}"><br>
+                            <img id="show" th:if="${detail}!=null" th:src="@{|/images/license/${detail?.license}|}"><br>
                         </div>
                         <div class="form-group">
                             <label>营业执照有效期</label>
@@ -439,6 +439,7 @@
     }
     /*回显图片*/
     function showPreview(source){
+        $("#show").hide()
         let file = source.files[0];
         /*window.FileReader  web应用程序异步读取存储在用户计算机上的文件*/
         if(window.FileReader){
