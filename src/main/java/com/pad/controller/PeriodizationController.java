@@ -41,6 +41,9 @@ public class PeriodizationController {
         //前三天可以开始还款
         ct.add(Calendar.DATE, -3);
         Date start = ct.getTime();
+        System.out.println("==========="+now);
+        System.out.println("==========="+start);
+        System.out.println("==========="+end);
         //判断是否在该范围内
         boolean isBetween = DateUtils.isEffectiveDate(now, start, end);
         return isBetween;
