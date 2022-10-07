@@ -21,4 +21,6 @@ public interface LoanInfoMapper extends BaseMapper<LoanInfo> {
     IPage<LoanInfo> findBy(Page<LoanInfo> page, String cNo);
     /*判断贷款申请是否审核*/
     Integer getStatus(String cNo);
+    /*贷款完成*/
+    void updateComplete(String id);
 }

@@ -7,9 +7,13 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pad.alipay.AliPay;
 import com.pad.alipay.AliPayConfig;
+import com.pad.entity.Overdue;
 import com.pad.entity.Periodization;
+import com.pad.service.LoanInfoService;
+import com.pad.service.OverdueService;
 import com.pad.service.PeriodizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 // xjlugv6874@sandbox.com
@@ -42,6 +48,12 @@ public class AliPayController {
 
     @Autowired
     private PeriodizationService periodizationService;
+
+    @Autowired
+    private OverdueService overdueService;
+
+    @Autowired
+    private LoanInfoService loanInfoService;
 
 
     @GetMapping("/pay") // &subject=xxx&traceNo=xxx&totalAmount=xxx
@@ -94,12 +106,48 @@ public class AliPayController {
             String gmtPayment = params.get("gmt_payment");
             //买家付款金额
             String amount = params.get("buyer_pay_amount");
+            //查询outTradeNo对应分期是否逾期
+            Periodization byId = periodizationService.getById(outTradeNo);
+            Integer overdue = byId.getOverdue();
+            String lId = byId.getLId();
+            if (overdue == 0){
+                //更新逾期表
+                LambdaQueryWrapper<Overdue> wrapper = new LambdaQueryWrapper<>();
+                wrapper.eq(Overdue::getRId,outTradeNo);
+                Overdue one = overdueService.getOne(wrapper);
+                one.setEndTime(new Date());
+                overdueService.updateById(one);
+            }
+            //更新分期表
             Periodization periodization = new Periodization();
             periodization.setId(outTradeNo);
             periodization.setRepaymentTime(sf.parse(gmtPayment));
             periodization.setMoney(Double.parseDouble(amount));
+            periodization.setNumber(params.get("trade_no"));
             periodization.setStatus(1);
             periodizationService.updateById(periodization);
+
+            //判断是否全部还完 还完 将贷款和材料删除 设置为已完成
+            LambdaQueryWrapper<Periodization> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(Periodization::getLId,lId);
+            wrapper.eq(Periodization::getStatus,1);
+            //贷款id为lId 且已还款的分期
+            List<Periodization> periodizationList1 = periodizationService.list(wrapper);
+            LambdaQueryWrapper<Periodization> wrapper1 = new LambdaQueryWrapper<>();
+            wrapper1.eq(Periodization::getLId,lId);
+            //贷款id为lId的分期
+            List<Periodization> periodizationList = periodizationService.list(wrapper1);
+            //比较两个集合的大小
+            System.out.println("=================================");
+            System.out.println(periodizationList);
+            System.out.println(periodizationList.size());
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(periodizationList1);
+            System.out.println(periodizationList1.size());
+            if (periodizationList.size()==periodizationList1.size()){
+                //全部还完
+                loanInfoService.complete(lId);
+            }
 
             String sign = params.get("sign");
             String content = AlipaySignature.getSignCheckContentV1(params);

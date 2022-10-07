@@ -89,7 +89,9 @@
                                       th:text="${loan.status}==-1?'审核失败':(${loan.status}==0?'未审核':(${loan.status}==5?'已放款':'审核中'))"></span>
                             </td>
                             <td>
-                                <span th:if="${loan.isDeleted}==0"></span>
+                                <a th:if="${loan.isDeleted}==0"
+                                   th:text="查看详情"
+                                   th:href="'/repayment/'+${{loan.id}}"></a>
                                 <a th:if="${loan.isDeleted}==1"
                                    th:text="${loan.status}==5?'前往还款':'查看详情'"
                                    th:href="${loan.status}==5?'/repayment/'+${{loan.id}}:'/apply-now'"></a>

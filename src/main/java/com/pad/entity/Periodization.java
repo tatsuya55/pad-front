@@ -53,7 +53,7 @@ public class Periodization implements Serializable {
     @ApiModelProperty(value = "是否逾期 0是 1否")
     private Integer overdue;
 
-    @ApiModelProperty(value = "还款卡号")
+    @ApiModelProperty(value = "交易凭证")
     private String number;
 
     @ApiModelProperty(value = "还款状态  0待还款 1已还款 2逾期")
@@ -65,5 +65,6 @@ public class Periodization implements Serializable {
     @ApiModelProperty(value = "期数")
     private Integer periods;
 
-
+    @ApiModelProperty(value = "逾期金额")
+    private Double overdueMoney;
 }

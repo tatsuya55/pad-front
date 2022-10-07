@@ -29,4 +29,10 @@ public class LoanInfoServiceImpl extends ServiceImpl<LoanInfoMapper, LoanInfo> i
     public Integer selectStatus(String cNo) {
         return baseMapper.getStatus(cNo);
     }
+
+    //将贷款和材料删除 设置为已完成
+    @Override
+    public void complete(String id) {
+        baseMapper.updateComplete(id);
+    }
 }

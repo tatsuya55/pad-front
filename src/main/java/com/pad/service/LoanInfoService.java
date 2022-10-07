@@ -19,4 +19,6 @@ public interface LoanInfoService extends IService<LoanInfo> {
     void findBy(Page<LoanInfo> page, String cNo);
     /*判断贷款申请是否审核*/
     Integer selectStatus(String cNo);
+    /*贷款完成*/
+    void complete(String id);
 }

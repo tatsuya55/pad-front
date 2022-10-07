@@ -52,6 +52,9 @@
                                 实际还款时间
                             </th>
                             <th class="text-left">
+                                逾期金额
+                            </th>
+                            <th class="text-left">
                                 状态
                             </th>
                             <th class="text-left">
@@ -80,13 +83,20 @@
                                 <span th:text="${#dates.format(item.repaymentTime, 'yyyy-MM-dd HH:mm')}"></span>
                             </td>
                             <td>
-                                <!--还款状态  0待还款 1已还款 2逾期-->
+                                <span th:if="${item.overdueMoney}!=null">[[${item.overdueMoney}]]</span>
+                                <span th:if="${item.overdueMoney}==null">未逾期</span>
+                            </td>
+                            <td>
+                                <!--还款状态  0待还款 1已还款 2逾期 -->
                                 <span th:if="${item.status}==0">待还款</span>
                                 <span th:if="${item.status}==1">已还款</span>
                                 <span th:if="${item.status}==2">逾期</span>
                             </td>
                             <td>
-                                <button type="button" th:onclick="checkTime([[${item.id}]],[[${item.ci}]])">还款</button>
+                                <button th:if="${item.status}==2" type="button"
+                                        th:onclick="payOverdue([[${item.id}]],[[${item.ci}]])">逾期还款</button>
+                                <button th:if="${item.status}==0" type="button"
+                                        th:onclick="checkTime([[${item.id}]],[[${item.ci}]])">还款</button>
                             </td>
                         </tr>
                         </tbody>
@@ -366,5 +376,8 @@
                 }
             }
         })
+    }
+    function payOverdue(pId,ci) {
+        location.href=`/alipay/pay?subject=${pId}&traceNo=${pId}&totalAmount=${ci}`
     }
 </script>

@@ -249,6 +249,8 @@
                     getMessage()
                 }else if (res == 5){
                     $("#message").html('已放款，请查看收款账户');
+                }else if (res == -3){
+                    $("#message").html('请提交申请后查看');
                 }else {
                     $("#message").html('审核中，请耐心等待');
                 }
