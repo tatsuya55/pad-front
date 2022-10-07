@@ -47,7 +47,7 @@ public class Message implements Serializable {
     private String reply;
 
     @ApiModelProperty(value = "回复时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
     @ApiModelProperty(value = "逻辑删除 0已删除，1未删除")

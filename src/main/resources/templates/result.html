@@ -8,6 +8,13 @@
 
 <!--引入navbar-->
 <div th:include="common/navbar :: navbar"></div>
+<!--提示框start-->
+<div class="alert alert-dismissable alert-info" id="my_alert" style="display: none;">
+    <button type="button" class="close" onclick="$('#my_alert').hide();">×</button>
+    <strong>提醒：</strong> <span id="alertText">内容</span>
+    请及时查看
+</div>
+<!--提示框end-->
 
 <!-- 步骤条star -->
 <div class="steps">
@@ -225,6 +232,9 @@
 <script th:src="@{/assets/js/wow.min.js}" src="assets/js/wow.min.js"></script>
 <!-- Custom JS -->
 <script th:src="@{/assets/js/main.js}" src="assets/js/main.js"></script>
+<!--websocket-->
+<script th:src="@{/js/websocket.js}" src="js/websocket.js"></script>
+</body>
 </body>
 </html>
 <script>
@@ -255,5 +265,17 @@
                 $("#reason").html("驳回原因："+res);
             }
         })
+    }
+
+    /*显示提示*/
+    function show(message) {
+        $("#alertText").html(message)
+        $("#my_alert").css("display","block");
+    }
+    /*websocket*/
+    websocket.onmessage = function (event) {
+        console.log('收到消息')
+        console.log(event.data)
+        show(event.data)
     }
 </script>
