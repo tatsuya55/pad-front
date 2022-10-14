@@ -30,7 +30,7 @@
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                发 现
+                                服 务
                                 <i class='bx bx-chevron-down'></i>
                             </a>
 
@@ -66,12 +66,6 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a th:href="@{/contact}" class="nav-link">
-                                        留言
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
                                     <a th:href="@{/message-details}" class="nav-link">
                                         留言详情
                                     </a>
@@ -89,125 +83,35 @@
                                     </a>
                                 </li>-->
 
-                                <li class="nav-item">
-                                    <a th:href="@{/faq}" class="nav-link">
-                                        银行信息
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="gallery.html" class="nav-link">
-                                        Gallery
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="testimonials.html" class="nav-link">
-                                        Testimonials
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        Projects
-                                        <i class='bx bx-chevron-down'></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="projects.html" class="nav-link">
-                                                Projects
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="terms-condition.html" class="nav-link">
-                                        Terms & Conditions
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="privacy-policy.html" class="nav-link">
-                                        Privacy Policy
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="error-404.html" class="nav-link">
-                                        Error Page
-                                    </a>
-                                </li>
 
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                服务
-                                <i class='bx bx-chevron-down'></i>
-                            </a>
-
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a th:href="@{/loan-calculator}" class="nav-link">
-                                       贷款计算器
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="services.html" class="nav-link">
-                                        Services
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="services-details.html" class="nav-link">
-                                        Services Details
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="funding.html" class="nav-link">
-                                Funding
+                            <a th:href="@{/loan-calculator}" class="nav-link">
+                                贷款计算器
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a th:href="@{/loans}" class="nav-link">
-                                Loans
+                            <a th:href="@{/contact}" class="nav-link">
+                                留 言
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                News
-                                <i class='bx bx-chevron-down'></i>
+                            <a th:href="@{/faq}" class="nav-link">
+                                银行信息
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a href="news.html" class="nav-link">
-                                        News Grid
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="news-details.html" class="nav-link">
-                                        News Details
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+
 
                         <li class="nav-item">
                             <a th:if="${session.user}==null" th:href="@{/signIn}" class="nav-link">
                                 登 录
                             </a>
 
-                            <a th:if="${session.user}!=null" th:text="|欢迎:${session.user.name}|" class="nav-link"></a>
+                            <a th:if="${session.user}!=null" th:text="|欢迎: ${session.user.name}|" class="nav-link"></a>
                             <ul th:if="${session.user}!=null" class="dropdown-menu">
                                 <li class="nav-item">
                                     <a th:href="@{/logout}" class="nav-link">
@@ -225,7 +129,7 @@
                             <div class="search-overlay search-popup">
                                 <div class='search-box'>
                                     <form class="search-form">
-                                        <input class="search-input" name="search" placeholder="Search" type="text">
+                                        <input class="search-input" name="search" placeholder="搜索" type="text">
 
                                         <button class="search-button" type="submit">
                                             <i class="flaticon-magnifying-glass"></i>
@@ -238,7 +142,7 @@
                         <div class="option-item">
                             <div class="info">
                                 <i class="flaticon-telephone"></i>
-                                <span>Call Now</span>
+                                <span>联系我们</span>
                                 <p>
                                     <a href="tel:1514312-5678">+1 (514) 312-5678</a>
                                 </p>
