@@ -53,6 +53,13 @@ public class IndexController {
         return "index";
     }
 
+    @ApiOperation("退出登录")
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("user");
+        return "index";
+    }
+
     @ApiOperation("登录页")
     @GetMapping("/signIn")
     public String toSignIn(){
